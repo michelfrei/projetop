@@ -1,3 +1,3 @@
 # projetop
 
-projeto para disciplina em conjunto do curso de sistemas de informação
+projeto interdiciplinar do curso - sistemas de informação
