@@ -5,7 +5,7 @@
  */
 package controller;
 
-import VIEW.*;
+import view.help;
 import java.sql.SQLException;
 /**
  *
