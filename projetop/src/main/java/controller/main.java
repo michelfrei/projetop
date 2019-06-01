@@ -5,7 +5,7 @@
  */
 package controller;
 
-import view.help;
+import view.Principal;
 import java.sql.SQLException;
 /**
  *
@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class main {
         public static void main(String[] args) throws SQLException {
-        help helpp = new help();
+        Principal helpp = new Principal();
         helpp.setVisible(true);
 
         }
