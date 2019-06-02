@@ -47,6 +47,4 @@ public class Manutencao {
         this.duracao_garantia = duracao_garantia;
     }
     
-    
-    
 }
