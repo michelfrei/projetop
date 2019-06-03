@@ -6,6 +6,7 @@
 package model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,17 +17,31 @@ public class Cliente {
     private String nome;
     private int cpf;
     private String descricao;
-    private Date saida_concerto;
-
+    private LocalDate saida_concerto;
+    private int garantia;
+    //private LocalDate detea = LocalDate.now();
+    
     public Cliente() {
     }
+    
+    /*public Cliente(LocalDate detea){
+        this.detea = detea;
+    }
+    public LocalDate getDetea() {
+        return detea;
+    }
 
-    public Cliente(int id, String nome, int cpf, String descricao, Date saida_concerto) {
+    public void setDetea(LocalDate detea) {
+        this.detea = detea;
+    }*/
+
+    public Cliente(int id, String nome, int cpf, String descricao, LocalDate saida_concerto, int garantia) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.descricao = descricao;
         this.saida_concerto = saida_concerto;
+        this.garantia = garantia;
     }
 
     public int getId() {
@@ -61,11 +76,20 @@ public class Cliente {
         this.descricao = descricao;
     }
 
-    public Date getSaida_concerto() {
+    public LocalDate getSaida_concerto() {
         return saida_concerto;
     }
 
-    public void setSaida_concerto(Date saida_concerto) {
+    public void setSaida_concerto(LocalDate saida_concerto) {
         this.saida_concerto = saida_concerto;
     }
+    
+    public int getGarantia() {
+        return garantia;
+    }
+
+    public void setGarantia(int garantia) {
+        this.garantia = garantia;
+    }
+       
 }

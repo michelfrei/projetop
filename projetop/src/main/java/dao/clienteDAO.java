@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,23 +19,34 @@ import model.Cliente;
  */
 public class clienteDAO {
 
-    public void InserirArea(Cliente cliente) throws SQLException {
+    public void InserirCliente(Cliente cliente) throws SQLException {
 
-        String SQL = "INSERT INTO cadastros.cliente (id, nome, cpf, descricao, saida_concerto) values (?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO cadastros.cliente (id, nome, manutencao, cpf, saida_concerto, garantia) values (?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
             stmt.setInt(1, 0);
             stmt.setString(2, cliente.getNome());
-            stmt.setInt(3, cliente.getCpf());
-            stmt.setString(4, cliente.getDescricao());
-            stmt.setDate(4, cliente.getSaida_concerto());
-
+            stmt.setString(3, cliente.getDescricao());
+            stmt.setInt(4, cliente.getCpf());
+            stmt.setDate(5, Date.valueOf(cliente.getSaida_concerto()));
+            stmt.setInt(6, 0);
             stmt.execute();
             stmt.close();
     }
+    
+    /*public void SalvarData(Cliente cliente) throws SQLException {
+        String SQL = "INSERT INTO cadastros.GetData (data) values (?)";
 
-    public void RemoverArea(Cliente cliente) throws SQLException {
+            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+            stmt.setDate(1, Date.valueOf(cliente.getDetea()));
+
+            stmt.execute();
+            stmt.close();
+    }*/
+    
+    
+    public void RemoverCliente(Cliente cliente) throws SQLException {
         String SQL = "Delete from cadastros.cliente where id=?";
 
             PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
@@ -44,15 +56,15 @@ public class clienteDAO {
             stmt.close();
     }
 
-    public void AlterarArea(Cliente cliente) throws SQLException {
-        String SQL = "update cadastros.cliente set nome=?, cpf=?, descricao=?, saida_concerto=? where id=?";
+    public void AlterarCliente(Cliente cliente) throws SQLException {
+        String SQL = "update cadastros.cliente set nome=?, cpf=?, descricao=? where id=?";
 
             PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
             stmt.setString(1, cliente.getNome());
             stmt.setInt(2, cliente.getCpf());
             stmt.setString(3, cliente.getDescricao());
-            stmt.setDate(4, cliente.getSaida_concerto());
+            //stmt.setDate(4, cliente.getSaida_concerto());
             stmt.setInt(5, cliente.getId());
             stmt.execute();
             stmt.close();
@@ -73,8 +85,9 @@ public class clienteDAO {
                 ListaCliente.add(new Cliente(rs.getInt("id"),
                         rs.getString("Nome"),
                         rs.getInt("cpf"),
-                        rs.getString("descricao"),
-                        rs.getDate("saida_concerto")                
+                        rs.getString("manutencao"),
+                        rs.getDate("saida_concerto").toLocalDate(),
+                        rs.getInt("garantia")
                 ));
 
             }
@@ -106,8 +119,10 @@ public class clienteDAO {
                 retorno.add(new Cliente(rs.getInt("id"),
                         rs.getString("Nome"),
                         rs.getInt("cpf"),
-                        rs.getString("descricao"),
-                        rs.getDate("saida_concerto")));
+                        rs.getString("manutencao"),
+                        rs.getDate("saida_concerto").toLocalDate(),
+                        rs.getInt("garantia")
+                ));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

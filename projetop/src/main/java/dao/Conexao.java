@@ -68,7 +68,7 @@ try {
 String driverName = "com.mysql.cj.jdbc.Driver";
 Class.forName(driverName);
           String serverName = "localhost";
-          String mydatabase ="revista";
+          String mydatabase ="cadastros";
           String port ="3306";
           String aux = "?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
           String url = "jdbc:mysql://"+serverName+":"+port +"/" +mydatabase+aux;

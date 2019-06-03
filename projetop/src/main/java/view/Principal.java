@@ -8,6 +8,8 @@ package view;
 //import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import controller.JTextFieldLimit;
 import controller.SetupAutoComplete;
+import dao.Conexao;
+import dao.clienteDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,6 +18,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,6 +30,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import model.Cliente;
 
 /**
  *
@@ -34,22 +40,144 @@ public class Principal extends javax.swing.JFrame {
 
     PreparedStatement stmt = null;
     ResultSet rs = null;
-
-
+    
+    List<Cliente> ListaCliente;
+    List<Cliente> ListaBuscaCliente;
+    
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
     public Principal() {
         initComponents();
-        
+
         PanelCadastro.setVisible(true);
         PanelConsulta.setVisible(false);
         setLblColor(BotaoCadastro);
         ResetColor(BotaoConsulta);
         ResetColor(BotaoGerenciamento);
-
+        ComboBoxAreaNovaRevista();
+        atualizarTabelaRevista();
     }
-    
+
     /*public void garantia(date dataRealizacao){
         
     }*/
+    private void ComboBoxAreaNovaRevista() { //ok
+        try {
+            String SQL = "Select * from cadastros.manutencao order by id asc";
+            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String Nome = rs.getString("nome");
+                CampoescolhaConserto.addItem(Nome);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("problema na combobox");
+        }
+    }
+
+    public void atualizarTabelaRevista() {
+        Cliente cli = new Cliente();
+        clienteDAO clidao = new clienteDAO();
+        try {
+            ListaCliente = clidao.ListaCliente();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String dados[][] = new String[ListaCliente.size()][6];
+        int i = 0;
+        for (Cliente clien : ListaCliente) {
+            dados[i][0] = String.valueOf(clien.getId());
+            dados[i][1] = clien.getNome();
+            dados[i][2] = clien.getDescricao();
+            dados[i][3] = String.valueOf(clien.getCpf());
+            dados[i][4] = String.valueOf(clien.getSaida_concerto());
+            dados[i][5] = String.valueOf(clien.getGarantia());
+            i++;
+        }
+        String tituloColuna[] = {"id", "Nome", "Manutencao", "Cpf", "Saida concerto", "Garantia até"};
+        DefaultTableModel tabelaCliente = new DefaultTableModel();
+        tabelaCliente.setDataVector(dados, tituloColuna);
+        jTable1.setModel(new DefaultTableModel(dados, tituloColuna) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false, false};
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(180);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(30);
+        jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        jTable1.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+        jTable1.getColumnModel().getColumn(1).setCellRenderer(centralizado);
+        jTable1.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+        jTable1.getColumnModel().getColumn(3).setCellRenderer(centralizado);
+        jTable1.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(centralizado);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTable1.setRowHeight(25);
+        jTable1.updateUI();
+
+    }
+
+    //Tava do PaneRevista, referente a aba PaneGuiaAlteraRevista
+    /*public void BuscaRevistaComFiltro() {
+
+        Revistas revistas = new Revistas();
+        String dados[][] = new String[ListaBuscaRevista.size()][7];
+        int i = 0;
+        for (Revistas rev : ListaBuscaRevista) {
+            dados[i][0] = String.valueOf(rev.getID());
+            dados[i][1] = rev.getTitulo();
+            dados[i][2] = rev.getArea();
+            dados[i][3] = rev.getEspecificacao();
+            dados[i][4] = String.valueOf(rev.getData());
+            dados[i][5] = String.valueOf(rev.getQuantidade());
+            dados[i][6] = rev.getOrigem();
+            i++;
+        }
+        String tituloColuna[] = {"id", "Titulo", "Área", "Especificação", "Data", "Quantidade", "Origem"};
+        DefaultTableModel tabelaCliente = new DefaultTableModel();
+        tabelaCliente.setDataVector(dados, tituloColuna);
+        TabelaAlterarOuRemoverRevista.setModel(new DefaultTableModel(dados, tituloColuna) {
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false, false, false, false,};
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        });
+        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(0).setPreferredWidth(20);
+        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(1).setPreferredWidth(180);
+        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(2).setPreferredWidth(100);
+        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(3).setPreferredWidth(100);
+        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(4).setPreferredWidth(30);
+        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(5).setPreferredWidth(50);
+        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(6).setPreferredWidth(60);
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        TabelaConsultaCliente.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+        TabelaConsultaCliente.getColumnModel().getColumn(1).setCellRenderer(centralizado);
+        TabelaConsultaCliente.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+        TabelaConsultaCliente.getColumnModel().getColumn(3).setCellRenderer(centralizado);
+        TabelaConsultaCliente.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+        TabelaConsultaCliente.getColumnModel().getColumn(5).setCellRenderer(centralizado);
+        TabelaConsultaCliente.getColumnModel().getColumn(6).setCellRenderer(centralizado);
+        TabelaConsultaCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        TabelaConsultaCliente.setRowHeight(25);
+        TabelaConsultaCliente.updateUI();
+    }*/
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,9 +194,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
-        TxtNome = new javax.swing.JTextField();
+        CampoNome = new javax.swing.JTextField();
         lblData = new javax.swing.JLabel();
-        TxtData = new javax.swing.JTextField();
         lblConserto = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -79,7 +206,9 @@ public class Principal extends javax.swing.JFrame {
         BotaoOkCadastro = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         CampoescolhaConserto = new java.awt.Choice();
-        TxtCPF = new javax.swing.JTextField();
+        CampoCpf = new javax.swing.JTextField();
+        BotaoSalvarNovaRevista = new javax.swing.JButton();
+        CampoDataFormatada = new javax.swing.JFormattedTextField();
         PanelConsulta = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -92,8 +221,7 @@ public class Principal extends javax.swing.JFrame {
         TxtNome1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        BotaoPesquisarConsulta = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        BotaoSalvarNovaRevista1 = new javax.swing.JButton();
         PanelGerenciamento = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -224,7 +352,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(325, 325, 325)
                 .addComponent(jLabel4)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,36 +365,25 @@ public class Principal extends javax.swing.JFrame {
         lblNome.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblNome.setText("Nome");
 
-        TxtNome.setBackground(new java.awt.Color(240, 240, 240));
-        TxtNome.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtNome.setBorder(null);
-        TxtNome.setMaximumSize(new java.awt.Dimension(25, 25));
-        TxtNome.setMinimumSize(new java.awt.Dimension(25, 25));
-        TxtNome.setDocument(new JTextFieldLimit(40, true));
-        TxtNome.addMouseListener(new java.awt.event.MouseAdapter() {
+        CampoNome.setBackground(new java.awt.Color(240, 240, 240));
+        CampoNome.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        CampoNome.setBorder(null);
+        CampoNome.setMaximumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        CampoNome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TxtNomeMouseClicked(evt);
+                CampoNomeMouseClicked(evt);
             }
         });
-        TxtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+        CampoNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtNomeKeyPressed(evt);
+                CampoNomeKeyPressed(evt);
             }
         });
 
         lblData.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblData.setText("Data do conserto");
-
-        TxtData.setBackground(new java.awt.Color(240, 240, 240));
-        TxtData.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtData.setBorder(null);
-        TxtData.setPreferredSize(new java.awt.Dimension(35, 26));
-        TxtData.setDocument(new JTextFieldLimit(10, false, true));
-        TxtData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDataActionPerformed(evt);
-            }
-        });
 
         lblConserto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblConserto.setText("Conserto");
@@ -329,16 +446,39 @@ public class Principal extends javax.swing.JFrame {
         );
 
         CampoescolhaConserto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CampoescolhaConserto.setFocusable(false);
         CampoescolhaConserto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        CampoescolhaConserto.setForeground(new java.awt.Color(1, 1, 1));
 
-        TxtCPF.setBackground(new java.awt.Color(240, 240, 240));
-        TxtCPF.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtCPF.setBorder(null);
-        TxtCPF.setPreferredSize(new java.awt.Dimension(35, 26));
-        TxtData.setDocument(new JTextFieldLimit(10, false, true));
-        TxtCPF.addActionListener(new java.awt.event.ActionListener() {
+        CampoCpf.setBackground(new java.awt.Color(240, 240, 240));
+        CampoCpf.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        CampoCpf.setBorder(null);
+        CampoCpf.setPreferredSize(new java.awt.Dimension(35, 26));
+        CampoCpf.setDocument(new JTextFieldLimit(10, false, true));
+        CampoCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtCPFActionPerformed(evt);
+                CampoCpfActionPerformed(evt);
+            }
+        });
+
+        BotaoSalvarNovaRevista.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoSalvarNovaRevista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarNovaRevista.setText("Salvar");
+        BotaoSalvarNovaRevista.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoSalvarNovaRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoSalvarNovaRevistaActionPerformed(evt);
+            }
+        });
+
+        try {
+            CampoDataFormatada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        CampoDataFormatada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoDataFormatadaActionPerformed(evt);
             }
         });
 
@@ -350,37 +490,36 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BotaoSalvarNovaRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(BotaoOkCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
                         .addComponent(BotaoCancelarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(146, 146, 146))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblNome)
-                            .addComponent(TxtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                            .addComponent(jSeparator2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblData)
-                                .addGap(212, 212, 212))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jSeparator4)
-                                    .addComponent(TxtData, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
-                                .addGap(272, 272, 272))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCPF, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblConserto)
-                            .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(111, 111, 111))))
+                            .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(284, 284, 284)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblData)
+                            .addComponent(jSeparator4)
+                            .addComponent(CampoDataFormatada, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                        .addGap(257, 257, 257))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNome)
+                            .addComponent(jSeparator2)
+                            .addComponent(CampoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblCPF)
+                                .addComponent(CampoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(219, 219, 219))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,29 +528,34 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
-                    .addComponent(lblData))
+                    .addComponent(lblCPF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtData, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(74, 74, 74)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCPF)
-                    .addComponent(lblConserto))
-                .addGap(11, 11, 11)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TxtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(CampoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblConserto)
+                        .addGap(11, 11, 11)
+                        .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CampoDataFormatada, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BotaoCancelarCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoOkCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BotaoOkCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoSalvarNovaRevista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64))
         );
 
@@ -442,7 +586,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(331, Short.MAX_VALUE)
+                .addContainerGap(268, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(324, 324, 324))
         );
@@ -468,7 +612,7 @@ public class Principal extends javax.swing.JFrame {
         TxtCPF1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         TxtCPF1.setBorder(null);
         TxtCPF1.setPreferredSize(new java.awt.Dimension(35, 26));
-        TxtData.setDocument(new JTextFieldLimit(10, false, true));
+        TxtCPF1.setDocument(new JTextFieldLimit(10, false, true));
         TxtCPF1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtCPF1ActionPerformed(evt);
@@ -480,7 +624,7 @@ public class Principal extends javax.swing.JFrame {
         TxtNome1.setBorder(null);
         TxtNome1.setMaximumSize(new java.awt.Dimension(25, 25));
         TxtNome1.setMinimumSize(new java.awt.Dimension(25, 25));
-        TxtNome.setDocument(new JTextFieldLimit(40, true));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
         TxtNome1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TxtNome1MouseClicked(evt);
@@ -523,29 +667,15 @@ public class Principal extends javax.swing.JFrame {
         jTable1.setShowHorizontalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
-        BotaoPesquisarConsulta.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoPesquisarConsulta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(190, 190, 190)));
-
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel7.setText("Pesquisar");
-        jLabel7.setAlignmentX(0.5F);
-
-        javax.swing.GroupLayout BotaoPesquisarConsultaLayout = new javax.swing.GroupLayout(BotaoPesquisarConsulta);
-        BotaoPesquisarConsulta.setLayout(BotaoPesquisarConsultaLayout);
-        BotaoPesquisarConsultaLayout.setHorizontalGroup(
-            BotaoPesquisarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotaoPesquisarConsultaLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel7)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        BotaoPesquisarConsultaLayout.setVerticalGroup(
-            BotaoPesquisarConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotaoPesquisarConsultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        BotaoSalvarNovaRevista1.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoSalvarNovaRevista1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarNovaRevista1.setText("Salvar");
+        BotaoSalvarNovaRevista1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoSalvarNovaRevista1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoSalvarNovaRevista1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -558,24 +688,23 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(111, 111, 111)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(BotaoPesquisarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNome1)
+                            .addComponent(TxtNome1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                            .addComponent(jSeparator3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TxtNome1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                                    .addComponent(jSeparator3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblCPF1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblCPF1)
-                                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(111, 111, 111))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(lblNome1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TxtCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BotaoSalvarNovaRevista1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1))
+                .addGap(111, 111, 111))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,21 +712,22 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCPF1)
-                    .addComponent(lblNome1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(BotaoPesquisarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                    .addComponent(lblNome1)
+                    .addComponent(lblCPF1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BotaoSalvarNovaRevista1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout PanelConsultaLayout = new javax.swing.GroupLayout(PanelConsulta);
@@ -669,20 +799,18 @@ public class Principal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     //----------------------Inicio das ações de revista ------------------------------------
-   private void BotaoCancelarCadastroMouseClicked(java.awt.event.MouseEvent evt){
-   
-   }
-    
-    private void BotaoOkCadastroMouseClicked(java.awt.event.MouseEvent evt){
-    
-    
+    private void BotaoCancelarCadastroMouseClicked(java.awt.event.MouseEvent evt) {
+
     }
-    private void BotaoPesquisarConsultaMouseClicked(java.awt.event.MouseEvent evt){
-        
-          
-     
+
+    private void BotaoOkCadastroMouseClicked(java.awt.event.MouseEvent evt) {
+
+    }
+
+    private void BotaoPesquisarConsultaMouseClicked(java.awt.event.MouseEvent evt) {
+
     }
     private void BotaoCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastroMouseClicked
         PanelCadastro.setVisible(true);
@@ -712,21 +840,17 @@ public class Principal extends javax.swing.JFrame {
         setLblColor(BotaoGerenciamento);
     }//GEN-LAST:event_BotaoGerenciamentoMouseClicked
 
-    private void TxtNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtNomeMouseClicked
+    private void CampoNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CampoNomeMouseClicked
         System.out.println("Teste");
-    }//GEN-LAST:event_TxtNomeMouseClicked
+    }//GEN-LAST:event_CampoNomeMouseClicked
 
-    private void TxtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNomeKeyPressed
-        
-    }//GEN-LAST:event_TxtNomeKeyPressed
+    private void CampoNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoNomeKeyPressed
 
-    private void TxtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDataActionPerformed
+    }//GEN-LAST:event_CampoNomeKeyPressed
+
+    private void CampoCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtDataActionPerformed
-
-    private void TxtCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtCPFActionPerformed
+    }//GEN-LAST:event_CampoCpfActionPerformed
 
     private void jLabel4AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel4AncestorAdded
         // TODO add your handling code here:
@@ -748,32 +872,88 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNome1ActionPerformed
 
+    private void BotaoSalvarNovaRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarNovaRevistaActionPerformed
+        /*if (campoTitulo.getText().isEmpty() || campoData.getText().isEmpty() || campoQuantidade.getText().isEmpty() || ComboBoxEspecificacaoNovaRevista.getSelectedItem() == null || ComboBoxAreaNovaRevista.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Há campos não preenchidos", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+        } else {*/
+        try {
+            Cliente cli = new Cliente();
+
+            cli.getId();
+            cli.setNome(CampoNome.getText());
+            //cli.setEspecificacao((String) ComboBoxEspecificacaoNovaRevista.getSelectedItem());
+            cli.setCpf(Integer.parseInt(CampoCpf.getText()));
+            cli.setDescricao((String) CampoescolhaConserto.getSelectedItem());
+            cli.setSaida_concerto(LocalDate.parse(CampoDataFormatada.getText(), formatter));
+            //cli.setSaida_concerto(Integer.parseInt(CampoData.getText()));
+            //cli.getDescricao((String) ComboBoxAreaNovaRevista.getSelectedItem());
+
+            //RevistaDAO revistaDAO = new RevistaDAO();
+            //revistaDAO.InserirNovaRevistas(rev);
+            clienteDAO clidao = new clienteDAO();
+            clidao.InserirCliente(cli);
+            
+            /*String srData;
+            srData = CampoDataFormatada.getText();
+            System.out.println(srData);
+            cli.setDetea(LocalDate.parse(srData, formatter));
+            System.out.println(cli.getDetea());
+            clidao.SalvarData(cli);*/
+            
+            try {
+                /*limpaCamposNovaRevista();
+                    TravaCamposDoNovaRevista();
+                    atualizarTabelaRevista();
+                    atualizarConsultaRevista();
+                    TravaBotoesCadRevista();
+                    BotaoAdicionarNovaRevista.setEnabled(true);*/
+
+                JOptionPane.showMessageDialog(null, "Revista cadastrada com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Essa revista já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(ex.getMessage());
+        }
+        //}
+    }//GEN-LAST:event_BotaoSalvarNovaRevistaActionPerformed
+
+    private void BotaoSalvarNovaRevista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarNovaRevista1ActionPerformed
+        atualizarTabelaRevista();
+    }//GEN-LAST:event_BotaoSalvarNovaRevista1ActionPerformed
+
+    private void CampoDataFormatadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoDataFormatadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoDataFormatadaActionPerformed
 
     public void setLblColor(JLabel lbl) {
         lbl.setBackground(new Color(220, 220, 220));
     }
 
     public void ResetColor(JLabel lbl) {
-        lbl.setBackground(new Color(230,230,230));
+        lbl.setBackground(new Color(230, 230, 230));
     }
-     
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BotaoCadastro;
     private javax.swing.JPanel BotaoCancelarCadastro;
     private javax.swing.JLabel BotaoConsulta;
     private javax.swing.JLabel BotaoGerenciamento;
     private javax.swing.JPanel BotaoOkCadastro;
-    private javax.swing.JPanel BotaoPesquisarConsulta;
+    private javax.swing.JButton BotaoSalvarNovaRevista;
+    private javax.swing.JButton BotaoSalvarNovaRevista1;
+    private javax.swing.JTextField CampoCpf;
+    private javax.swing.JFormattedTextField CampoDataFormatada;
+    private javax.swing.JTextField CampoNome;
     private java.awt.Choice CampoescolhaConserto;
     private javax.swing.JPanel PaneMae;
     private javax.swing.JPanel PanelCadastro;
     private javax.swing.JPanel PanelConsulta;
     private javax.swing.JPanel PanelGerenciamento;
     private javax.swing.JPanel SideBoard;
-    private javax.swing.JTextField TxtCPF;
     private javax.swing.JTextField TxtCPF1;
-    private javax.swing.JTextField TxtData;
-    private javax.swing.JTextField TxtNome;
     private javax.swing.JTextField TxtNome1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -781,7 +961,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
