@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
@@ -30,7 +31,7 @@ public class clienteDAO {
             stmt.setString(3, cliente.getDescricao());
             stmt.setInt(4, cliente.getCpf());
             stmt.setDate(5, Date.valueOf(cliente.getSaida_concerto()));
-            stmt.setInt(6, 0);
+            stmt.setDate(6, Date.valueOf(cliente.getGarantia()));
             stmt.execute();
             stmt.close();
     }
@@ -86,8 +87,8 @@ public class clienteDAO {
                         rs.getString("Nome"),
                         rs.getInt("cpf"),
                         rs.getString("manutencao"),
-                        rs.getDate("saida_concerto").toLocalDate(),
-                        rs.getInt("garantia")
+                        rs.getObject("saida_concerto", LocalDate.class),
+                        rs.getObject("garantia", LocalDate.class)
                 ));
 
             }
@@ -121,7 +122,7 @@ public class clienteDAO {
                         rs.getInt("cpf"),
                         rs.getString("manutencao"),
                         rs.getDate("saida_concerto").toLocalDate(),
-                        rs.getInt("garantia")
+                        rs.getDate("garantia").toLocalDate()
                 ));
             }
         } catch (Exception e) {

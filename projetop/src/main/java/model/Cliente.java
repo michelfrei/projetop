@@ -18,7 +18,7 @@ public class Cliente {
     private int cpf;
     private String descricao;
     private LocalDate saida_concerto;
-    private int garantia;
+    private LocalDate garantia;
     //private LocalDate detea = LocalDate.now();
     
     public Cliente() {
@@ -35,7 +35,7 @@ public class Cliente {
         this.detea = detea;
     }*/
 
-    public Cliente(int id, String nome, int cpf, String descricao, LocalDate saida_concerto, int garantia) {
+    public Cliente(int id, String nome, int cpf, String descricao, LocalDate saida_concerto, LocalDate garantia) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -84,11 +84,11 @@ public class Cliente {
         this.saida_concerto = saida_concerto;
     }
     
-    public int getGarantia() {
+    public LocalDate getGarantia() {
         return garantia;
     }
 
-    public void setGarantia(int garantia) {
+    public void setGarantia(LocalDate garantia) {
         this.garantia = garantia;
     }
        

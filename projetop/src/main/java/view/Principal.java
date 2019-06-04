@@ -58,9 +58,26 @@ public class Principal extends javax.swing.JFrame {
         atualizarTabelaRevista();
     }
 
-    /*public void garantia(date dataRealizacao){
-        
-    }*/
+    public String FuncGarantia(LocalDate dataGarantia, String descricao){
+        int duracao_garantia = 0;
+        try {
+            String SQL = "Select duracao_garantia from cadastros.manutencao where nome = ?";
+            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+            stmt.setString(1, descricao);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                duracao_garantia = rs.getInt("duracao_garantia");
+            }
+
+            dataGarantia = dataGarantia.plusMonths(duracao_garantia);
+            return dataGarantia.format(formatter);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + e.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
+        }
+        return dataGarantia.format(formatter);
+    }
     private void ComboBoxAreaNovaRevista() { //ok
         try {
             String SQL = "Select * from cadastros.manutencao order by id asc";
@@ -93,8 +110,8 @@ public class Principal extends javax.swing.JFrame {
             dados[i][1] = clien.getNome();
             dados[i][2] = clien.getDescricao();
             dados[i][3] = String.valueOf(clien.getCpf());
-            dados[i][4] = String.valueOf(clien.getSaida_concerto());
-            dados[i][5] = String.valueOf(clien.getGarantia());
+            dados[i][4] = String.valueOf(clien.getSaida_concerto().format(formatter));
+            dados[i][5] = String.valueOf(clien.getGarantia().format(formatter));
             i++;
         }
         String tituloColuna[] = {"id", "Nome", "Manutencao", "Cpf", "Saida concerto", "Garantia até"};
@@ -876,45 +893,29 @@ public class Principal extends javax.swing.JFrame {
         /*if (campoTitulo.getText().isEmpty() || campoData.getText().isEmpty() || campoQuantidade.getText().isEmpty() || ComboBoxEspecificacaoNovaRevista.getSelectedItem() == null || ComboBoxAreaNovaRevista.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Há campos não preenchidos", "Sistema", JOptionPane.INFORMATION_MESSAGE);
         } else {*/
+        Cliente cli = new Cliente();
+                
         try {
-            Cliente cli = new Cliente();
-
             cli.getId();
             cli.setNome(CampoNome.getText());
-            //cli.setEspecificacao((String) ComboBoxEspecificacaoNovaRevista.getSelectedItem());
             cli.setCpf(Integer.parseInt(CampoCpf.getText()));
             cli.setDescricao((String) CampoescolhaConserto.getSelectedItem());
             cli.setSaida_concerto(LocalDate.parse(CampoDataFormatada.getText(), formatter));
-            //cli.setSaida_concerto(Integer.parseInt(CampoData.getText()));
-            //cli.getDescricao((String) ComboBoxAreaNovaRevista.getSelectedItem());
+            cli.setGarantia(LocalDate.parse(FuncGarantia(cli.getSaida_concerto(), cli.getDescricao()), formatter));//atenção redobrada nessa linha
 
-            //RevistaDAO revistaDAO = new RevistaDAO();
-            //revistaDAO.InserirNovaRevistas(rev);
             clienteDAO clidao = new clienteDAO();
             clidao.InserirCliente(cli);
-            
-            /*String srData;
-            srData = CampoDataFormatada.getText();
-            System.out.println(srData);
-            cli.setDetea(LocalDate.parse(srData, formatter));
-            System.out.println(cli.getDetea());
-            clidao.SalvarData(cli);*/
-            
-            try {
-                /*limpaCamposNovaRevista();
-                    TravaCamposDoNovaRevista();
-                    atualizarTabelaRevista();
-                    atualizarConsultaRevista();
-                    TravaBotoesCadRevista();
-                    BotaoAdicionarNovaRevista.setEnabled(true);*/
 
-                JOptionPane.showMessageDialog(null, "Revista cadastrada com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            try {
+
+
+                JOptionPane.showMessageDialog(null, "Concerto cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Essa revista já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Essa revista já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(ex.getMessage());
         }
         //}
