@@ -22,20 +22,19 @@ public class clienteDAO {
 
     public void InserirCliente(Cliente cliente) throws SQLException {
 
-        String SQL = "INSERT INTO cadastros.cliente (id, nome, manutencao, cpf, saida_concerto, garantia) values (?, ?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO cadastros.cliente (id, nome, cpf, telefone) values (?, ?, ?, ?)";
 
-            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+        PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
-            stmt.setInt(1, 0);
-            stmt.setString(2, cliente.getNome());
-            stmt.setString(3, cliente.getDescricao());
-            stmt.setInt(4, cliente.getCpf());
-            stmt.setDate(5, Date.valueOf(cliente.getSaida_concerto()));
-            stmt.setDate(6, Date.valueOf(cliente.getGarantia()));
-            stmt.execute();
-            stmt.close();
+        stmt.setInt(1, 0);
+        stmt.setString(2, cliente.getNome());
+        stmt.setString(3, cliente.getCpf());
+        stmt.setString(4, cliente.getTelefone());
+
+        stmt.execute();
+        stmt.close();
     }
-    
+
     /*public void SalvarData(Cliente cliente) throws SQLException {
         String SQL = "INSERT INTO cadastros.GetData (data) values (?)";
 
@@ -45,30 +44,28 @@ public class clienteDAO {
             stmt.execute();
             stmt.close();
     }*/
-    
-    
     public void RemoverCliente(Cliente cliente) throws SQLException {
         String SQL = "Delete from cadastros.cliente where id=?";
 
-            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
-            stmt.setInt(1, cliente.getId());
+        PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+        stmt.setInt(1, cliente.getId());
 
-            stmt.execute();
-            stmt.close();
+        stmt.execute();
+        stmt.close();
     }
 
     public void AlterarCliente(Cliente cliente) throws SQLException {
         String SQL = "update cadastros.cliente set nome=?, cpf=?, descricao=? where id=?";
 
-            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+        PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
-            stmt.setString(1, cliente.getNome());
-            stmt.setInt(2, cliente.getCpf());
-            stmt.setString(3, cliente.getDescricao());
-            //stmt.setDate(4, cliente.getSaida_concerto());
-            stmt.setInt(5, cliente.getId());
-            stmt.execute();
-            stmt.close();
+        stmt.setString(1, cliente.getNome());
+        stmt.setString(2, cliente.getCpf());
+        stmt.setString(3, cliente.getTelefone());
+        //stmt.setDate(4, cliente.getSaida_concerto());
+        stmt.setInt(5, cliente.getId());
+        stmt.execute();
+        stmt.close();
     }
 
     public List<Cliente> ListaCliente() throws SQLException {
@@ -85,10 +82,8 @@ public class clienteDAO {
             while (rs.next()) {
                 ListaCliente.add(new Cliente(rs.getInt("id"),
                         rs.getString("Nome"),
-                        rs.getInt("cpf"),
-                        rs.getString("manutencao"),
-                        rs.getObject("saida_concerto", LocalDate.class),
-                        rs.getObject("garantia", LocalDate.class)
+                        rs.getString("cpf"),
+                        rs.getString("telefone")
                 ));
 
             }
@@ -100,29 +95,35 @@ public class clienteDAO {
 
     public List<Cliente> ListaBuscaCliente(Cliente cliente) throws SQLException {
         List<Cliente> retorno = new ArrayList<Cliente>();
-
+        Cliente cli = new Cliente();
         String SQL = "select * from cadastros.cliente ";
-        
-        
-        if(cliente.getNome() != null){
-            SQL += "where Nome like ?";
-        }
-        PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
-        
-        if(cliente.getNome() != null){
-            stmt.setString(1, "%" + cliente.getNome() + "%");
-        }
 
+        if (cli.getNome() != null /*&& cli.getCpf().equals(null)*/) {
+            SQL += "where Nome like ?";
+        } /*else if (cli.getCpf() != null && cli.getNome() == null) {
+            SQL += "where cpf like ?";
+        } else if (cli.getNome() != null && cli.getCpf() != null) {
+            SQL += "where Nome like ?";
+        }*/
+        PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+
+        if (cli.getNome() != null /*&& cli.getCpf() == null*/) {
+            stmt.setString(1, "%" + cli.getNome() + "%");
+        } /*else if (cli.getCpf() != null && cli.getNome() == null) {
+            stmt.setString(1, "%" + cli.getCpf() + "%");
+        } else if (cli.getNome() != null && cli.getCpf() != null) {
+            stmt.setString(1, "%" + cli.getNome() + "%");
+            stmt.setString(2, "%" + cli.getCpf() + "%");
+        }*/
+        System.out.println(SQL);
         try {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
 
                 retorno.add(new Cliente(rs.getInt("id"),
                         rs.getString("Nome"),
-                        rs.getInt("cpf"),
-                        rs.getString("manutencao"),
-                        rs.getDate("saida_concerto").toLocalDate(),
-                        rs.getDate("garantia").toLocalDate()
+                        rs.getString("cpf"),
+                        rs.getString("telefone")
                 ));
             }
         } catch (Exception e) {

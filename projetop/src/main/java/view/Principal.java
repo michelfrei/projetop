@@ -40,25 +40,25 @@ public class Principal extends javax.swing.JFrame {
 
     PreparedStatement stmt = null;
     ResultSet rs = null;
-    
+
     List<Cliente> ListaCliente;
     List<Cliente> ListaBuscaCliente;
-    
+
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+
     public Principal() {
         initComponents();
 
-        PanelCadastrarCliente.setVisible(true);
-        PanelCadastrarServico.setVisible(false);
-        PanelConsultarServico.setVisible(false);
-        setLblColor(BotaoClientes);
-        ResetColor(BotaoServiços);
-        ComboBoxConserto();
-        atualizarTabelaClientes();
+        PaneClientes.setVisible(true);
+        PaneGarantia.setVisible(false);
+        setLblColor(BotaoCadastro);
+        ResetColor(BotaoConsulta);
+        ResetColor(BotaoGerenciamento);
+        ComboBoxAreaNovaRevista();
+        atualizarTabelaConsultaCliente();
     }
 
-    public String FuncGarantia(LocalDate dataGarantia, String descricao){
+    public String FuncGarantia(LocalDate dataGarantia, String descricao) {
         int duracao_garantia = 0;
         try {
             String SQL = "Select duracao_garantia from cadastros.manutencao where nome = ?";
@@ -72,13 +72,14 @@ public class Principal extends javax.swing.JFrame {
 
             dataGarantia = dataGarantia.plusMonths(duracao_garantia);
             return dataGarantia.format(formatter);
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + e.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
         }
         return dataGarantia.format(formatter);
     }
-    private void ComboBoxConserto() { //ok
+
+    private void ComboBoxAreaNovaRevista() { //ok
         try {
             String SQL = "Select * from cadastros.manutencao order by id asc";
             PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
@@ -86,7 +87,7 @@ public class Principal extends javax.swing.JFrame {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 String Nome = rs.getString("nome");
-                BoxConsertoCadastrarServico.addItem(Nome);
+                CampoescolhaConserto.addItem(Nome);
 
             }
 
@@ -95,7 +96,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    public void atualizarTabelaClientes() {
+    public void atualizarTabelaConsultaCliente() {
         Cliente cli = new Cliente();
         clienteDAO clidao = new clienteDAO();
         try {
@@ -103,159 +104,159 @@ public class Principal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String dados[][] = new String[ListaCliente.size()][6];
+        String dados[][] = new String[ListaCliente.size()][4];
         int i = 0;
         for (Cliente clien : ListaCliente) {
             dados[i][0] = String.valueOf(clien.getId());
             dados[i][1] = clien.getNome();
-            dados[i][2] = clien.getDescricao();
-            dados[i][3] = String.valueOf(clien.getCpf());
-            dados[i][4] = String.valueOf(clien.getSaida_concerto().format(formatter));
-            dados[i][5] = String.valueOf(clien.getGarantia().format(formatter));
+            dados[i][2] = clien.getCpf();
+            dados[i][3] = clien.getTelefone();
             i++;
         }
-        String tituloColuna[] = {"id", "Nome", "Manutencao", "Cpf", "Saida concerto", "Garantia até"};
+        String tituloColuna[] = {"id", "Nome", "CPF", "Telefone"};
         DefaultTableModel tabelaCliente = new DefaultTableModel();
         tabelaCliente.setDataVector(dados, tituloColuna);
-        jTable1.setModel(new DefaultTableModel(dados, tituloColuna) {
+        TableConsultaCliente.setModel(new DefaultTableModel(dados, tituloColuna) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false};
+                false, false, false, false};
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
         });
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(180);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(30);
-        jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+        TableConsultaCliente.getColumnModel().getColumn(0).setPreferredWidth(20);
+        TableConsultaCliente.getColumnModel().getColumn(1).setPreferredWidth(180);
+        TableConsultaCliente.getColumnModel().getColumn(2).setPreferredWidth(100);
+        TableConsultaCliente.getColumnModel().getColumn(3).setPreferredWidth(100);
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-        jTable1.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-        jTable1.getColumnModel().getColumn(1).setCellRenderer(centralizado);
-        jTable1.getColumnModel().getColumn(2).setCellRenderer(centralizado);
-        jTable1.getColumnModel().getColumn(3).setCellRenderer(centralizado);
-        jTable1.getColumnModel().getColumn(4).setCellRenderer(centralizado);
-        jTable1.getColumnModel().getColumn(5).setCellRenderer(centralizado);
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TableConsultaCliente.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+        TableConsultaCliente.getColumnModel().getColumn(1).setCellRenderer(centralizado);
+        TableConsultaCliente.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+        TableConsultaCliente.getColumnModel().getColumn(3).setCellRenderer(centralizado);
+        TableConsultaCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        jTable1.setRowHeight(25);
-        jTable1.updateUI();
+        TableConsultaCliente.setRowHeight(25);
+        TableConsultaCliente.updateUI();
 
     }
-
-    //Tava do PaneRevista, referente a aba PaneGuiaAlteraRevista
-    /*public void BuscaRevistaComFiltro() {
-
-        Revistas revistas = new Revistas();
-        String dados[][] = new String[ListaBuscaRevista.size()][7];
+    
+        public void atualizarTabelaBuscaCliente() {
+        Cliente cliente = new Cliente();
+        String dados[][] = new String[ListaBuscaCliente.size()][4];
         int i = 0;
-        for (Revistas rev : ListaBuscaRevista) {
-            dados[i][0] = String.valueOf(rev.getID());
-            dados[i][1] = rev.getTitulo();
-            dados[i][2] = rev.getArea();
-            dados[i][3] = rev.getEspecificacao();
-            dados[i][4] = String.valueOf(rev.getData());
-            dados[i][5] = String.valueOf(rev.getQuantidade());
-            dados[i][6] = rev.getOrigem();
+        for (Cliente clien : ListaBuscaCliente) {
+            dados[i][0] = String.valueOf(clien.getId());
+            dados[i][1] = clien.getNome();
+            dados[i][2] = String.valueOf(clien.getCpf());
+            dados[i][3] = clien.getTelefone();
             i++;
         }
-        String tituloColuna[] = {"id", "Titulo", "Área", "Especificação", "Data", "Quantidade", "Origem"};
+        String tituloColuna[] = {"id", "Nome", "CPF", "Telefone"};
         DefaultTableModel tabelaCliente = new DefaultTableModel();
         tabelaCliente.setDataVector(dados, tituloColuna);
-        TabelaAlterarOuRemoverRevista.setModel(new DefaultTableModel(dados, tituloColuna) {
+        TableConsultaCliente.setModel(new DefaultTableModel(dados, tituloColuna) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false,};
+                false, false, false, false};
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
         });
-        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(0).setPreferredWidth(20);
-        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(1).setPreferredWidth(180);
-        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(2).setPreferredWidth(100);
-        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(3).setPreferredWidth(100);
-        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(4).setPreferredWidth(30);
-        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(5).setPreferredWidth(50);
-        TabelaAlterarOuRemoverRevista.getColumnModel().getColumn(6).setPreferredWidth(60);
+        TableConsultaCliente.getColumnModel().getColumn(0).setPreferredWidth(20);
+        TableConsultaCliente.getColumnModel().getColumn(1).setPreferredWidth(180);
+        TableConsultaCliente.getColumnModel().getColumn(2).setPreferredWidth(100);
+        TableConsultaCliente.getColumnModel().getColumn(3).setPreferredWidth(100);
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-        TabelaConsultaCliente.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-        TabelaConsultaCliente.getColumnModel().getColumn(1).setCellRenderer(centralizado);
-        TabelaConsultaCliente.getColumnModel().getColumn(2).setCellRenderer(centralizado);
-        TabelaConsultaCliente.getColumnModel().getColumn(3).setCellRenderer(centralizado);
-        TabelaConsultaCliente.getColumnModel().getColumn(4).setCellRenderer(centralizado);
-        TabelaConsultaCliente.getColumnModel().getColumn(5).setCellRenderer(centralizado);
-        TabelaConsultaCliente.getColumnModel().getColumn(6).setCellRenderer(centralizado);
-        TabelaConsultaCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        TableConsultaCliente.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+        TableConsultaCliente.getColumnModel().getColumn(1).setCellRenderer(centralizado);
+        TableConsultaCliente.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+        TableConsultaCliente.getColumnModel().getColumn(3).setCellRenderer(centralizado);
+        TableConsultaCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        TabelaConsultaCliente.setRowHeight(25);
-        TabelaConsultaCliente.updateUI();
-    }*/
-
+        TableConsultaCliente.setRowHeight(25);
+        TableConsultaCliente.updateUI();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         SideBoard = new javax.swing.JPanel();
-        BotaoClientes = new javax.swing.JLabel();
-        BotaoServiços = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        BotaoConsulta = new javax.swing.JLabel();
+        BotaoCadastro = new javax.swing.JLabel();
+        BotaoGerenciamento = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         PaneMae = new javax.swing.JPanel();
-        PanelCadastrarCliente = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        PanelGuias = new javax.swing.JPanel();
-        BotaoCadastrarCadastrarCliente = new javax.swing.JLabel();
-        BotaoGerenciarCadastrarCliente = new javax.swing.JLabel();
-        lblNome2 = new javax.swing.JLabel();
-        TxtNomeCadastrarCliente = new javax.swing.JTextField();
-        jSeparator8 = new javax.swing.JSeparator();
-        lblCPF2 = new javax.swing.JLabel();
-        jSeparator7 = new javax.swing.JSeparator();
-        lblTelefone = new javax.swing.JLabel();
-        TxtTelefoneCadastrarCliente = new javax.swing.JTextField();
+        PaneClientes = new javax.swing.JPanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        CadastrarClientes = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        lblNome3 = new javax.swing.JLabel();
+        FieldCadastroNomeCliente = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
-        BotaoSalvarCadastrarCliente = new javax.swing.JButton();
-        TxtCPFCadastrarCliente = new javax.swing.JTextField();
-        PanelCadastrarServico = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        BotaoCadastrarCadastrarServico = new javax.swing.JLabel();
-        BotaoConsultarCadastrarServico = new javax.swing.JLabel();
-        BotaoGerenciarCadastrarServico = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        lblNome = new javax.swing.JLabel();
-        TxtNomeCadastrarServico = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
-        lblConserto = new javax.swing.JLabel();
-        BoxConsertoCadastrarServico = new java.awt.Choice();
-        lblCPF = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
-        lblData = new javax.swing.JLabel();
-        TxtDataCadastrarServico = new javax.swing.JFormattedTextField();
-        jSeparator4 = new javax.swing.JSeparator();
-        BotaoBuscarCadastrarServico = new javax.swing.JButton();
-        BotaoCadastrarCadastrarServicos = new javax.swing.JButton();
-        TxtCPFCadastrarServico = new javax.swing.JTextField();
-        PanelConsultarServico = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        BotaoCadastrarConsultarServico = new javax.swing.JLabel();
-        BotaoConsultarConsultarServico = new javax.swing.JLabel();
-        BotaoGerenciarConsultarServico = new javax.swing.JLabel();
+        lblCPF3 = new javax.swing.JLabel();
+        FieldCadastroCPFCliente = new javax.swing.JTextField();
+        jSeparator10 = new javax.swing.JSeparator();
+        BotaoSalvarCadastroCliente = new javax.swing.JButton();
+        jSeparator12 = new javax.swing.JSeparator();
+        FieldCadastroTelefoneCliente = new javax.swing.JTextField();
+        lblNome4 = new javax.swing.JLabel();
+        BotaoCancelarCadastroCliente = new javax.swing.JButton();
+        BotaoNovoCadastroCliente = new javax.swing.JButton();
+        ConsultarClientes = new javax.swing.JPanel();
+        lblNome2 = new javax.swing.JLabel();
+        FieldConsultaNomeCliente = new javax.swing.JTextField();
+        jSeparator7 = new javax.swing.JSeparator();
+        lblCPF2 = new javax.swing.JLabel();
+        FieldConsultaCPFCliente = new javax.swing.JTextField();
+        BotaoBuscaConsultaCliente = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TableConsultaCliente = new javax.swing.JTable();
+        jSeparator11 = new javax.swing.JSeparator();
+        GerenciarClientes = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        PaneGarantia = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        BotaoBuscarConsultarServico = new javax.swing.JButton();
         lblNome1 = new javax.swing.JLabel();
-        TxtNomeConsultarServico = new javax.swing.JTextField();
+        TxtNome1 = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         lblCPF1 = new javax.swing.JLabel();
+        TxtCPF1 = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
+        BotaoSalvarNovaRevista1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        TxtCPFConsultarServico = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        lblNome = new javax.swing.JLabel();
+        CampoNome = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        lblCPF = new javax.swing.JLabel();
+        CampoCpf = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        lblData = new javax.swing.JLabel();
+        CampoDataFormatada = new javax.swing.JFormattedTextField();
+        jSeparator4 = new javax.swing.JSeparator();
+        CampoescolhaConserto = new java.awt.Choice();
+        lblConserto = new javax.swing.JLabel();
+        BotaoSalvarNovaRevista = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        PaneManutencoes = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UEMG Frutal - Revistas");
@@ -267,688 +268,483 @@ public class Principal extends javax.swing.JFrame {
         SideBoard.setToolTipText("");
         SideBoard.setMaximumSize(new java.awt.Dimension(300, 400));
 
-        BotaoClientes.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoClientes.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoClientes.setForeground(new java.awt.Color(25, 25, 112));
-        BotaoClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoClientes.setText("Clientes");
-        BotaoClientes.setOpaque(true);
-        BotaoClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoClientesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoClientesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoClientesMouseExited(evt);
-            }
-        });
-
-        BotaoServiços.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoServiços.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
-        BotaoServiços.setForeground(new java.awt.Color(25, 25, 112));
-        BotaoServiços.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoServiços.setText("Serviços");
-        BotaoServiços.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoServiços.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoServiços.setOpaque(true);
-        BotaoServiços.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoServiços.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoServiçosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoServiçosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoServiçosMouseExited(evt);
-            }
-        });
-
         jSeparator1.setBackground(new java.awt.Color(25, 25, 112));
         jSeparator1.setForeground(new java.awt.Color(230, 230, 230));
+
+        BotaoConsulta.setBackground(new java.awt.Color(230, 230, 230));
+        BotaoConsulta.setFont(new java.awt.Font("Segoe UI", 0, 26)); // NOI18N
+        BotaoConsulta.setForeground(new java.awt.Color(25, 25, 112));
+        BotaoConsulta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotaoConsulta.setText("Garantias");
+        BotaoConsulta.setMaximumSize(new java.awt.Dimension(139, 25));
+        BotaoConsulta.setMinimumSize(new java.awt.Dimension(139, 25));
+        BotaoConsulta.setOpaque(true);
+        BotaoConsulta.setPreferredSize(new java.awt.Dimension(139, 25));
+        BotaoConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotaoConsultaMouseClicked(evt);
+            }
+        });
+
+        BotaoCadastro.setBackground(new java.awt.Color(230, 230, 230));
+        BotaoCadastro.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
+        BotaoCadastro.setForeground(new java.awt.Color(25, 25, 112));
+        BotaoCadastro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotaoCadastro.setText("Clientes");
+        BotaoCadastro.setOpaque(true);
+        BotaoCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotaoCadastroMouseClicked(evt);
+            }
+        });
+
+        BotaoGerenciamento.setBackground(new java.awt.Color(230, 230, 230));
+        BotaoGerenciamento.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
+        BotaoGerenciamento.setForeground(new java.awt.Color(23, 23, 112));
+        BotaoGerenciamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotaoGerenciamento.setText("Concertos");
+        BotaoGerenciamento.setMaximumSize(new java.awt.Dimension(139, 25));
+        BotaoGerenciamento.setMinimumSize(new java.awt.Dimension(139, 25));
+        BotaoGerenciamento.setOpaque(true);
+        BotaoGerenciamento.setPreferredSize(new java.awt.Dimension(139, 25));
+        BotaoGerenciamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotaoGerenciamentoMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 204));
 
         javax.swing.GroupLayout SideBoardLayout = new javax.swing.GroupLayout(SideBoard);
         SideBoard.setLayout(SideBoardLayout);
         SideBoardLayout.setHorizontalGroup(
             SideBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BotaoClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(BotaoServiços, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addComponent(BotaoCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BotaoConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+            .addComponent(BotaoGerenciamento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(SideBoardLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
+            .addGroup(SideBoardLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SideBoardLayout.setVerticalGroup(
             SideBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SideBoardLayout.createSequentialGroup()
-                .addGap(198, 198, 198)
+                .addGap(85, 85, 85)
+                .addComponent(jLabel1)
+                .addGap(113, 113, 113)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(BotaoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(BotaoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(BotaoServiços, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotaoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(BotaoGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PaneMae.setBackground(new java.awt.Color(255, 255, 255));
-        PaneMae.setPreferredSize(new java.awt.Dimension(1145, 677));
+        PaneMae.setPreferredSize(new java.awt.Dimension(1144, 677));
         PaneMae.setLayout(new java.awt.CardLayout());
 
-        jPanel8.setPreferredSize(new java.awt.Dimension(1144, 199));
+        PaneClientes.setBackground(new java.awt.Color(255, 255, 255));
+        PaneClientes.setPreferredSize(new java.awt.Dimension(1144, 677));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(25, 25, 112));
-        jLabel7.setText("CADASTRAR CLIENTE");
+        CadastrarClientes.setForeground(new java.awt.Color(255, 255, 255));
+        CadastrarClientes.setDoubleBuffered(false);
+        CadastrarClientes.setPreferredSize(new java.awt.Dimension(1144, 677));
+        CadastrarClientes.setRequestFocusEnabled(false);
+        CadastrarClientes.setVerifyInputWhenFocusTarget(false);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(351, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(324, 324, 324))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
-        );
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setPreferredSize(new java.awt.Dimension(356, 200));
 
-        PanelGuias.setBackground(new java.awt.Color(230, 230, 230));
-        PanelGuias.setPreferredSize(new java.awt.Dimension(1145, 50));
+        lblNome3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblNome3.setText("Nome");
 
-        BotaoCadastrarCadastrarCliente.setBackground(new java.awt.Color(220, 220, 220));
-        BotaoCadastrarCadastrarCliente.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoCadastrarCadastrarCliente.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoCadastrarCadastrarCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoCadastrarCadastrarCliente.setText("Cadastrar");
-        BotaoCadastrarCadastrarCliente.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarCadastrarCliente.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarCadastrarCliente.setOpaque(true);
-        BotaoCadastrarCadastrarCliente.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarCadastrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+        FieldCadastroNomeCliente.setBackground(new java.awt.Color(240, 240, 240));
+        FieldCadastroNomeCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        FieldCadastroNomeCliente.setBorder(null);
+        FieldCadastroNomeCliente.setMaximumSize(new java.awt.Dimension(25, 25));
+        FieldCadastroNomeCliente.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        FieldCadastroNomeCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoCadastrarCadastrarClienteMouseClicked(evt);
+                FieldCadastroNomeClienteMouseClicked(evt);
             }
         });
-
-        BotaoGerenciarCadastrarCliente.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoGerenciarCadastrarCliente.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoGerenciarCadastrarCliente.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoGerenciarCadastrarCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoGerenciarCadastrarCliente.setText("Gerenciar");
-        BotaoGerenciarCadastrarCliente.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarCadastrarCliente.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarCadastrarCliente.setOpaque(true);
-        BotaoGerenciarCadastrarCliente.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarCadastrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarCadastrarClienteMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarCadastrarClienteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarCadastrarClienteMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout PanelGuiasLayout = new javax.swing.GroupLayout(PanelGuias);
-        PanelGuias.setLayout(PanelGuiasLayout);
-        PanelGuiasLayout.setHorizontalGroup(
-            PanelGuiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelGuiasLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(BotaoCadastrarCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(BotaoGerenciarCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        PanelGuiasLayout.setVerticalGroup(
-            PanelGuiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelGuiasLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(PanelGuiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotaoCadastrarCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoGerenciarCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        lblNome2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNome2.setText("Nome");
-
-        TxtNomeCadastrarCliente.setBackground(new java.awt.Color(240, 240, 240));
-        TxtNomeCadastrarCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtNomeCadastrarCliente.setBorder(null);
-        TxtNomeCadastrarCliente.setMaximumSize(new java.awt.Dimension(25, 25));
-        TxtNomeCadastrarCliente.setMinimumSize(new java.awt.Dimension(25, 25));
-        TxtNomeCadastrarServico.setDocument(new JTextFieldLimit(40, true));
-        TxtNomeCadastrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TxtNomeCadastrarClienteMouseClicked(evt);
-            }
-        });
-        TxtNomeCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtNomeCadastrarClienteActionPerformed(evt);
-            }
-        });
-        TxtNomeCadastrarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+        FieldCadastroNomeCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtNomeCadastrarClienteKeyPressed(evt);
-            }
-        });
-
-        jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
-
-        lblCPF2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblCPF2.setText("CPF");
-
-        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
-
-        lblTelefone.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblTelefone.setText("Telefone");
-
-        TxtTelefoneCadastrarCliente.setBackground(new java.awt.Color(240, 240, 240));
-        TxtTelefoneCadastrarCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtTelefoneCadastrarCliente.setBorder(null);
-        TxtTelefoneCadastrarCliente.setPreferredSize(new java.awt.Dimension(35, 26));
-        TxtCPFConsultarServico.setDocument(new JTextFieldLimit(10, false, true));
-        TxtTelefoneCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtTelefoneCadastrarClienteActionPerformed(evt);
+                FieldCadastroNomeClienteKeyPressed(evt);
             }
         });
 
         jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
 
-        BotaoSalvarCadastrarCliente.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoSalvarCadastrarCliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        BotaoSalvarCadastrarCliente.setText("Salvar");
-        BotaoSalvarCadastrarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        BotaoSalvarCadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
+        lblCPF3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblCPF3.setText("CPF");
+
+        FieldCadastroCPFCliente.setBackground(new java.awt.Color(240, 240, 240));
+        FieldCadastroCPFCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        FieldCadastroCPFCliente.setBorder(null);
+        FieldCadastroCPFCliente.setPreferredSize(new java.awt.Dimension(35, 26));
+        CampoCpf.setDocument(new JTextFieldLimit(10, false, true));
+        FieldCadastroCPFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotaoSalvarCadastrarClienteActionPerformed(evt);
+                FieldCadastroCPFClienteActionPerformed(evt);
             }
         });
 
-        TxtCPFCadastrarCliente.setBackground(new java.awt.Color(240, 240, 240));
-        TxtCPFCadastrarCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtCPFCadastrarCliente.setBorder(null);
+        jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout PanelCadastrarClienteLayout = new javax.swing.GroupLayout(PanelCadastrarCliente);
-        PanelCadastrarCliente.setLayout(PanelCadastrarClienteLayout);
-        PanelCadastrarClienteLayout.setHorizontalGroup(
-            PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelCadastrarClienteLayout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addGroup(PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblNome2)
-                        .addComponent(TxtNomeCadastrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtTelefoneCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTelefone))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
-                .addGroup(PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCPF2)
-                    .addComponent(jSeparator7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(BotaoSalvarCadastrarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(TxtCPFCadastrarCliente))
-                .addGap(202, 202, 202))
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 1145, Short.MAX_VALUE)
-            .addComponent(PanelGuias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        BotaoSalvarCadastroCliente.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoSalvarCadastroCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarCadastroCliente.setText("Salvar");
+        BotaoSalvarCadastroCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoSalvarCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoSalvarCadastroClienteActionPerformed(evt);
+            }
+        });
+
+        jSeparator12.setForeground(new java.awt.Color(0, 0, 0));
+
+        FieldCadastroTelefoneCliente.setBackground(new java.awt.Color(240, 240, 240));
+        FieldCadastroTelefoneCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        FieldCadastroTelefoneCliente.setBorder(null);
+        FieldCadastroTelefoneCliente.setMaximumSize(new java.awt.Dimension(25, 25));
+        FieldCadastroTelefoneCliente.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        FieldCadastroTelefoneCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FieldCadastroTelefoneClienteMouseClicked(evt);
+            }
+        });
+        FieldCadastroTelefoneCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                FieldCadastroTelefoneClienteKeyPressed(evt);
+            }
+        });
+
+        lblNome4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblNome4.setText("Telefone:");
+
+        BotaoCancelarCadastroCliente.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoCancelarCadastroCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarCadastroCliente.setText("Cancelar");
+        BotaoCancelarCadastroCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoCancelarCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoCancelarCadastroClienteActionPerformed(evt);
+            }
+        });
+
+        BotaoNovoCadastroCliente.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoNovoCadastroCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoNovoCadastroCliente.setText("Novo");
+        BotaoNovoCadastroCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoNovoCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoNovoCadastroClienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblNome3)
+                                    .addComponent(FieldCadastroNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                                    .addComponent(jSeparator9))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblCPF3))
+                                    .addComponent(FieldCadastroCPFCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel15Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(BotaoSalvarCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BotaoCancelarCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(58, 58, 58))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BotaoNovoCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblNome4)
+                                .addComponent(FieldCadastroTelefoneCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                                .addComponent(jSeparator12)))
+                        .addGap(296, 703, Short.MAX_VALUE))))
         );
-        PanelCadastrarClienteLayout.setVerticalGroup(
-            PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelCadastrarClienteLayout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(PanelGuias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome2)
-                    .addComponent(lblCPF2))
-                .addGap(11, 11, 11)
-                .addGroup(PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtNomeCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtCPFCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(lblNome3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FieldCadastroNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(lblCPF3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FieldCadastroCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1, 1, 1)
-                .addGroup(PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85)
-                .addComponent(lblTelefone)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(lblNome4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelCadastrarClienteLayout.createSequentialGroup()
-                        .addComponent(TxtTelefoneCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(FieldCadastroTelefoneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotaoSalvarCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoCancelarCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoNovoCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
+        );
+
+        javax.swing.GroupLayout CadastrarClientesLayout = new javax.swing.GroupLayout(CadastrarClientes);
+        CadastrarClientes.setLayout(CadastrarClientesLayout);
+        CadastrarClientesLayout.setHorizontalGroup(
+            CadastrarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
+        );
+        CadastrarClientesLayout.setVerticalGroup(
+            CadastrarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Cadastrar", CadastrarClientes);
+
+        ConsultarClientes.setPreferredSize(new java.awt.Dimension(1144, 199));
+
+        lblNome2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblNome2.setText("Nome");
+
+        FieldConsultaNomeCliente.setBackground(new java.awt.Color(240, 240, 240));
+        FieldConsultaNomeCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        FieldConsultaNomeCliente.setBorder(null);
+        FieldConsultaNomeCliente.setMaximumSize(new java.awt.Dimension(25, 25));
+        FieldConsultaNomeCliente.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        FieldConsultaNomeCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FieldConsultaNomeClienteMouseClicked(evt);
+            }
+        });
+        FieldConsultaNomeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldConsultaNomeClienteActionPerformed(evt);
+            }
+        });
+        FieldConsultaNomeCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                FieldConsultaNomeClienteKeyPressed(evt);
+            }
+        });
+
+        jSeparator7.setForeground(new java.awt.Color(0, 0, 0));
+
+        lblCPF2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblCPF2.setText("CPF");
+
+        FieldConsultaCPFCliente.setBackground(new java.awt.Color(240, 240, 240));
+        FieldConsultaCPFCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        FieldConsultaCPFCliente.setBorder(null);
+        FieldConsultaCPFCliente.setPreferredSize(new java.awt.Dimension(35, 26));
+        TxtCPF1.setDocument(new JTextFieldLimit(10, false, true));
+        FieldConsultaCPFCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldConsultaCPFClienteActionPerformed(evt);
+            }
+        });
+
+        BotaoBuscaConsultaCliente.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoBuscaConsultaCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoBuscaConsultaCliente.setText("Busca");
+        BotaoBuscaConsultaCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoBuscaConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoBuscaConsultaClienteActionPerformed(evt);
+            }
+        });
+
+        TableConsultaCliente.setAutoCreateRowSorter(true);
+        TableConsultaCliente.setBackground(new java.awt.Color(240, 240, 240));
+        TableConsultaCliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        TableConsultaCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nome", "CPF", "Conserto", "Data do conserto", "Tempo de garantia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        TableConsultaCliente.setFocusable(false);
+        TableConsultaCliente.setGridColor(new java.awt.Color(190, 190, 190));
+        TableConsultaCliente.setSelectionBackground(new java.awt.Color(230, 230, 230));
+        TableConsultaCliente.setSelectionForeground(new java.awt.Color(230, 230, 230));
+        TableConsultaCliente.setShowHorizontalLines(false);
+        jScrollPane2.setViewportView(TableConsultaCliente);
+
+        jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout ConsultarClientesLayout = new javax.swing.GroupLayout(ConsultarClientes);
+        ConsultarClientes.setLayout(ConsultarClientesLayout);
+        ConsultarClientesLayout.setHorizontalGroup(
+            ConsultarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ConsultarClientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ConsultarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ConsultarClientesLayout.createSequentialGroup()
+                        .addGroup(ConsultarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNome2)
+                            .addComponent(jSeparator7)
+                            .addComponent(FieldConsultaNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(ConsultarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblCPF2)
+                            .addComponent(FieldConsultaCPFCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(jSeparator11))
+                        .addGap(46, 46, 46)
+                        .addComponent(BotaoBuscaConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1124, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        ConsultarClientesLayout.setVerticalGroup(
+            ConsultarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ConsultarClientesLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(ConsultarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(ConsultarClientesLayout.createSequentialGroup()
+                        .addComponent(lblNome2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(FieldConsultaNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
-                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BotaoSalvarCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(120, Short.MAX_VALUE))
-        );
-
-        PaneMae.add(PanelCadastrarCliente, "card5");
-
-        PanelCadastrarServico.setForeground(new java.awt.Color(240, 240, 240));
-        PanelCadastrarServico.setDoubleBuffered(false);
-        PanelCadastrarServico.setPreferredSize(new java.awt.Dimension(1145, 677));
-        PanelCadastrarServico.setRequestFocusEnabled(false);
-        PanelCadastrarServico.setVerifyInputWhenFocusTarget(false);
-
-        jPanel10.setBackground(new java.awt.Color(230, 230, 230));
-        jPanel10.setPreferredSize(new java.awt.Dimension(1145, 50));
-
-        BotaoCadastrarCadastrarServico.setBackground(new java.awt.Color(220, 220, 220));
-        BotaoCadastrarCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoCadastrarCadastrarServico.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoCadastrarCadastrarServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoCadastrarCadastrarServico.setText("Cadastrar");
-        BotaoCadastrarCadastrarServico.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarCadastrarServico.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarCadastrarServico.setOpaque(true);
-        BotaoCadastrarCadastrarServico.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarCadastrarServico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoCadastrarCadastrarServicoMouseClicked(evt);
-            }
-        });
-
-        BotaoConsultarCadastrarServico.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoConsultarCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoConsultarCadastrarServico.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoConsultarCadastrarServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoConsultarCadastrarServico.setText("Consultar");
-        BotaoConsultarCadastrarServico.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoConsultarCadastrarServico.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoConsultarCadastrarServico.setOpaque(true);
-        BotaoConsultarCadastrarServico.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoConsultarCadastrarServico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoConsultarCadastrarServicoMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoConsultarCadastrarServicoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoConsultarCadastrarServicoMouseExited(evt);
-            }
-        });
-
-        BotaoGerenciarCadastrarServico.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoGerenciarCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoGerenciarCadastrarServico.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoGerenciarCadastrarServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoGerenciarCadastrarServico.setText("Gerenciar");
-        BotaoGerenciarCadastrarServico.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarCadastrarServico.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarCadastrarServico.setOpaque(true);
-        BotaoGerenciarCadastrarServico.setPreferredSize(new java.awt.Dimension(163, 50));
-        BotaoGerenciarCadastrarServico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarCadastrarServicoMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarCadastrarServicoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarCadastrarServicoMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(BotaoCadastrarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(BotaoConsultarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(BotaoGerenciarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(656, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotaoCadastrarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoGerenciarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoConsultarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSeparator7)
+                        .addGap(18, 18, 18))
+                    .addGroup(ConsultarClientesLayout.createSequentialGroup()
+                        .addGroup(ConsultarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(ConsultarClientesLayout.createSequentialGroup()
+                                .addComponent(lblCPF2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FieldConsultaCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BotaoBuscaConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addComponent(jSeparator11, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
+                        .addGap(17, 17, 17)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(1145, 199));
+        jTabbedPane3.addTab("Consultar", ConsultarClientes);
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(25, 25, 112));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("CADASTRAR SERVIÇO");
-        jLabel4.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jLabel4AncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(325, 325, 325)
-                .addComponent(jLabel4)
-                .addContainerGap(325, Short.MAX_VALUE))
+        javax.swing.GroupLayout GerenciarClientesLayout = new javax.swing.GroupLayout(GerenciarClientes);
+        GerenciarClientes.setLayout(GerenciarClientesLayout);
+        GerenciarClientesLayout.setHorizontalGroup(
+            GerenciarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1144, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel4)
-                .addContainerGap(69, Short.MAX_VALUE))
+        GerenciarClientesLayout.setVerticalGroup(
+            GerenciarClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 444, Short.MAX_VALUE)
         );
 
-        lblNome.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNome.setText("Nome");
+        jTabbedPane3.addTab("Gerenciar", GerenciarClientes);
 
-        TxtNomeCadastrarServico.setBackground(new java.awt.Color(240, 240, 240));
-        TxtNomeCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtNomeCadastrarServico.setBorder(null);
-        TxtNomeCadastrarServico.setMaximumSize(new java.awt.Dimension(25, 25));
-        TxtNomeCadastrarServico.setMinimumSize(new java.awt.Dimension(25, 25));
-        TxtNomeCadastrarServico.setDocument(new JTextFieldLimit(40, true));
-        TxtNomeCadastrarServico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TxtNomeCadastrarServicoMouseClicked(evt);
-            }
-        });
-        TxtNomeCadastrarServico.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtNomeCadastrarServicoKeyPressed(evt);
-            }
-        });
+        jPanel17.setBackground(new java.awt.Color(255, 102, 153));
+        jPanel17.setPreferredSize(new java.awt.Dimension(1144, 199));
 
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(25, 25, 112));
+        jLabel10.setText("Clientes");
 
-        lblConserto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblConserto.setText("Conserto");
-
-        BoxConsertoCadastrarServico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        BoxConsertoCadastrarServico.setFocusable(false);
-        BoxConsertoCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        BoxConsertoCadastrarServico.setForeground(new java.awt.Color(1, 1, 1));
-
-        lblCPF.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblCPF.setText("CPF");
-
-        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
-
-        lblData.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblData.setText("Data do conserto");
-
-        TxtDataCadastrarServico.setBackground(new java.awt.Color(240, 240, 240));
-        TxtDataCadastrarServico.setBorder(null);
-        try {
-            TxtDataCadastrarServico.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        TxtDataCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        TxtDataCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDataCadastrarServicoActionPerformed(evt);
-            }
-        });
-
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-
-        BotaoBuscarCadastrarServico.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        BotaoBuscarCadastrarServico.setText("Buscar Cliente");
-        BotaoBuscarCadastrarServico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        BotaoBuscarCadastrarServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotaoBuscarCadastrarServicoActionPerformed(evt);
-            }
-        });
-
-        BotaoCadastrarCadastrarServicos.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCadastrarCadastrarServicos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        BotaoCadastrarCadastrarServicos.setText("Cadastrar Serviço");
-        BotaoCadastrarCadastrarServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        BotaoCadastrarCadastrarServicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotaoCadastrarCadastrarServicosActionPerformed(evt);
-            }
-        });
-
-        TxtCPFCadastrarServico.setBackground(new java.awt.Color(240, 240, 240));
-        TxtCPFCadastrarServico.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtCPFCadastrarServico.setBorder(null);
-
-        javax.swing.GroupLayout PanelCadastrarServicoLayout = new javax.swing.GroupLayout(PanelCadastrarServico);
-        PanelCadastrarServico.setLayout(PanelCadastrarServicoLayout);
-        PanelCadastrarServicoLayout.setHorizontalGroup(
-            PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(PanelCadastrarServicoLayout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblConserto)
-                    .addComponent(BoxConsertoCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblNome)
-                        .addComponent(TxtNomeCadastrarServico, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)))
-                .addGap(102, 102, 102)
-                .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCPF)
-                    .addComponent(lblData)
-                    .addComponent(TxtDataCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(TxtCPFCadastrarServico, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)))
-                .addGap(48, 48, 48)
-                .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BotaoCadastrarCadastrarServicos)
-                    .addComponent(BotaoBuscarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        PanelCadastrarServicoLayout.setVerticalGroup(
-            PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelCadastrarServicoLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelCadastrarServicoLayout.createSequentialGroup()
-                        .addComponent(lblNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelCadastrarServicoLayout.createSequentialGroup()
-                                .addComponent(TxtNomeCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(BotaoBuscarCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PanelCadastrarServicoLayout.createSequentialGroup()
-                        .addComponent(lblCPF)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtCPFCadastrarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)))
-                .addGap(77, 77, 77)
-                .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblData)
-                    .addComponent(lblConserto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BotaoCadastrarCadastrarServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelCadastrarServicoLayout.createSequentialGroup()
-                        .addGroup(PanelCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TxtDataCadastrarServico)
-                            .addComponent(BoxConsertoCadastrarServico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(2, 2, 2)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(13, 13, 13))
-        );
-
-        PaneMae.add(PanelCadastrarServico, "card5");
-
-        PanelConsultarServico.setPreferredSize(new java.awt.Dimension(1145, 677));
-
-        jPanel9.setBackground(new java.awt.Color(230, 230, 230));
-
-        BotaoCadastrarConsultarServico.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCadastrarConsultarServico.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoCadastrarConsultarServico.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoCadastrarConsultarServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoCadastrarConsultarServico.setText("Cadastrar");
-        BotaoCadastrarConsultarServico.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarConsultarServico.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarConsultarServico.setOpaque(true);
-        BotaoCadastrarConsultarServico.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoCadastrarConsultarServico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoCadastrarConsultarServicoMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoCadastrarConsultarServicoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoCadastrarConsultarServicoMouseExited(evt);
-            }
-        });
-
-        BotaoConsultarConsultarServico.setBackground(new java.awt.Color(220, 220, 220));
-        BotaoConsultarConsultarServico.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoConsultarConsultarServico.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoConsultarConsultarServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoConsultarConsultarServico.setText("Consultar");
-        BotaoConsultarConsultarServico.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoConsultarConsultarServico.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoConsultarConsultarServico.setOpaque(true);
-        BotaoConsultarConsultarServico.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoConsultarConsultarServico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoConsultarConsultarServicoMouseClicked(evt);
-            }
-        });
-
-        BotaoGerenciarConsultarServico.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoGerenciarConsultarServico.setFont(new java.awt.Font("Century Gothic", 0, 26)); // NOI18N
-        BotaoGerenciarConsultarServico.setForeground(new java.awt.Color(23, 23, 112));
-        BotaoGerenciarConsultarServico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotaoGerenciarConsultarServico.setText("Gerenciar");
-        BotaoGerenciarConsultarServico.setMaximumSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarConsultarServico.setMinimumSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarConsultarServico.setOpaque(true);
-        BotaoGerenciarConsultarServico.setPreferredSize(new java.awt.Dimension(139, 25));
-        BotaoGerenciarConsultarServico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarConsultarServicoMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarConsultarServicoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotaoGerenciarConsultarServicoMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(BotaoCadastrarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(BotaoConsultarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(BotaoGerenciarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(417, 417, 417)
+                .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotaoCadastrarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoGerenciarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BotaoConsultarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
+
+        javax.swing.GroupLayout PaneClientesLayout = new javax.swing.GroupLayout(PaneClientes);
+        PaneClientes.setLayout(PaneClientesLayout);
+        PaneClientesLayout.setHorizontalGroup(
+            PaneClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, 1149, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
+        );
+        PaneClientesLayout.setVerticalGroup(
+            PaneClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PaneClientesLayout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+        );
+
+        PaneMae.add(PaneClientes, "card3");
+
+        PaneGarantia.setBackground(new java.awt.Color(255, 255, 255));
+        PaneGarantia.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
 
         jPanel2.setPreferredSize(new java.awt.Dimension(1144, 199));
-
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(25, 25, 112));
-        jLabel6.setText("CONSULTAR SERVIÇO");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(332, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(324, 324, 324))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel6)
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
-
-        BotaoBuscarConsultarServico.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarConsultarServico.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        BotaoBuscarConsultarServico.setText("Buscar Cliente");
-        BotaoBuscarConsultarServico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        BotaoBuscarConsultarServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotaoBuscarConsultarServicoActionPerformed(evt);
-            }
-        });
 
         lblNome1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblNome1.setText("Nome");
 
-        TxtNomeConsultarServico.setBackground(new java.awt.Color(240, 240, 240));
-        TxtNomeConsultarServico.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtNomeConsultarServico.setBorder(null);
-        TxtNomeConsultarServico.setMaximumSize(new java.awt.Dimension(25, 25));
-        TxtNomeConsultarServico.setMinimumSize(new java.awt.Dimension(25, 25));
-        TxtNomeCadastrarServico.setDocument(new JTextFieldLimit(40, true));
-        TxtNomeConsultarServico.addMouseListener(new java.awt.event.MouseAdapter() {
+        TxtNome1.setBackground(new java.awt.Color(240, 240, 240));
+        TxtNome1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        TxtNome1.setBorder(null);
+        TxtNome1.setMaximumSize(new java.awt.Dimension(25, 25));
+        TxtNome1.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        TxtNome1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TxtNomeConsultarServicoMouseClicked(evt);
+                TxtNome1MouseClicked(evt);
             }
         });
-        TxtNomeConsultarServico.addActionListener(new java.awt.event.ActionListener() {
+        TxtNome1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtNomeConsultarServicoActionPerformed(evt);
+                TxtNome1ActionPerformed(evt);
             }
         });
-        TxtNomeConsultarServico.addKeyListener(new java.awt.event.KeyAdapter() {
+        TxtNome1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TxtNomeConsultarServicoKeyPressed(evt);
+                TxtNome1KeyPressed(evt);
             }
         });
 
@@ -957,7 +753,28 @@ public class Principal extends javax.swing.JFrame {
         lblCPF1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblCPF1.setText("CPF");
 
+        TxtCPF1.setBackground(new java.awt.Color(240, 240, 240));
+        TxtCPF1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        TxtCPF1.setBorder(null);
+        TxtCPF1.setPreferredSize(new java.awt.Dimension(35, 26));
+        TxtCPF1.setDocument(new JTextFieldLimit(10, false, true));
+        TxtCPF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtCPF1ActionPerformed(evt);
+            }
+        });
+
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
+
+        BotaoSalvarNovaRevista1.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoSalvarNovaRevista1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarNovaRevista1.setText("Salvar");
+        BotaoSalvarNovaRevista1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoSalvarNovaRevista1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoSalvarNovaRevista1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setBackground(new java.awt.Color(240, 240, 240));
@@ -985,68 +802,372 @@ public class Principal extends javax.swing.JFrame {
         jTable1.setShowHorizontalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
-        TxtCPFConsultarServico.setBackground(new java.awt.Color(240, 240, 240));
-        TxtCPFConsultarServico.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        TxtCPFConsultarServico.setBorder(null);
-
-        javax.swing.GroupLayout PanelConsultarServicoLayout = new javax.swing.GroupLayout(PanelConsultarServico);
-        PanelConsultarServico.setLayout(PanelConsultarServicoLayout);
-        PanelConsultarServicoLayout.setHorizontalGroup(
-            PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelConsultarServicoLayout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelConsultarServicoLayout.createSequentialGroup()
-                        .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblNome1)
-                            .addComponent(TxtNomeConsultarServico, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-                            .addComponent(jSeparator3))
-                        .addGap(118, 118, 118)
-                        .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtNome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCPF1)
-                            .addGroup(PanelConsultarServicoLayout.createSequentialGroup()
-                                .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSeparator6, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                    .addComponent(TxtCPFConsultarServico))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BotaoBuscarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(PanelConsultarServicoLayout.createSequentialGroup()
-                .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1145, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(TxtCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BotaoSalvarNovaRevista1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(218, 218, 218)))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
-        PanelConsultarServicoLayout.setVerticalGroup(
-            PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelConsultarServicoLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome1)
                     .addComponent(lblCPF1))
                 .addGap(11, 11, 11)
-                .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelConsultarServicoLayout.createSequentialGroup()
-                        .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtCPFConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtNomeConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addGroup(PanelConsultarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultarServicoLayout.createSequentialGroup()
-                        .addComponent(BotaoBuscarConsultarServico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoSalvarNovaRevista1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        PaneMae.add(PanelConsultarServico, "card5");
+        jTabbedPane2.addTab("Consultar", jPanel2);
+
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.setDoubleBuffered(false);
+        jPanel3.setPreferredSize(new java.awt.Dimension(1144, 677));
+        jPanel3.setRequestFocusEnabled(false);
+        jPanel3.setVerifyInputWhenFocusTarget(false);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(356, 200));
+
+        lblNome.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblNome.setText("Nome");
+
+        CampoNome.setBackground(new java.awt.Color(240, 240, 240));
+        CampoNome.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        CampoNome.setBorder(null);
+        CampoNome.setMaximumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        CampoNome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CampoNomeMouseClicked(evt);
+            }
+        });
+        CampoNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CampoNomeKeyPressed(evt);
+            }
+        });
+
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+
+        lblCPF.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblCPF.setText("CPF");
+
+        CampoCpf.setBackground(new java.awt.Color(240, 240, 240));
+        CampoCpf.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        CampoCpf.setBorder(null);
+        CampoCpf.setPreferredSize(new java.awt.Dimension(35, 26));
+        CampoCpf.setDocument(new JTextFieldLimit(10, false, true));
+        CampoCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoCpfActionPerformed(evt);
+            }
+        });
+
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+
+        lblData.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblData.setText("Data do conserto");
+
+        try {
+            CampoDataFormatada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        CampoDataFormatada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoDataFormatadaActionPerformed(evt);
+            }
+        });
+
+        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+
+        CampoescolhaConserto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CampoescolhaConserto.setFocusable(false);
+        CampoescolhaConserto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        CampoescolhaConserto.setForeground(new java.awt.Color(1, 1, 1));
+
+        lblConserto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblConserto.setText("Conserto");
+
+        BotaoSalvarNovaRevista.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoSalvarNovaRevista.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarNovaRevista.setText("Salvar");
+        BotaoSalvarNovaRevista.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoSalvarNovaRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoSalvarNovaRevistaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BotaoSalvarNovaRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(320, 320, 320))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblConserto)
+                            .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(284, 284, 284)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblData)
+                            .addComponent(jSeparator4)
+                            .addComponent(CampoDataFormatada, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNome)
+                            .addComponent(jSeparator2)
+                            .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblCPF)
+                                .addComponent(CampoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(213, 213, 213))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome)
+                    .addComponent(lblCPF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(CampoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblConserto)
+                        .addGap(11, 11, 11)
+                        .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblData)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CampoDataFormatada, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(BotaoSalvarNovaRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Cadastrar", jPanel3);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1144, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 444, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Gerenciar", jPanel12);
+
+        jPanel11.setBackground(new java.awt.Color(255, 102, 153));
+        jPanel11.setPreferredSize(new java.awt.Dimension(1144, 199));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(25, 25, 112));
+        jLabel9.setText("Garantias");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(417, 417, 417)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane2)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 1149, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout PaneGarantiaLayout = new javax.swing.GroupLayout(PaneGarantia);
+        PaneGarantia.setLayout(PaneGarantiaLayout);
+        PaneGarantiaLayout.setHorizontalGroup(
+            PaneGarantiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        PaneGarantiaLayout.setVerticalGroup(
+            PaneGarantiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        PaneMae.add(PaneGarantia, "card2");
+
+        jPanel6.setBackground(new java.awt.Color(255, 102, 153));
+        jPanel6.setPreferredSize(new java.awt.Dimension(1144, 199));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(25, 25, 112));
+        jLabel7.setText("Manutenções");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(417, 417, 417)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1144, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 444, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Cadastro", jPanel4);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1144, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 444, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Consulta", jPanel8);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1144, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 444, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Gerenciar", jPanel9);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+
+        javax.swing.GroupLayout PaneManutencoesLayout = new javax.swing.GroupLayout(PaneManutencoes);
+        PaneManutencoes.setLayout(PaneManutencoesLayout);
+        PaneManutencoesLayout.setHorizontalGroup(
+            PaneManutencoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 1149, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        PaneManutencoesLayout.setVerticalGroup(
+            PaneManutencoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PaneManutencoesLayout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PaneMae.add(PaneManutencoes, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1054,7 +1175,7 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(SideBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PaneMae, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1068,44 +1189,74 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //----------------------Inicio das ações de revista ------------------------------------
-    
+    private void BotaoCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastroMouseClicked
+        PaneClientes.setVisible(true);
+        PaneGarantia.setVisible(false);
+        PaneManutencoes.setVisible(false);
+        setLblColor(BotaoCadastro);
+        ResetColor(BotaoConsulta);
+        ResetColor(BotaoGerenciamento);
+    }//GEN-LAST:event_BotaoCadastroMouseClicked
 
-    private void TxtNomeCadastrarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtNomeCadastrarServicoMouseClicked
-        System.out.println("Teste");
-    }//GEN-LAST:event_TxtNomeCadastrarServicoMouseClicked
+    private void BotaoConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultaMouseClicked
+        PaneClientes.setVisible(false);
+        PaneGarantia.setVisible(true);
+        PaneManutencoes.setVisible(false);
+        setLblColor(BotaoConsulta);
+        ResetColor(BotaoCadastro);
+        ResetColor(BotaoGerenciamento);
+    }//GEN-LAST:event_BotaoConsultaMouseClicked
 
-    private void TxtNomeCadastrarServicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNomeCadastrarServicoKeyPressed
 
-    }//GEN-LAST:event_TxtNomeCadastrarServicoKeyPressed
+    private void BotaoGerenciamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciamentoMouseClicked
+        PaneClientes.setVisible(false);
+        PaneGarantia.setVisible(false);
+        PaneManutencoes.setVisible(true);
+        ResetColor(BotaoCadastro);
+        ResetColor(BotaoConsulta);
+        setLblColor(BotaoGerenciamento);
+    }//GEN-LAST:event_BotaoGerenciamentoMouseClicked
 
-    private void jLabel4AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel4AncestorAdded
+    private void CampoNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CampoNomeMouseClicked
+
+    }//GEN-LAST:event_CampoNomeMouseClicked
+
+    private void CampoNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoNomeKeyPressed
+
+    }//GEN-LAST:event_CampoNomeKeyPressed
+
+    private void CampoCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel4AncestorAdded
+    }//GEN-LAST:event_CampoCpfActionPerformed
 
-    private void TxtNomeConsultarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtNomeConsultarServicoMouseClicked
+    private void TxtNome1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtNome1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtNomeConsultarServicoMouseClicked
+    }//GEN-LAST:event_TxtNome1MouseClicked
 
-    private void TxtNomeConsultarServicoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNomeConsultarServicoKeyPressed
+    private void TxtNome1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNome1KeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtNomeConsultarServicoKeyPressed
+    }//GEN-LAST:event_TxtNome1KeyPressed
 
-    private void TxtNomeConsultarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNomeConsultarServicoActionPerformed
+    private void TxtCPF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCPF1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtNomeConsultarServicoActionPerformed
+    }//GEN-LAST:event_TxtCPF1ActionPerformed
 
-    private void BotaoCadastrarCadastrarServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarCadastrarServicosActionPerformed
+    private void TxtNome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNome1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtNome1ActionPerformed
+
+    private void BotaoSalvarNovaRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarNovaRevistaActionPerformed
         /*if (campoTitulo.getText().isEmpty() || campoData.getText().isEmpty() || campoQuantidade.getText().isEmpty() || ComboBoxEspecificacaoNovaRevista.getSelectedItem() == null || ComboBoxAreaNovaRevista.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Há campos não preenchidos", "Sistema", JOptionPane.INFORMATION_MESSAGE);
         } else {*/
-        Cliente cli = new Cliente();
+ /*Cliente cli = new Cliente();
                 
         try {
             cli.getId();
-            cli.setNome(TxtNomeCadastrarServico.getText());
-            cli.setCpf(Integer.parseInt(TxtCPFCadastrarServico.getText()));
-            cli.setDescricao((String) BoxConsertoCadastrarServico.getSelectedItem());
-            cli.setSaida_concerto(LocalDate.parse(TxtDataCadastrarServico.getText(), formatter));
+            cli.setNome(CampoNome.getText());
+            cli.setCpf(Integer.parseInt(CampoCpf.getText()));
+            cli.setDescricao((String) CampoescolhaConserto.getSelectedItem());
+            cli.setSaida_concerto(LocalDate.parse(CampoDataFormatada.getText(), formatter));
             cli.setGarantia(LocalDate.parse(FuncGarantia(cli.getSaida_concerto(), cli.getDescricao()), formatter));//atenção redobrada nessa linha
 
             clienteDAO clidao = new clienteDAO();
@@ -1123,154 +1274,113 @@ public class Principal extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null, "Essa revista já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(ex.getMessage());
         }
-        //}
-    }//GEN-LAST:event_BotaoCadastrarCadastrarServicosActionPerformed
- 
-    private void BotaoBuscarConsultarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoBuscarConsultarServicoActionPerformed
-        atualizarTabelaClientes();
-    }//GEN-LAST:event_BotaoBuscarConsultarServicoActionPerformed
+        //}*/
+    }//GEN-LAST:event_BotaoSalvarNovaRevistaActionPerformed
 
-    private void TxtDataCadastrarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDataCadastrarServicoActionPerformed
+    private void BotaoSalvarNovaRevista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarNovaRevista1ActionPerformed
+        //atualizarTabelaRevista();
+    }//GEN-LAST:event_BotaoSalvarNovaRevista1ActionPerformed
+
+    private void CampoDataFormatadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoDataFormatadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtDataCadastrarServicoActionPerformed
+    }//GEN-LAST:event_CampoDataFormatadaActionPerformed
 
-    private void BotaoBuscarCadastrarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoBuscarCadastrarServicoActionPerformed
+    private void FieldConsultaNomeClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldConsultaNomeClienteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_BotaoBuscarCadastrarServicoActionPerformed
+    }//GEN-LAST:event_FieldConsultaNomeClienteMouseClicked
 
-    private void TxtNomeCadastrarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtNomeCadastrarClienteMouseClicked
+    private void FieldConsultaNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldConsultaNomeClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtNomeCadastrarClienteMouseClicked
+    }//GEN-LAST:event_FieldConsultaNomeClienteActionPerformed
 
-    private void TxtNomeCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNomeCadastrarClienteActionPerformed
+    private void FieldConsultaNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldConsultaNomeClienteKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtNomeCadastrarClienteActionPerformed
+    }//GEN-LAST:event_FieldConsultaNomeClienteKeyPressed
 
-    private void TxtNomeCadastrarClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNomeCadastrarClienteKeyPressed
+    private void FieldConsultaCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldConsultaCPFClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtNomeCadastrarClienteKeyPressed
+    }//GEN-LAST:event_FieldConsultaCPFClienteActionPerformed
 
-    private void BotaoSalvarCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarCadastrarClienteActionPerformed
+    private void BotaoBuscaConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoBuscaConsultaClienteActionPerformed
+
+        ListaBuscaCliente = null;
+        Cliente cli = new Cliente();
+        clienteDAO clidao = new clienteDAO();
+
+        try {
+
+            if (!FieldConsultaNomeCliente.getText().isEmpty()) {
+                cli.setNome(FieldConsultaNomeCliente.getText());
+            }
+
+            if (FieldConsultaCPFCliente.getText() != null) {
+                cli.setCpf(FieldConsultaCPFCliente.getText());
+            }
+
+            ListaBuscaCliente = clidao.ListaBuscaCliente(cli);
+            atualizarTabelaBuscaCliente();
+        } catch (Exception E) {
+            System.out.println(E.getMessage());
+            JOptionPane.showMessageDialog(null, E.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(E.getMessage());
+        }
+
+        atualizarTabelaConsultaCliente();
+
+    }//GEN-LAST:event_BotaoBuscaConsultaClienteActionPerformed
+
+    private void BotaoSalvarCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarCadastroClienteActionPerformed
+        try {
+            Cliente cli = new Cliente();
+            clienteDAO clidao = new clienteDAO();
+
+            cli.getId();
+            cli.setNome(FieldCadastroNomeCliente.getText());
+            cli.setCpf(FieldCadastroCPFCliente.getText());
+            cli.setTelefone(FieldCadastroTelefoneCliente.getText());
+
+            clidao.InserirCliente(cli);
+
+            try {
+
+                JOptionPane.showMessageDialog(null, "Concerto cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Essa revista já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_BotaoSalvarCadastroClienteActionPerformed
+
+    private void FieldCadastroCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldCadastroCPFClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BotaoSalvarCadastrarClienteActionPerformed
+    }//GEN-LAST:event_FieldCadastroCPFClienteActionPerformed
 
-    private void TxtTelefoneCadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefoneCadastrarClienteActionPerformed
+    private void FieldCadastroNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldCadastroNomeClienteKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtTelefoneCadastrarClienteActionPerformed
+    }//GEN-LAST:event_FieldCadastroNomeClienteKeyPressed
 
-    private void BotaoGerenciarCadastrarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarCadastrarClienteMouseClicked
+    private void FieldCadastroNomeClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldCadastroNomeClienteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_BotaoGerenciarCadastrarClienteMouseClicked
+    }//GEN-LAST:event_FieldCadastroNomeClienteMouseClicked
 
-    private void BotaoCadastrarCadastrarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastrarCadastrarClienteMouseClicked
-        PanelCadastrarCliente.setVisible(true);
-        PanelCadastrarServico.setVisible(false);
-        PanelConsultarServico.setVisible(false);
-    }//GEN-LAST:event_BotaoCadastrarCadastrarClienteMouseClicked
-
-    private void BotaoGerenciarConsultarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarConsultarServicoMouseClicked
+    private void FieldCadastroTelefoneClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldCadastroTelefoneClienteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_BotaoGerenciarConsultarServicoMouseClicked
+    }//GEN-LAST:event_FieldCadastroTelefoneClienteMouseClicked
 
-    private void BotaoCadastrarConsultarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastrarConsultarServicoMouseClicked
-        PanelCadastrarCliente.setVisible(false);
-        PanelCadastrarServico.setVisible(true);
-        PanelConsultarServico.setVisible(false);
-    }//GEN-LAST:event_BotaoCadastrarConsultarServicoMouseClicked
-
-    private void BotaoConsultarConsultarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarConsultarServicoMouseClicked
-        PanelCadastrarCliente.setVisible(false);
-        PanelCadastrarServico.setVisible(false);
-        PanelConsultarServico.setVisible(true);
-    }//GEN-LAST:event_BotaoConsultarConsultarServicoMouseClicked
-
-    private void BotaoGerenciarCadastrarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarCadastrarServicoMouseClicked
+    private void FieldCadastroTelefoneClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldCadastroTelefoneClienteKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BotaoGerenciarCadastrarServicoMouseClicked
+    }//GEN-LAST:event_FieldCadastroTelefoneClienteKeyPressed
 
-    private void BotaoCadastrarCadastrarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastrarCadastrarServicoMouseClicked
-        PanelCadastrarCliente.setVisible(false);
-        PanelCadastrarServico.setVisible(true);
-        PanelConsultarServico.setVisible(false);
-    }//GEN-LAST:event_BotaoCadastrarCadastrarServicoMouseClicked
+    private void BotaoCancelarCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCancelarCadastroClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotaoCancelarCadastroClienteActionPerformed
 
-    private void BotaoConsultarCadastrarServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCadastrarServicoMouseClicked
-        PanelCadastrarCliente.setVisible(false);
-        PanelCadastrarServico.setVisible(false);
-        PanelConsultarServico.setVisible(true);
-    }//GEN-LAST:event_BotaoConsultarCadastrarServicoMouseClicked
-
-    private void BotaoGerenciarCadastrarClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarCadastrarClienteMouseEntered
-       BotaoGerenciarCadastrarCliente.setBackground(new Color (220, 220, 220));
-    }//GEN-LAST:event_BotaoGerenciarCadastrarClienteMouseEntered
-
-    private void BotaoGerenciarCadastrarClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarCadastrarClienteMouseExited
-        ResetColor(BotaoGerenciarCadastrarCliente);
-    }//GEN-LAST:event_BotaoGerenciarCadastrarClienteMouseExited
-
-    private void BotaoConsultarCadastrarServicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCadastrarServicoMouseEntered
-        BotaoConsultarCadastrarServico.setBackground(new Color (220, 220, 220));
-    }//GEN-LAST:event_BotaoConsultarCadastrarServicoMouseEntered
-
-    private void BotaoConsultarCadastrarServicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCadastrarServicoMouseExited
-        ResetColor(BotaoConsultarCadastrarServico);
-    }//GEN-LAST:event_BotaoConsultarCadastrarServicoMouseExited
-
-    private void BotaoGerenciarCadastrarServicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarCadastrarServicoMouseEntered
-        BotaoGerenciarCadastrarServico.setBackground(new Color (220, 220, 220));
-    }//GEN-LAST:event_BotaoGerenciarCadastrarServicoMouseEntered
-
-    private void BotaoGerenciarCadastrarServicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarCadastrarServicoMouseExited
-        ResetColor(BotaoGerenciarCadastrarServico);
-    }//GEN-LAST:event_BotaoGerenciarCadastrarServicoMouseExited
-
-    private void BotaoCadastrarConsultarServicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastrarConsultarServicoMouseEntered
-        BotaoCadastrarConsultarServico.setBackground(new Color (220, 220, 220));
-    }//GEN-LAST:event_BotaoCadastrarConsultarServicoMouseEntered
-
-    private void BotaoCadastrarConsultarServicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastrarConsultarServicoMouseExited
-        ResetColor(BotaoCadastrarConsultarServico);
-    }//GEN-LAST:event_BotaoCadastrarConsultarServicoMouseExited
-
-    private void BotaoGerenciarConsultarServicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarConsultarServicoMouseEntered
-        BotaoGerenciarConsultarServico.setBackground(new Color (220, 220, 220));
-    }//GEN-LAST:event_BotaoGerenciarConsultarServicoMouseEntered
-
-    private void BotaoGerenciarConsultarServicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarConsultarServicoMouseExited
-        ResetColor(BotaoGerenciarConsultarServico);
-    }//GEN-LAST:event_BotaoGerenciarConsultarServicoMouseExited
-
-    private void BotaoServiçosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoServiçosMouseEntered
-        //BotaoServiços.setBackground(new Color (220, 220, 220));
-    }//GEN-LAST:event_BotaoServiçosMouseEntered
-
-    private void BotaoServiçosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoServiçosMouseClicked
-        PanelCadastrarCliente.setVisible(false);
-        PanelCadastrarServico.setVisible(true);
-        PanelConsultarServico.setVisible(false);
-        setLblColor(BotaoServiços);
-        ResetColor(BotaoClientes);
-    }//GEN-LAST:event_BotaoServiçosMouseClicked
-
-    private void BotaoClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoClientesMouseExited
-        //ResetColor(BotaoClientes);
-    }//GEN-LAST:event_BotaoClientesMouseExited
-
-    private void BotaoClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoClientesMouseEntered
-        //BotaoClientes.setBackground(new Color (220, 220, 220));
-    }//GEN-LAST:event_BotaoClientesMouseEntered
-
-    private void BotaoClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoClientesMouseClicked
-        PanelCadastrarCliente.setVisible(true);
-        PanelCadastrarServico.setVisible(false);
-        PanelConsultarServico.setVisible(false);
-        setLblColor(BotaoClientes);
-        ResetColor(BotaoServiços);  
-    }//GEN-LAST:event_BotaoClientesMouseClicked
-
-    private void BotaoServiçosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoServiçosMouseExited
-       // ResetColor(BotaoServiços);
-    }//GEN-LAST:event_BotaoServiçosMouseExited
+    private void BotaoNovoCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoNovoCadastroClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotaoNovoCadastroClienteActionPerformed
 
     public void setLblColor(JLabel lbl) {
         lbl.setBackground(new Color(220, 220, 220));
@@ -1281,66 +1391,81 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotaoBuscarCadastrarServico;
-    private javax.swing.JButton BotaoBuscarConsultarServico;
-    private javax.swing.JLabel BotaoCadastrarCadastrarCliente;
-    private javax.swing.JLabel BotaoCadastrarCadastrarServico;
-    private javax.swing.JButton BotaoCadastrarCadastrarServicos;
-    private javax.swing.JLabel BotaoCadastrarConsultarServico;
-    private javax.swing.JLabel BotaoClientes;
-    private javax.swing.JLabel BotaoConsultarCadastrarServico;
-    private javax.swing.JLabel BotaoConsultarConsultarServico;
-    private javax.swing.JLabel BotaoGerenciarCadastrarCliente;
-    private javax.swing.JLabel BotaoGerenciarCadastrarServico;
-    private javax.swing.JLabel BotaoGerenciarConsultarServico;
-    private javax.swing.JButton BotaoSalvarCadastrarCliente;
-    private javax.swing.JLabel BotaoServiços;
-    private java.awt.Choice BoxConsertoCadastrarServico;
+    private javax.swing.JButton BotaoBuscaConsultaCliente;
+    private javax.swing.JLabel BotaoCadastro;
+    private javax.swing.JButton BotaoCancelarCadastroCliente;
+    private javax.swing.JLabel BotaoConsulta;
+    private javax.swing.JLabel BotaoGerenciamento;
+    private javax.swing.JButton BotaoNovoCadastroCliente;
+    private javax.swing.JButton BotaoSalvarCadastroCliente;
+    private javax.swing.JButton BotaoSalvarNovaRevista;
+    private javax.swing.JButton BotaoSalvarNovaRevista1;
+    private javax.swing.JPanel CadastrarClientes;
+    private javax.swing.JTextField CampoCpf;
+    private javax.swing.JFormattedTextField CampoDataFormatada;
+    private javax.swing.JTextField CampoNome;
+    private java.awt.Choice CampoescolhaConserto;
+    private javax.swing.JPanel ConsultarClientes;
+    private javax.swing.JTextField FieldCadastroCPFCliente;
+    private javax.swing.JTextField FieldCadastroNomeCliente;
+    private javax.swing.JTextField FieldCadastroTelefoneCliente;
+    private javax.swing.JTextField FieldConsultaCPFCliente;
+    private javax.swing.JTextField FieldConsultaNomeCliente;
+    private javax.swing.JPanel GerenciarClientes;
+    private javax.swing.JPanel PaneClientes;
+    private javax.swing.JPanel PaneGarantia;
     private javax.swing.JPanel PaneMae;
-    private javax.swing.JPanel PanelCadastrarCliente;
-    private javax.swing.JPanel PanelCadastrarServico;
-    private javax.swing.JPanel PanelConsultarServico;
-    private javax.swing.JPanel PanelGuias;
+    private javax.swing.JPanel PaneManutencoes;
     private javax.swing.JPanel SideBoard;
-    private javax.swing.JTextField TxtCPFCadastrarCliente;
-    private javax.swing.JTextField TxtCPFCadastrarServico;
-    private javax.swing.JTextField TxtCPFConsultarServico;
-    private javax.swing.JFormattedTextField TxtDataCadastrarServico;
-    private javax.swing.JTextField TxtNomeCadastrarCliente;
-    private javax.swing.JTextField TxtNomeCadastrarServico;
-    private javax.swing.JTextField TxtNomeConsultarServico;
-    private javax.swing.JTextField TxtTelefoneCadastrarCliente;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTable TableConsultaCliente;
+    private javax.swing.JTextField TxtCPF1;
+    private javax.swing.JTextField TxtNome1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCPF1;
     private javax.swing.JLabel lblCPF2;
+    private javax.swing.JLabel lblCPF3;
     private javax.swing.JLabel lblConserto;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNome2;
-    private javax.swing.JLabel lblTelefone;
+    private javax.swing.JLabel lblNome3;
+    private javax.swing.JLabel lblNome4;
     // End of variables declaration//GEN-END:variables
-
-    private void makeTableTransparente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

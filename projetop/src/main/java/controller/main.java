@@ -13,8 +13,8 @@ import java.sql.SQLException;
  */
 public class main {
         public static void main(String[] args) throws SQLException {
-        Principal principal = new Principal();
-        principal.setVisible(true);
+        Principal helpp = new Principal();
+        helpp.setVisible(true);
 
         }
 }
