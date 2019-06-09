@@ -11,16 +11,14 @@ package model;
  */
 public class Manutencao {
      private int id;
-    private String nome;
-    private int duracao_garantia;
+    private String descricao;
 
     public Manutencao() {
     }
 
-    public Manutencao(int id, String nome, int duracao_garantia) {
+    public Manutencao(int id, String descricao) {
         this.id = id;
-        this.nome = nome;
-        this.duracao_garantia = duracao_garantia;
+        this.descricao = descricao;
     }
 
     public int getId() {
@@ -31,20 +29,14 @@ public class Manutencao {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public int getDuracao_garantia() {
-        return duracao_garantia;
-    }
-
-    public void setDuracao_garantia(int duracao_garantia) {
-        this.duracao_garantia = duracao_garantia;
-    }
     
+
 }
