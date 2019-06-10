@@ -10,7 +10,8 @@ package model;
  * @author user
  */
 public class Manutencao {
-     private int id;
+
+    private int id;
     private String descricao;
 
     public Manutencao() {
@@ -36,7 +37,5 @@ public class Manutencao {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    
 
 }

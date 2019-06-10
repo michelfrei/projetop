@@ -9,6 +9,8 @@ package view;
 import controller.JTextFieldLimit;
 import controller.SetupAutoComplete;
 import dao.Conexao;
+import dao.GarantiaDAO;
+import dao.ManutencaoDAO;
 import dao.clienteDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,6 +33,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
+import model.Garantia;
+import model.Manutencao;
 
 /**
  *
@@ -54,22 +58,23 @@ public class Principal extends javax.swing.JFrame {
         setLblColor(BotaoCadastro);
         ResetColor(BotaoConsulta);
         ResetColor(BotaoGerenciamento);
-        ComboBoxAreaNovaRevista();
+        ComboBoxEscolhaConserto();
         atualizarTabelaConsultaCliente();
+        AutoComplete();
     }
 
-    public String FuncGarantia(LocalDate dataGarantia, String descricao) {
+    public String FuncGarantia(LocalDate dataGarantia, int meses) {
         int duracao_garantia = 0;
         try {
-            String SQL = "Select duracao_garantia from cadastros.manutencao where nome = ?";
+            /*String SQL = "Select duracao_garantia from cadastros.manutencao where nome = ?";
             PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
             stmt.setString(1, descricao);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
                 duracao_garantia = rs.getInt("duracao_garantia");
-            }
-
+            }*/
+            duracao_garantia = meses;
             dataGarantia = dataGarantia.plusMonths(duracao_garantia);
             return dataGarantia.format(formatter);
 
@@ -78,21 +83,38 @@ public class Principal extends javax.swing.JFrame {
         }
         return dataGarantia.format(formatter);
     }
+    
+    public void AutoComplete() {
+        clienteDAO clienteDAO = new clienteDAO();
+        //Preenche o combobox com os registros
+        ArrayList<String> ListaCliente = new ArrayList<>();
 
-    private void ComboBoxAreaNovaRevista() { //ok
+        try {
+            for (Cliente cli : clienteDAO.ListaCliente()) {
+                ListaCliente.add(cli.getNome());
+            }
+
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        SetupAutoComplete.setupAutoComplete(CampoNome, ListaCliente);
+    }
+    
+    private void ComboBoxEscolhaConserto() { //ok
         try {
             String SQL = "Select * from cadastros.manutencao order by id asc";
             PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                String Nome = rs.getString("nome");
-                CampoescolhaConserto.addItem(Nome);
+                String Nome = rs.getString("descricao");
+                ComboEscolhaConserto.addItem(Nome);
 
             }
 
         } catch (Exception e) {
-            System.out.println("problema na combobox");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -140,9 +162,9 @@ public class Principal extends javax.swing.JFrame {
         TableConsultaCliente.updateUI();
 
     }
-    
-        public void atualizarTabelaBuscaCliente() {
-        Cliente cliente = new Cliente();
+
+    public void atualizarTabelaBuscaCliente() {
+        Cliente cli = new Cliente();
         String dados[][] = new String[ListaBuscaCliente.size()][4];
         int i = 0;
         for (Cliente clien : ListaBuscaCliente) {
@@ -157,13 +179,13 @@ public class Principal extends javax.swing.JFrame {
         tabelaCliente.setDataVector(dados, tituloColuna);
         TableConsultaCliente.setModel(new DefaultTableModel(dados, tituloColuna) {
             boolean[] canEdit = new boolean[]{
-                false, false, false, false};
+                false, false, false, false,};
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit[columnIndex];
             }
         });
-        TableConsultaCliente.getColumnModel().getColumn(0).setPreferredWidth(20);
+        /*TableConsultaCliente.getColumnModel().getColumn(0).setPreferredWidth(20);
         TableConsultaCliente.getColumnModel().getColumn(1).setPreferredWidth(180);
         TableConsultaCliente.getColumnModel().getColumn(2).setPreferredWidth(100);
         TableConsultaCliente.getColumnModel().getColumn(3).setPreferredWidth(100);
@@ -176,9 +198,9 @@ public class Principal extends javax.swing.JFrame {
         TableConsultaCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         TableConsultaCliente.setRowHeight(25);
-        TableConsultaCliente.updateUI();
+        TableConsultaCliente.updateUI();*/
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -243,7 +265,7 @@ public class Principal extends javax.swing.JFrame {
         lblData = new javax.swing.JLabel();
         CampoDataFormatada = new javax.swing.JFormattedTextField();
         jSeparator4 = new javax.swing.JSeparator();
-        CampoescolhaConserto = new java.awt.Choice();
+        ComboEscolhaConserto = new java.awt.Choice();
         lblConserto = new javax.swing.JLabel();
         BotaoSalvarNovaRevista = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
@@ -254,9 +276,15 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
+        CadastrarManutencao = new javax.swing.JPanel();
+        lblNome5 = new javax.swing.JLabel();
+        FieldCadastroNomeManutencao = new javax.swing.JTextField();
+        jSeparator13 = new javax.swing.JSeparator();
+        BotaoNovoCadastroManutencao = new javax.swing.JButton();
+        BotaoSalvarCadastroManutencao = new javax.swing.JButton();
+        BotaoCancelarCadastroManutencao = new javax.swing.JButton();
+        ConsultarManutencao = new javax.swing.JPanel();
+        GerenciarManutencao = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("UEMG Frutal - Revistas");
@@ -912,10 +940,10 @@ public class Principal extends javax.swing.JFrame {
 
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
 
-        CampoescolhaConserto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        CampoescolhaConserto.setFocusable(false);
-        CampoescolhaConserto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        CampoescolhaConserto.setForeground(new java.awt.Color(1, 1, 1));
+        ComboEscolhaConserto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ComboEscolhaConserto.setFocusable(false);
+        ComboEscolhaConserto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        ComboEscolhaConserto.setForeground(new java.awt.Color(1, 1, 1));
 
         lblConserto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblConserto.setText("Conserto");
@@ -944,7 +972,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblConserto)
-                            .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ComboEscolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(284, 284, 284)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblData)
@@ -986,15 +1014,16 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblConserto)
                         .addGap(11, 11, 11)
-                        .addComponent(CampoescolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ComboEscolhaConserto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addComponent(BotaoSalvarNovaRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CampoDataFormatada, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(BotaoSalvarNovaRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1008,7 +1037,7 @@ public class Principal extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Cadastrar", jPanel3);
@@ -1102,44 +1131,122 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        CadastrarManutencao.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblNome5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblNome5.setText("Nome da manutenção:");
+
+        FieldCadastroNomeManutencao.setBackground(new java.awt.Color(240, 240, 240));
+        FieldCadastroNomeManutencao.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        FieldCadastroNomeManutencao.setBorder(null);
+        FieldCadastroNomeManutencao.setMaximumSize(new java.awt.Dimension(25, 25));
+        FieldCadastroNomeManutencao.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        FieldCadastroNomeManutencao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FieldCadastroNomeManutencaoMouseClicked(evt);
+            }
+        });
+        FieldCadastroNomeManutencao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                FieldCadastroNomeManutencaoKeyPressed(evt);
+            }
+        });
+
+        jSeparator13.setForeground(new java.awt.Color(0, 0, 0));
+
+        BotaoNovoCadastroManutencao.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoNovoCadastroManutencao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoNovoCadastroManutencao.setText("Novo");
+        BotaoNovoCadastroManutencao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoNovoCadastroManutencao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoNovoCadastroManutencaoActionPerformed(evt);
+            }
+        });
+
+        BotaoSalvarCadastroManutencao.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoSalvarCadastroManutencao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarCadastroManutencao.setText("Salvar");
+        BotaoSalvarCadastroManutencao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoSalvarCadastroManutencao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoSalvarCadastroManutencaoActionPerformed(evt);
+            }
+        });
+
+        BotaoCancelarCadastroManutencao.setBackground(new java.awt.Color(255, 255, 255));
+        BotaoCancelarCadastroManutencao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarCadastroManutencao.setText("Cancelar");
+        BotaoCancelarCadastroManutencao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        BotaoCancelarCadastroManutencao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoCancelarCadastroManutencaoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CadastrarManutencaoLayout = new javax.swing.GroupLayout(CadastrarManutencao);
+        CadastrarManutencao.setLayout(CadastrarManutencaoLayout);
+        CadastrarManutencaoLayout.setHorizontalGroup(
+            CadastrarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CadastrarManutencaoLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(CadastrarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CadastrarManutencaoLayout.createSequentialGroup()
+                        .addComponent(BotaoNovoCadastroManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BotaoSalvarCadastroManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(BotaoCancelarCadastroManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, 1027, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FieldCadastroNomeManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 1027, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome5))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        CadastrarManutencaoLayout.setVerticalGroup(
+            CadastrarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CadastrarManutencaoLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(lblNome5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(FieldCadastroNomeManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator13, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                .addGroup(CadastrarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotaoNovoCadastroManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoSalvarCadastroManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoCancelarCadastroManutencao, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63))
+        );
+
+        jTabbedPane1.addTab("Cadastro", CadastrarManutencao);
+
+        javax.swing.GroupLayout ConsultarManutencaoLayout = new javax.swing.GroupLayout(ConsultarManutencao);
+        ConsultarManutencao.setLayout(ConsultarManutencaoLayout);
+        ConsultarManutencaoLayout.setHorizontalGroup(
+            ConsultarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1144, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ConsultarManutencaoLayout.setVerticalGroup(
+            ConsultarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 444, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Cadastro", jPanel4);
+        jTabbedPane1.addTab("Consulta", ConsultarManutencao);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout GerenciarManutencaoLayout = new javax.swing.GroupLayout(GerenciarManutencao);
+        GerenciarManutencao.setLayout(GerenciarManutencaoLayout);
+        GerenciarManutencaoLayout.setHorizontalGroup(
+            GerenciarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1144, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        GerenciarManutencaoLayout.setVerticalGroup(
+            GerenciarManutencaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 444, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Consulta", jPanel8);
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1144, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Gerenciar", jPanel9);
+        jTabbedPane1.addTab("Gerenciar", GerenciarManutencao);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1249,18 +1356,17 @@ public class Principal extends javax.swing.JFrame {
         /*if (campoTitulo.getText().isEmpty() || campoData.getText().isEmpty() || campoQuantidade.getText().isEmpty() || ComboBoxEspecificacaoNovaRevista.getSelectedItem() == null || ComboBoxAreaNovaRevista.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Há campos não preenchidos", "Sistema", JOptionPane.INFORMATION_MESSAGE);
         } else {*/
- /*Cliente cli = new Cliente();
+        Garantia gar = new Garantia();
                 
         try {
-            cli.getId();
-            cli.setNome(CampoNome.getText());
-            cli.setCpf(Integer.parseInt(CampoCpf.getText()));
-            cli.setDescricao((String) CampoescolhaConserto.getSelectedItem());
-            cli.setSaida_concerto(LocalDate.parse(CampoDataFormatada.getText(), formatter));
-            cli.setGarantia(LocalDate.parse(FuncGarantia(cli.getSaida_concerto(), cli.getDescricao()), formatter));//atenção redobrada nessa linha
+            gar.getId();
+            gar.setNome(CampoNome.getText());
+            gar.setDescricao((String) ComboEscolhaConserto.getSelectedItem());
+            gar.setSaida_concerto(LocalDate.parse(CampoDataFormatada.getText(), formatter));
+            gar.setDt_garantia(LocalDate.parse(FuncGarantia(gar.getSaida_concerto(), 3), formatter));//atenção redobrada nessa linha
 
-            clienteDAO clidao = new clienteDAO();
-            clidao.InserirCliente(cli);
+            GarantiaDAO garantiaDAO = new GarantiaDAO();
+            garantiaDAO.InserirGarantia(gar);
 
             try {
 
@@ -1274,7 +1380,7 @@ public class Principal extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null, "Essa revista já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(ex.getMessage());
         }
-        //}*/
+        //}
     }//GEN-LAST:event_BotaoSalvarNovaRevistaActionPerformed
 
     private void BotaoSalvarNovaRevista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarNovaRevista1ActionPerformed
@@ -1308,12 +1414,10 @@ public class Principal extends javax.swing.JFrame {
         clienteDAO clidao = new clienteDAO();
 
         try {
-
             if (!FieldConsultaNomeCliente.getText().isEmpty()) {
                 cli.setNome(FieldConsultaNomeCliente.getText());
             }
-
-            if (FieldConsultaCPFCliente.getText() != null) {
+            if (!FieldConsultaCPFCliente.getText().isEmpty()) {
                 cli.setCpf(FieldConsultaCPFCliente.getText());
             }
 
@@ -1321,11 +1425,10 @@ public class Principal extends javax.swing.JFrame {
             atualizarTabelaBuscaCliente();
         } catch (Exception E) {
             System.out.println(E.getMessage());
-            JOptionPane.showMessageDialog(null, E.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Problema no BotaoBuscaConsultaRevista do DashBoard, consulta de revista falhou", "Sistema", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(E.getMessage());
         }
 
-        atualizarTabelaConsultaCliente();
 
     }//GEN-LAST:event_BotaoBuscaConsultaClienteActionPerformed
 
@@ -1382,6 +1485,45 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BotaoNovoCadastroClienteActionPerformed
 
+    private void FieldCadastroNomeManutencaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldCadastroNomeManutencaoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldCadastroNomeManutencaoMouseClicked
+
+    private void FieldCadastroNomeManutencaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldCadastroNomeManutencaoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldCadastroNomeManutencaoKeyPressed
+
+    private void BotaoNovoCadastroManutencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoNovoCadastroManutencaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotaoNovoCadastroManutencaoActionPerformed
+
+    private void BotaoSalvarCadastroManutencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarCadastroManutencaoActionPerformed
+        try {
+            Manutencao man = new Manutencao();
+            ManutencaoDAO mandao = new ManutencaoDAO();
+
+            man.getId();
+            man.setDescricao(FieldCadastroNomeManutencao.getText());
+
+            mandao.InserirManutencao(man);
+
+            try {
+
+                JOptionPane.showMessageDialog(null, "Manutencao cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Essa revista já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_BotaoSalvarCadastroManutencaoActionPerformed
+
+    private void BotaoCancelarCadastroManutencaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCancelarCadastroManutencaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotaoCancelarCadastroManutencaoActionPerformed
+
     public void setLblColor(JLabel lbl) {
         lbl.setBackground(new Color(220, 220, 220));
     }
@@ -1394,24 +1536,31 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton BotaoBuscaConsultaCliente;
     private javax.swing.JLabel BotaoCadastro;
     private javax.swing.JButton BotaoCancelarCadastroCliente;
+    private javax.swing.JButton BotaoCancelarCadastroManutencao;
     private javax.swing.JLabel BotaoConsulta;
     private javax.swing.JLabel BotaoGerenciamento;
     private javax.swing.JButton BotaoNovoCadastroCliente;
+    private javax.swing.JButton BotaoNovoCadastroManutencao;
     private javax.swing.JButton BotaoSalvarCadastroCliente;
+    private javax.swing.JButton BotaoSalvarCadastroManutencao;
     private javax.swing.JButton BotaoSalvarNovaRevista;
     private javax.swing.JButton BotaoSalvarNovaRevista1;
     private javax.swing.JPanel CadastrarClientes;
+    private javax.swing.JPanel CadastrarManutencao;
     private javax.swing.JTextField CampoCpf;
     private javax.swing.JFormattedTextField CampoDataFormatada;
     private javax.swing.JTextField CampoNome;
-    private java.awt.Choice CampoescolhaConserto;
+    private java.awt.Choice ComboEscolhaConserto;
     private javax.swing.JPanel ConsultarClientes;
+    private javax.swing.JPanel ConsultarManutencao;
     private javax.swing.JTextField FieldCadastroCPFCliente;
     private javax.swing.JTextField FieldCadastroNomeCliente;
+    private javax.swing.JTextField FieldCadastroNomeManutencao;
     private javax.swing.JTextField FieldCadastroTelefoneCliente;
     private javax.swing.JTextField FieldConsultaCPFCliente;
     private javax.swing.JTextField FieldConsultaNomeCliente;
     private javax.swing.JPanel GerenciarClientes;
+    private javax.swing.JPanel GerenciarManutencao;
     private javax.swing.JPanel PaneClientes;
     private javax.swing.JPanel PaneGarantia;
     private javax.swing.JPanel PaneMae;
@@ -1423,28 +1572,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1467,5 +1612,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblNome2;
     private javax.swing.JLabel lblNome3;
     private javax.swing.JLabel lblNome4;
+    private javax.swing.JLabel lblNome5;
     // End of variables declaration//GEN-END:variables
 }

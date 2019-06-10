@@ -10,26 +10,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import model.Cliente;
+import model.Garantia;
 
 /**
  *
  * @author Real
  */
-public class clienteDAO {
+public class GarantiaDAO {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public void InserirGarantia(Garantia garantia) throws SQLException {
 
-    public void InserirCliente(Cliente cliente) throws SQLException {
-
-        String SQL = "INSERT INTO cadastros.cliente (id, nome, cpf, telefone) values (?, ?, ?, ?)";
+        String SQL = "INSERT INTO cadastros.garantia (id, nome, descricao, saida_concerto, garantia) values (?, ?, ?, ?, ?)";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
         stmt.setInt(1, 0);
-        stmt.setString(2, cliente.getNome());
-        stmt.setString(3, cliente.getCpf());
-        stmt.setString(4, cliente.getTelefone());
+        stmt.setString(2, garantia.getNome());
+        stmt.setString(3, garantia.getDescricao());
+        stmt.setDate(4, Date.valueOf(garantia.getSaida_concerto()));
+        stmt.setDate(5, Date.valueOf(garantia.getDt_garantia()));
 
         stmt.execute();
         stmt.close();
@@ -44,7 +46,7 @@ public class clienteDAO {
             stmt.execute();
             stmt.close();
     }*/
-    public void RemoverCliente(Cliente cliente) throws SQLException {
+    /*public void RemoverCliente(Cliente cliente) throws SQLException {
         String SQL = "Delete from cadastros.cliente where id=?";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
@@ -66,34 +68,35 @@ public class clienteDAO {
         stmt.setInt(5, cliente.getId());
         stmt.execute();
         stmt.close();
-    }
+    }*/
 
-    public List<Cliente> ListaCliente() throws SQLException {
+    public List<Garantia> ListaGarantia() throws SQLException {
 
-        List<Cliente> ListaCliente;
-        ListaCliente = new ArrayList<>();
+        List<Garantia> ListaGarantia;
+        ListaGarantia = new ArrayList<>();
 
-        String SQL = "select* from cadastros.cliente";
+        String SQL = "select* from cadastros.garantia";
         try {
 
             PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                ListaCliente.add(new Cliente(rs.getInt("id"),
-                        rs.getString("Nome"),
-                        rs.getString("cpf"),
-                        rs.getString("telefone")
+                ListaGarantia.add(new Garantia(rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("descricao"),
+                        rs.getObject("saida_concerto", LocalDate.class),
+                        rs.getObject("garantia", LocalDate.class)
                 ));
 
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return ListaCliente;
+        return ListaGarantia;
     }
 
-    public List<Cliente> ListaBuscaCliente(Cliente cliente) throws SQLException {
+    /*public List<Cliente> ListaBuscaCliente(Cliente cliente) throws SQLException {
         List<Cliente> retorno = new ArrayList<Cliente>();
 
         String SQL = "select * from cadastros.cliente ";
@@ -133,5 +136,5 @@ public class clienteDAO {
         }
 
         return retorno;
-    }
+    }*/
 }

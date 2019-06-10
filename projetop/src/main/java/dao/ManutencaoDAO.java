@@ -43,7 +43,7 @@ public class ManutencaoDAO {
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
         stmt.setString(1, manutencao.getDescricao());
-        stmt.setInt(5, manutencao.getId());
+        stmt.setInt(2, manutencao.getId());
         stmt.execute();
         stmt.close();
     }
