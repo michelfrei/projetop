@@ -5,7 +5,7 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="UEMG Frutal - Revistas"/>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+      <Color blue="e6" green="e6" red="e6" type="rgb"/>
     </Property>
     <Property name="iconImages" type="java.util.List" editor="org.netbeans.modules.form.ComponentChooserEditor">
       <ComponentRef name="null"/>
@@ -195,9 +195,6 @@
     </Container>
     <Container class="javax.swing.JPanel" name="PaneMae">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[1144, 677]"/>
         </Property>
@@ -208,7 +205,7 @@
         <Container class="javax.swing.JPanel" name="PaneClientes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="e6" green="e6" red="e6" type="rgb"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[1144, 677]"/>
@@ -223,7 +220,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel17" alignment="0" pref="1149" max="32767" attributes="0"/>
+                  <Component id="jPanel17" alignment="0" pref="1151" max="32767" attributes="0"/>
                   <Component id="jTabbedPane3" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
@@ -232,13 +229,26 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTabbedPane3" pref="472" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane3" pref="479" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane3">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                </Property>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="f1" green="f1" red="f1" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="opaque" type="boolean" value="true"/>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
@@ -265,12 +275,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel15" alignment="0" pref="1144" max="32767" attributes="0"/>
+                          <Component id="jPanel15" alignment="0" min="-2" pref="1144" max="-2" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel15" alignment="0" pref="444" max="32767" attributes="0"/>
+                          <Component id="jPanel15" alignment="0" min="-2" pref="449" max="-2" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -278,7 +288,7 @@
                     <Container class="javax.swing.JPanel" name="jPanel15">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="e6" green="e6" red="e6" type="rgb"/>
                         </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[356, 200]"/>
@@ -359,7 +369,7 @@
                                   <Component id="FieldCadastroTelefoneCliente" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   <Component id="jSeparator12" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace pref="154" max="32767" attributes="0"/>
+                                  <EmptySpace pref="159" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="BotaoSalvarCadastroCliente" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                                       <Component id="BotaoCancelarCadastroCliente" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
@@ -439,7 +449,7 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldCadastroCPFClienteActionPerformed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoCpf.setDocument(new JTextFieldLimit(10, false, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCadastroCPFCliente.setDocument(new JTextFieldLimit(11, false, true));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator10">
@@ -452,7 +462,7 @@
                         <Component class="javax.swing.JButton" name="BotaoSalvarCadastroCliente">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                              <Color blue="f1" green="0" red="f1" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
@@ -510,7 +520,7 @@
                         <Component class="javax.swing.JButton" name="BotaoCancelarCadastroCliente">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                              <Color blue="f1" green="f1" red="f1" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
@@ -527,7 +537,7 @@
                         <Component class="javax.swing.JButton" name="BotaoNovoCadastroCliente">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                              <Color blue="e6" green="e6" red="e6" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="18" style="0"/>
@@ -609,7 +619,7 @@
                                           <Component id="BotaoBuscaConsultaCliente" min="-2" pref="48" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                      <Component id="jSeparator11" pref="15" max="32767" attributes="0"/>
+                                      <Component id="jSeparator11" pref="20" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -694,9 +704,6 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="BotaoBuscaConsultaCliente">
                       <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="18" style="0"/>
                         </Property>
@@ -807,7 +814,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="444" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="449" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -817,7 +824,7 @@
             <Container class="javax.swing.JPanel" name="jPanel17">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="99" green="66" red="ff" type="rgb"/>
+                  <Color blue="e6" green="e6" red="e6" type="rgb"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[1144, 199]"/>
@@ -894,7 +901,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jTabbedPane2" max="32767" attributes="0"/>
-                      <Component id="jPanel11" pref="1149" max="32767" attributes="0"/>
+                      <Component id="jPanel11" pref="1151" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -902,7 +909,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane2" pref="472" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane2" pref="479" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -912,7 +919,232 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jPanel2">
+                    <Container class="javax.swing.JPanel" name="CadastrarGarantias">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="doubleBuffered" type="boolean" value="false"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[1144, 677]"/>
+                        </Property>
+                        <Property name="requestFocusEnabled" type="boolean" value="false"/>
+                        <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Cadastrar">
+                            <Property name="tabTitle" type="java.lang.String" value="Cadastrar"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jPanel1" alignment="0" pref="1146" max="32767" attributes="0"/>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jPanel1" alignment="0" pref="451" max="32767" attributes="0"/>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JPanel" name="jPanel1">
+                          <Properties>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[356, 200]"/>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <Component id="BotaoSalvarNovaRevista" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="533" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="CampoNome" alignment="0" min="-2" pref="499" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace pref="99" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="lblData" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jSeparator4" max="32767" attributes="0"/>
+                                                  <Component id="CampoDataFormatada" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblConserto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="ComboEscolhaConserto" alignment="0" min="-2" pref="215" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="CampoNome" min="-2" pref="25" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                              <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblData" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="CampoDataFormatada" min="-2" pref="27" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                              <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                      <Component id="lblConserto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ComboEscolhaConserto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="166" max="32767" attributes="0"/>
+                                      <Component id="BotaoSalvarNovaRevista" min="-2" pref="48" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JLabel" name="lblNome">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="18" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Nome"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="CampoNome">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="16" style="0"/>
+                                </Property>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="null"/>
+                                </Property>
+                                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[25, 25]"/>
+                                </Property>
+                                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[25, 25]"/>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CampoNomeMouseClicked"/>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CampoNomeKeyPressed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JSeparator" name="jSeparator2">
+                              <Properties>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="0" green="0" red="0" type="rgb"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblData">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="18" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Data do conserto"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JFormattedTextField" name="CampoDataFormatada">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                                </Property>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="null"/>
+                                </Property>
+                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                                  <Format format="##/##/####" subtype="-1" type="5"/>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CampoDataFormatadaActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JSeparator" name="jSeparator4">
+                              <Properties>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="0" green="0" red="0" type="rgb"/>
+                                </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="lblConserto">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Century Gothic" size="18" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Conserto"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="BotaoSalvarNovaRevista">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Segoe UI" size="18" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Salvar"/>
+                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                                  <Color id="Default Cursor"/>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoSalvarNovaRevistaActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="ComboEscolhaConserto">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                                </Property>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="0"/>
+                                </Property>
+                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                  <Border info="null"/>
+                                </Property>
+                              </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="ConsultarGarantias">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[1144, 199]"/>
@@ -930,31 +1162,28 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="lblNome1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="TxtNome1" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="jSeparator3" alignment="0" min="-2" pref="414" max="-2" attributes="0"/>
-                                          </Group>
+                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lblNome1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="TxtNome1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jSeparator3" alignment="0" min="-2" pref="414" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblCPF1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jSeparator6" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="TxtCPF1" min="-2" pref="200" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblCPF1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jSeparator6" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="TxtCPF1" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="BotaoSalvarNovaRevista1" min="-2" pref="200" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jScrollPane1" min="-2" pref="681" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
+                                          <Component id="BotaoSalvarNovaRevista1" min="-2" pref="200" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="185" max="32767" attributes="0"/>
+                                  <EmptySpace pref="187" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -978,8 +1207,8 @@
                                       <Component id="jSeparator6" min="-2" pref="16" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" min="-2" pref="241" max="-2" attributes="0"/>
-                                  <EmptySpace pref="48" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="285" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1088,7 +1317,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable1">
+                            <Component class="javax.swing.JTable" name="TableConsultaGarantia">
                               <Properties>
                                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1123,285 +1352,7 @@
                         </Container>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="jPanel3">
-                      <Properties>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                        </Property>
-                        <Property name="doubleBuffered" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[1144, 677]"/>
-                        </Property>
-                        <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                        <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
-                      </Properties>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                          <JTabbedPaneConstraints tabName="Cadastrar">
-                            <Property name="tabTitle" type="java.lang.String" value="Cadastrar"/>
-                          </JTabbedPaneConstraints>
-                        </Constraint>
-                      </Constraints>
-
-                      <Layout>
-                        <DimensionLayout dim="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel1" alignment="0" pref="1144" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                        <DimensionLayout dim="1">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jPanel1" min="-2" pref="416" max="-2" attributes="0"/>
-                                  <EmptySpace pref="28" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                        </DimensionLayout>
-                      </Layout>
-                      <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jPanel1">
-                          <Properties>
-                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[356, 200]"/>
-                            </Property>
-                          </Properties>
-
-                          <Layout>
-                            <DimensionLayout dim="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              <Component id="BotaoSalvarNovaRevista" min="-2" pref="200" max="-2" attributes="0"/>
-                                              <EmptySpace min="320" pref="320" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblConserto" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="ComboEscolhaConserto" min="-2" pref="320" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="284" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="lblData" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jSeparator4" max="32767" attributes="0"/>
-                                                  <Component id="CampoDataFormatada" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="CampoNome" alignment="0" min="-2" pref="499" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                                      <Component id="lblCPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="CampoCpf" min="-2" pref="210" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="jSeparator5" alignment="1" min="-2" pref="210" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                            <DimensionLayout dim="1">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="CampoNome" min="-2" pref="25" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                              <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="CampoCpf" min="-2" pref="25" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                              <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblConserto" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                              <Component id="ComboEscolhaConserto" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="123" max="32767" attributes="0"/>
-                                              <Component id="BotaoSalvarNovaRevista" min="-2" pref="48" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblData" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="CampoDataFormatada" min="-2" pref="27" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                          </Layout>
-                          <SubComponents>
-                            <Component class="javax.swing.JLabel" name="lblNome">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Nome"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="CampoNome">
-                              <Properties>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
-                                </Property>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="16" style="0"/>
-                                </Property>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[25, 25]"/>
-                                </Property>
-                                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[25, 25]"/>
-                                </Property>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CampoNomeMouseClicked"/>
-                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CampoNomeKeyPressed"/>
-                              </Events>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
-                              </AuxValues>
-                            </Component>
-                            <Component class="javax.swing.JSeparator" name="jSeparator2">
-                              <Properties>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="0" green="0" red="0" type="rgb"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lblCPF">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="CPF"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="CampoCpf">
-                              <Properties>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="f0" green="f0" red="f0" type="rgb"/>
-                                </Property>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="16" style="0"/>
-                                </Property>
-                                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                                  <Border info="null"/>
-                                </Property>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[35, 26]"/>
-                                </Property>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CampoCpfActionPerformed"/>
-                              </Events>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoCpf.setDocument(new JTextFieldLimit(10, false, true));"/>
-                              </AuxValues>
-                            </Component>
-                            <Component class="javax.swing.JSeparator" name="jSeparator5">
-                              <Properties>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="0" green="0" red="0" type="rgb"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lblData">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Data do conserto"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JFormattedTextField" name="CampoDataFormatada">
-                              <Properties>
-                                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                                  <Format format="##/##/####" subtype="-1" type="5"/>
-                                </Property>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CampoDataFormatadaActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="javax.swing.JSeparator" name="jSeparator4">
-                              <Properties>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="0" green="0" red="0" type="rgb"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="java.awt.Choice" name="ComboEscolhaConserto">
-                              <Properties>
-                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
-                                </Property>
-                                <Property name="focusable" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="16" style="0"/>
-                                </Property>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="1" green="1" red="1" type="rgb"/>
-                                </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lblConserto">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Conserto"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="BotaoSalvarNovaRevista">
-                              <Properties>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Segoe UI" size="18" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Salvar"/>
-                                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                                  <Color id="Default Cursor"/>
-                                </Property>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoSalvarNovaRevistaActionPerformed"/>
-                              </Events>
-                            </Component>
-                          </SubComponents>
-                        </Container>
-                      </SubComponents>
-                    </Container>
-                    <Container class="javax.swing.JPanel" name="jPanel12">
+                    <Container class="javax.swing.JPanel" name="GerenciarGarantias">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                           <JTabbedPaneConstraints tabName="Gerenciar">
@@ -1413,12 +1364,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1144" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1146" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="444" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="451" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -1428,7 +1379,7 @@
                 <Container class="javax.swing.JPanel" name="jPanel11">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="99" green="66" red="ff" type="rgb"/>
+                      <Color blue="e6" green="e6" red="e6" type="rgb"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[1144, 199]"/>
@@ -1483,7 +1434,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel6" pref="1149" max="32767" attributes="0"/>
+                  <Component id="jPanel6" pref="1151" max="32767" attributes="0"/>
                   <Component id="jPanel7" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
@@ -1501,7 +1452,7 @@
             <Container class="javax.swing.JPanel" name="jPanel6">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="99" green="66" red="ff" type="rgb"/>
+                  <Color blue="e6" green="e6" red="e6" type="rgb"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[1144, 199]"/>
@@ -1558,13 +1509,18 @@
               </Layout>
               <SubComponents>
                 <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                    </Property>
+                  </Properties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                   <SubComponents>
                     <Container class="javax.swing.JPanel" name="CadastrarManutencao">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="e6" green="e6" red="e6" type="rgb"/>
                         </Property>
                       </Properties>
                       <Constraints>
@@ -1592,7 +1548,7 @@
                                       <Component id="FieldCadastroNomeManutencao" min="-2" pref="1027" max="-2" attributes="0"/>
                                       <Component id="lblNome5" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="59" max="32767" attributes="0"/>
+                                  <EmptySpace pref="61" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1605,7 +1561,7 @@
                                   <Component id="FieldCadastroNomeManutencao" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jSeparator13" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace pref="224" max="32767" attributes="0"/>
+                                  <EmptySpace pref="231" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="BotaoNovoCadastroManutencao" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                                       <Component id="BotaoSalvarCadastroManutencao" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
@@ -1712,6 +1668,11 @@
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="ConsultarManutencao">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                        </Property>
+                      </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                           <JTabbedPaneConstraints tabName="Consulta">
@@ -1723,15 +1684,46 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1144" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" pref="1126" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="444" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="170" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" pref="270" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTable" name="TabelaConsultaManutencao">
+                              <Properties>
+                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                  <Table columnCount="4" rowCount="4">
+                                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                                  </Table>
+                                </Property>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                      </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="GerenciarManutencao">
                       <Constraints>
@@ -1745,12 +1737,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="1144" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1146" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="444" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="451" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>

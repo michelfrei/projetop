@@ -6,7 +6,12 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import model.Garantia;
 import model.Manutencao;
 
 /**
@@ -46,6 +51,29 @@ public class ManutencaoDAO {
         stmt.setInt(2, manutencao.getId());
         stmt.execute();
         stmt.close();
+    }
+     
+         public List<Manutencao> ListaManutencao() throws SQLException {
+
+        List<Manutencao> ListaManutencao;
+        ListaManutencao = new ArrayList<>();
+
+        String SQL = "select* from cadastros.manutencao";
+        try {
+
+            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ListaManutencao.add(new Manutencao(rs.getInt("id"),
+                        rs.getString("descricao")
+                ));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ListaManutencao;
     }
     
 }
