@@ -11,7 +11,8 @@ import controller.SetupAutoComplete;
 import dao.Conexao;
 import dao.GarantiaDAO;
 import dao.ManutencaoDAO;
-import dao.ClienteDAO;
+import dao.clienteDAO;
+import dao.clienteDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -107,7 +108,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void AutoComplete() {
-        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO clienteDAO = new clienteDAO();
         //Preenche o combobox com os registros
         ArrayList<String> ListaCliente = new ArrayList<>();
 
@@ -142,7 +143,7 @@ public class Principal extends javax.swing.JFrame {
 
     public void atualizarTabelaConsultaCliente() {
         Cliente cli = new Cliente();
-        ClienteDAO clidao = new ClienteDAO();
+        clienteDAO clidao = new clienteDAO();
         try {
             ListaCliente = clidao.ListaCliente();
         } catch (SQLException ex) {
@@ -2597,7 +2598,7 @@ public class Principal extends javax.swing.JFrame {
     private void BotaoBuscarConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoBuscarConsultaClienteActionPerformed
         ListaBuscaCliente = null;
         Cliente cli = new Cliente();
-        ClienteDAO clidao = new ClienteDAO();
+        clienteDAO clidao = new clienteDAO();
         
         try{
             if(!FieldConsultaNomeCliente.getText().isEmpty()){
@@ -2660,7 +2661,7 @@ public class Principal extends javax.swing.JFrame {
     private void BotaoSalvarCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarCadastroClienteActionPerformed
         try {
             Cliente cli = new Cliente();
-            ClienteDAO clidao = new ClienteDAO();
+            clienteDAO clidao = new clienteDAO();
 
             cli.getId();
             cli.setNome(FieldCadastroNomeCliente.getText());

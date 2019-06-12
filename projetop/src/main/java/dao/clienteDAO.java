@@ -83,7 +83,10 @@ public class clienteDAO {
                 ListaCliente.add(new Cliente(rs.getInt("id"),
                         rs.getString("Nome"),
                         rs.getString("cpf"),
-                        rs.getString("telefone")
+                        rs.getString("telefone"),
+                        rs.getString("cidade"),
+                        rs.getString("endereco"),
+                        rs.getString("email")
                 ));
 
             }
@@ -124,7 +127,10 @@ public class clienteDAO {
                 retorno.add(new Cliente(rs.getInt("id"),
                         rs.getString("Nome"),
                         rs.getString("cpf"),
-                        rs.getString("telefone")
+                        rs.getString("telefone"),
+                        rs.getString("cidade"),
+                        rs.getString("endereco"),
+                        rs.getString("email")
                 ));
 
             }
