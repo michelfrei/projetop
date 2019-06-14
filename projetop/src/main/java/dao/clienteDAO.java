@@ -22,7 +22,7 @@ public class clienteDAO {
 
     public void InserirCliente(Cliente cliente) throws SQLException {
 
-        String SQL = "INSERT INTO cadastros.cliente (id, nome, cpf, telefone) values (?, ?, ?, ?)";
+        String SQL = "INSERT INTO cadastros.cliente (id, nome, cpf, telefone, cidade, endereco, email) values (?, ?, ?, ?,?,?,?)";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
@@ -30,7 +30,9 @@ public class clienteDAO {
         stmt.setString(2, cliente.getNome());
         stmt.setString(3, cliente.getCpf());
         stmt.setString(4, cliente.getTelefone());
-
+        stmt.setString(5, cliente.getCidade());
+        stmt.setString(6, cliente.getEndereco());
+        stmt.setString(7, cliente.getEmail());
         stmt.execute();
         stmt.close();
     }
@@ -62,8 +64,11 @@ public class clienteDAO {
         stmt.setString(1, cliente.getNome());
         stmt.setString(2, cliente.getCpf());
         stmt.setString(3, cliente.getTelefone());
+        stmt.setString(4, cliente.getCidade());
+        stmt.setString(5, cliente.getEndereco());
+        stmt.setString(6, cliente.getEmail());
         //stmt.setDate(4, cliente.getSaida_concerto());
-        stmt.setInt(5, cliente.getId());
+        stmt.setInt(7, cliente.getId());
         stmt.execute();
         stmt.close();
     }

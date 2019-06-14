@@ -19,20 +19,21 @@ import model.Manutencao;
  * @author user
  */
 public class ManutencaoDAO {
+
     public void InserirManutencao(Manutencao manutencao) throws SQLException {
 
-        String SQL = "INSERT INTO cadastros.manutencao (id,descricao) values (?, ?)";
+        String SQL = "INSERT INTO cadastros.manutencao (id,descricao, duracao_garantia) values (?, ?, ?)";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
         stmt.setInt(1, 0);
-        stmt.setString(2,manutencao.getDescricao());
-
+        stmt.setString(2, manutencao.getDescricao());
+        stmt.setInt(3, manutencao.getDuracao());
         stmt.execute();
         stmt.close();
     }
-    
-     public void RemoverManutencao(Manutencao manutencao) throws SQLException {
+
+    public void RemoverManutencao(Manutencao manutencao) throws SQLException {
         String SQL = "Delete from cadastros.manutencao where id=?";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
@@ -40,20 +41,22 @@ public class ManutencaoDAO {
 
         stmt.execute();
         stmt.close();
-     }
-     
-     public void AlterarManutencao(Manutencao manutencao) throws SQLException {
-        String SQL = "update cadastros.manutencao set descricao=? where id=?";
+    }
+
+    public void AlterarManutencao(Manutencao manutencao) throws SQLException {
+        String SQL = "update cadastros.manutencao set descricao=?, set duracao_garantia=? where id=?";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
         stmt.setString(1, manutencao.getDescricao());
-        stmt.setInt(2, manutencao.getId());
+        stmt.setInt(2, manutencao.getDuracao());
+        stmt.setInt(3, manutencao.getId());
+
         stmt.execute();
         stmt.close();
     }
-     
-         public List<Manutencao> ListaManutencao() throws SQLException {
+
+    public List<Manutencao> ListaManutencao() throws SQLException {
 
         List<Manutencao> ListaManutencao;
         ListaManutencao = new ArrayList<>();
@@ -66,8 +69,9 @@ public class ManutencaoDAO {
 
             while (rs.next()) {
                 ListaManutencao.add(new Manutencao(rs.getInt("id"),
-                        rs.getString("descricao")
-                ));
+                        rs.getString("descricao"),
+                        rs.getInt("duracao_garantia"))
+                );
 
             }
         } catch (Exception e) {
@@ -75,5 +79,35 @@ public class ManutencaoDAO {
         }
         return ListaManutencao;
     }
-    
+
+    public List<Manutencao> ListaBuscaManutencao(Manutencao man) throws SQLException {
+        List<Manutencao> retorno = new ArrayList<Manutencao>();
+
+        String SQL = "select * from cadastros.manutencao ";
+
+        if (man.getDescricao() != null) {
+            SQL += "where descricao like ?";
+        }
+
+        PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
+
+        if (man.getDescricao() != null) {
+            stmt.setString(1, "%" + man.getDescricao() + "%");
+        }
+
+        try {
+            ResultSet rs = stmt.executeQuery();
+            System.out.println(SQL);
+            while (rs.next()) {
+                retorno.add(new Manutencao(rs.getInt("id"),
+                        rs.getString("descricao"),
+                        rs.getInt("duracao_garantia")));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return retorno;
+    }
 }

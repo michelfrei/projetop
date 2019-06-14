@@ -13,13 +13,15 @@ public class Manutencao {
 
     private int id;
     private String descricao;
+    private int duracao;
 
     public Manutencao() {
     }
 
-    public Manutencao(int id, String descricao) {
+    public Manutencao(int id, String descricao, int duracao) {
         this.id = id;
         this.descricao = descricao;
+        this.duracao = duracao;
     }
 
     public int getId() {
@@ -37,5 +39,14 @@ public class Manutencao {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(int duracao) {
+        this.duracao = duracao;
+    }
+    
 
 }
