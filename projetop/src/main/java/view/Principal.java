@@ -85,6 +85,62 @@ public class Principal extends javax.swing.JFrame {
         atualizarTabelaConsultaGarantia();
         atualizarTabelaConsultaManutencao();
         AutoComplete();
+        iniciaCliente();
+    }
+
+    public void iniciaCliente() {
+        TravaCamposCadastroClientes();
+    }
+
+    public void iniciaManutencao() {
+
+    }
+
+    public void iniciaGarantia() {
+
+    }
+
+    public void TravaCamposCadastroClientes() {
+        FieldCadastroNomeCliente.setEnabled(false);
+        FieldCadastroCPFCliente.setEnabled(false);
+        FieldCadastroTelefoneCliente.setEnabled(false);
+        FieldCadastroCidadeCliente.setEnabled(false);
+        FieldCadastroEnderecoCliente.setEnabled(false);
+        FieldCadastroEmailCliente.setEnabled(false);
+        BotaoSalvarCadastroCliente.setEnabled(false);
+        BotaoCancelarCadastroCliente.setEnabled(false);
+    }
+
+    public void DestravaCamposCadastroClientes() {
+        FieldCadastroNomeCliente.setEnabled(true);
+        FieldCadastroCPFCliente.setEnabled(true);
+        FieldCadastroTelefoneCliente.setEnabled(true);
+        FieldCadastroCidadeCliente.setEnabled(true);
+        FieldCadastroEnderecoCliente.setEnabled(true);
+        FieldCadastroEmailCliente.setEnabled(true);
+        BotaoSalvarCadastroCliente.setEnabled(true);
+        BotaoCancelarCadastroCliente.setEnabled(true);
+        BotaoNovoCadastroCliente.setEnabled(false);
+    }
+
+    public void SalvarCamposCadastroClientes() {
+        FieldCadastroNomeCliente.setText("");
+        FieldCadastroCPFCliente.setText("");
+        FieldCadastroTelefoneCliente.setText("");
+        FieldCadastroCidadeCliente.setText("");
+        FieldCadastroEnderecoCliente.setText("");
+        FieldCadastroEmailCliente.setText("");
+
+        FieldCadastroNomeCliente.setEnabled(false);
+        FieldCadastroCPFCliente.setEnabled(false);
+        FieldCadastroTelefoneCliente.setEnabled(false);
+        FieldCadastroCidadeCliente.setEnabled(false);
+        FieldCadastroEnderecoCliente.setEnabled(false);
+        FieldCadastroEmailCliente.setEnabled(false);
+
+        BotaoSalvarCadastroCliente.setEnabled(false);
+        BotaoCancelarCadastroCliente.setEnabled(false);
+        BotaoNovoCadastroCliente.setEnabled(true);
     }
 
     public String FuncGarantia(LocalDate dataGarantia, String meses) {
@@ -329,8 +385,8 @@ public class Principal extends javax.swing.JFrame {
         TabelaConsultaManutencao.setRowHeight(25);
         TabelaConsultaManutencao.updateUI();
     }
-    
-        public void atualizarTabelaBuscaManutencao() {
+
+    public void atualizarTabelaBuscaManutencao() {
         Manutencao man = new Manutencao();
         String dados[][] = new String[ListaBuscaManutencao.size()][3];
         int i = 0;
@@ -364,6 +420,7 @@ public class Principal extends javax.swing.JFrame {
         TabelaConsultaManutencao.setRowHeight(25);
         TabelaConsultaManutencao.updateUI();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -386,7 +443,6 @@ public class Principal extends javax.swing.JFrame {
         lblNome4 = new javax.swing.JLabel();
         BotaoNovoCadastroCliente = new javax.swing.JButton();
         lblCPF4 = new javax.swing.JLabel();
-        FieldCadastroCPFCliente = new javax.swing.JFormattedTextField();
         jSeparator14 = new javax.swing.JSeparator();
         FieldCadastroTelefoneCliente = new javax.swing.JFormattedTextField();
         BotaoCancelarCadastroCliente = new javax.swing.JButton();
@@ -399,6 +455,7 @@ public class Principal extends javax.swing.JFrame {
         lblNome9 = new javax.swing.JLabel();
         FieldCadastroCidadeCliente = new javax.swing.JTextField();
         jSeparator21 = new javax.swing.JSeparator();
+        FieldCadastroCPFCliente = new javax.swing.JTextField();
         ConsultarClientes = new javax.swing.JPanel();
         lblNome2 = new javax.swing.JLabel();
         FieldConsultaNomeCliente = new javax.swing.JTextField();
@@ -657,21 +714,6 @@ public class Principal extends javax.swing.JFrame {
         lblCPF4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblCPF4.setText("CPF");
 
-        FieldCadastroCPFCliente.setBackground(new java.awt.Color(240, 240, 240));
-        FieldCadastroCPFCliente.setBorder(null);
-        try {
-            FieldCadastroCPFCliente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        FieldCadastroCPFCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        FieldCadastroCPFCliente.setPreferredSize(new java.awt.Dimension(112, 25));
-        FieldCadastroCPFCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FieldCadastroCPFClienteActionPerformed(evt);
-            }
-        });
-
         jSeparator14.setForeground(new java.awt.Color(0, 0, 0));
 
         FieldCadastroTelefoneCliente.setBackground(new java.awt.Color(240, 240, 240));
@@ -775,6 +817,28 @@ public class Principal extends javax.swing.JFrame {
 
         jSeparator21.setForeground(new java.awt.Color(0, 0, 0));
 
+        FieldCadastroCPFCliente.setBackground(new java.awt.Color(240, 240, 240));
+        FieldCadastroCPFCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        FieldCadastroCPFCliente.setBorder(null);
+        FieldCadastroCPFCliente.setMaximumSize(new java.awt.Dimension(25, 25));
+        FieldCadastroCPFCliente.setMinimumSize(new java.awt.Dimension(25, 25));
+        CampoNome.setDocument(new JTextFieldLimit(40, true));
+        FieldCadastroCPFCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FieldCadastroCPFClienteMouseClicked(evt);
+            }
+        });
+        FieldCadastroCPFCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldCadastroCPFClienteActionPerformed(evt);
+            }
+        });
+        FieldCadastroCPFCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                FieldCadastroCPFClienteKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -802,11 +866,10 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(FieldCadastroNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
                                     .addComponent(jSeparator9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblCPF4)
-                                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(FieldCadastroCPFCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jSeparator14, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                    .addComponent(FieldCadastroCPFCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(71, 71, 71)
                                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblNome4)
@@ -846,7 +909,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                         .addComponent(lblCPF4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FieldCadastroCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FieldCadastroCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -2736,15 +2799,13 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldCadastroEnderecoClienteMouseClicked
 
     private void BotaoCancelarCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCancelarCadastroClienteActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Todos os dados informados serão perdidos. Deseja continuar?", "Cadastro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            SalvarCamposCadastroClientes();
+        }
     }//GEN-LAST:event_BotaoCancelarCadastroClienteActionPerformed
 
-    private void FieldCadastroCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldCadastroCPFClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FieldCadastroCPFClienteActionPerformed
-
     private void BotaoNovoCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoNovoCadastroClienteActionPerformed
-        // TODO add your handling code here:
+        DestravaCamposCadastroClientes();
     }//GEN-LAST:event_BotaoNovoCadastroClienteActionPerformed
 
     private void BotaoSalvarCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvarCadastroClienteActionPerformed
@@ -2762,8 +2823,9 @@ public class Principal extends javax.swing.JFrame {
             clidao.InserirCliente(cli);
 
             try {
+                JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                SalvarCamposCadastroClientes();
 
-                JOptionPane.showMessageDialog(null, "Concerto cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
@@ -2818,6 +2880,18 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldDuracaoCadastrarConsertosKeyPressed
 
+    private void FieldCadastroCPFClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldCadastroCPFClienteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldCadastroCPFClienteMouseClicked
+
+    private void FieldCadastroCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldCadastroCPFClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldCadastroCPFClienteActionPerformed
+
+    private void FieldCadastroCPFClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FieldCadastroCPFClienteKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldCadastroCPFClienteKeyPressed
+
     public void setLblColor(JLabel lbl) {
         lbl.setBackground(new Color(220, 220, 220));
     }
@@ -2867,7 +2941,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField FieldCPFConsultarGarantias;
     private javax.swing.JFormattedTextField FieldCPFGerenciaGarantias;
     private javax.swing.JFormattedTextField FieldCPFGerenciarClientes;
-    private javax.swing.JFormattedTextField FieldCadastroCPFCliente;
+    private javax.swing.JTextField FieldCadastroCPFCliente;
     private javax.swing.JTextField FieldCadastroCidadeCliente;
     private javax.swing.JTextField FieldCadastroEmailCliente;
     private javax.swing.JTextField FieldCadastroEnderecoCliente;
