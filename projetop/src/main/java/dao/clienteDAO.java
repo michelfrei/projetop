@@ -37,15 +37,6 @@ public class clienteDAO {
         stmt.close();
     }
 
-    /*public void SalvarData(Cliente cliente) throws SQLException {
-        String SQL = "INSERT INTO cadastros.GetData (data) values (?)";
-
-            PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
-            stmt.setDate(1, Date.valueOf(cliente.getDetea()));
-
-            stmt.execute();
-            stmt.close();
-    }*/
     public void RemoverCliente(Cliente cliente) throws SQLException {
         String SQL = "Delete from cadastros.cliente where id=?";
 
@@ -57,8 +48,9 @@ public class clienteDAO {
     }
 
     public void AlterarCliente(Cliente cliente) throws SQLException {
-        String SQL = "update cadastros.cliente set nome=?, cpf=?, descricao=? where id=?";
-
+        String SQL = "update cadastros.cliente set nome=?, cpf=?, telefone=?, cidade=?, endereco=?, email=? where id=?";
+        System.out.println(cliente.getNome() + " , "+ cliente.getCpf()+ 
+                " , " + cliente.getTelefone()+ " , " + cliente.getCidade()+ " , "+ cliente.getEndereco());
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
         stmt.setString(1, cliente.getNome());
@@ -67,7 +59,6 @@ public class clienteDAO {
         stmt.setString(4, cliente.getCidade());
         stmt.setString(5, cliente.getEndereco());
         stmt.setString(6, cliente.getEmail());
-        //stmt.setDate(4, cliente.getSaida_concerto());
         stmt.setInt(7, cliente.getId());
         stmt.execute();
         stmt.close();

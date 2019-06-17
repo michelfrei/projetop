@@ -46,29 +46,30 @@ public class GarantiaDAO {
             stmt.execute();
             stmt.close();
     }*/
-    /*public void RemoverCliente(Cliente cliente) throws SQLException {
-        String SQL = "Delete from cadastros.cliente where id=?";
-
+    public void RemoverGarantia(Garantia gar) throws SQLException {
+        String SQL = "Delete from cadastros.garantia where id=?";
+        
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
-        stmt.setInt(1, cliente.getId());
+        stmt.setInt(1, gar.getId());
 
         stmt.execute();
         stmt.close();
     }
 
-    public void AlterarCliente(Cliente cliente) throws SQLException {
-        String SQL = "update cadastros.cliente set nome=?, cpf=?, descricao=? where id=?";
+    public void AlterarGarantia(Garantia gar) throws SQLException {
+        String SQL = "update cadastros.garantia set nome=?, descricao=?, saida_concerto=?, garantia=?  where id=?";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
-
-        stmt.setString(1, cliente.getNome());
-        stmt.setString(2, cliente.getCpf());
-        stmt.setString(3, cliente.getTelefone());
-        //stmt.setDate(4, cliente.getSaida_concerto());
-        stmt.setInt(5, cliente.getId());
+        System.out.println(gar.getNome() + " , "+ gar.getDescricao()+ " , " + gar.getSaida_concerto()+ " , " + gar.getDt_garantia()+ " , "+ gar.getId());
+        stmt.setString(1, gar.getNome());
+        stmt.setString(2, gar.getDescricao());
+        stmt.setDate(3, Date.valueOf(gar.getSaida_concerto()));
+        stmt.setDate(4, Date.valueOf(gar.getDt_garantia()));
+        stmt.setInt(5, gar.getId());
+        
         stmt.execute();
         stmt.close();
-    }*/
+    }
 
     public List<Garantia> ListaGarantia() throws SQLException {
 

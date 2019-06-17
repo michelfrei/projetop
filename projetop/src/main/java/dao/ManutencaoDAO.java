@@ -44,7 +44,7 @@ public class ManutencaoDAO {
     }
 
     public void AlterarManutencao(Manutencao manutencao) throws SQLException {
-        String SQL = "update cadastros.manutencao set descricao=?, set duracao_garantia=? where id=?";
+        String SQL = "update cadastros.manutencao set descricao=?, duracao_garantia=? where id=?";
 
         PreparedStatement stmt = Conexao.getConexaoMySQL().prepareStatement(SQL);
 
