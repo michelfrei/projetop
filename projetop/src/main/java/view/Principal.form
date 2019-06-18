@@ -46,7 +46,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="SideBoard" alignment="0" max="32767" attributes="0"/>
-          <Component id="PaneMae" alignment="1" max="32767" attributes="0"/>
+          <Component id="PaneMae" alignment="1" pref="780" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -164,7 +164,7 @@
               <Color blue="70" green="17" red="17" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Consertos"/>
+            <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[139, 25]"/>
             </Property>
@@ -193,9 +193,6 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="PaneClientes">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="e6" green="e6" red="e6" type="rgb"/>
-            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[1144, 429]"/>
             </Property>
@@ -209,25 +206,23 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPane3" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel17" alignment="0" pref="1441" max="32767" attributes="0"/>
+                  <Component id="jPanel8" max="32767" attributes="0"/>
+                  <Component id="jTabbedPane3" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel17" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="jTabbedPane3" pref="551" max="32767" attributes="0"/>
+                      <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTabbedPane3" min="-2" pref="546" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane3">
-              <Properties>
-                <Property name="opaque" type="boolean" value="true"/>
-              </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTabbedPane3MouseClicked"/>
               </Events>
@@ -264,7 +259,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel15" min="-2" pref="415" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="108" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="103" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -300,26 +295,10 @@
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="BotaoCancelarCadastroCliente" min="-2" pref="151" max="-2" attributes="0"/>
                                               </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="lblNome3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="FieldCadastroNomeCliente" alignment="0" pref="647" max="32767" attributes="0"/>
-                                                      <Component id="jSeparator9" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="lblCPF4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jSeparator14" pref="126" max="32767" attributes="0"/>
-                                                      <Component id="FieldCadastroCPFCliente" alignment="0" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="lblNome4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="FieldCadastroTelefoneCliente" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jSeparator12" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="lblNome3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="FieldCadastroNomeCliente" alignment="0" pref="647" max="32767" attributes="0"/>
+                                                  <Component id="jSeparator9" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -330,9 +309,26 @@
                                                   <EmptySpace pref="73" max="32767" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="lblNome6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="FieldCadastroEnderecoCliente" max="32767" attributes="0"/>
-                                                          <Component id="jSeparator16" min="-2" pref="529" max="-2" attributes="0"/>
+                                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                                      <Component id="jSeparator14" max="32767" attributes="0"/>
+                                                                      <Component id="FieldCadastroCPFCliente" min="-2" pref="200" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <Component id="lblCPF4" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                                  <Component id="lblNome4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                                  <Component id="FieldCadastroTelefoneCliente" max="32767" attributes="0"/>
+                                                                  <Component id="jSeparator12" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="FieldCadastroEnderecoCliente" max="32767" attributes="0"/>
+                                                              <Component id="jSeparator16" min="-2" pref="529" max="-2" attributes="0"/>
+                                                          </Group>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -411,7 +407,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Nome do cliente"/>
+                            <Property name="text" type="java.lang.String" value="Nome do cliente*"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldCadastroNomeCliente">
@@ -438,7 +434,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldCadastroNomeClienteKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCadastroNomeCliente.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator9">
@@ -477,7 +473,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Celular"/>
+                            <Property name="text" type="java.lang.String" value="Celular*"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="BotaoNovoCadastroCliente">
@@ -502,7 +498,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="CPF"/>
+                            <Property name="text" type="java.lang.String" value="CPF*"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator14">
@@ -580,7 +576,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldCadastroEnderecoClienteKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCadastroEnderecoCliente.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator16">
@@ -595,7 +591,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Email"/>
+                            <Property name="text" type="java.lang.String" value="Email*"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldCadastroEmailCliente">
@@ -622,7 +618,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldCadastroEmailClienteKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCadastroEmailCliente.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator17">
@@ -664,7 +660,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldCadastroCidadeClienteKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCadastroCidadeCliente.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator21">
@@ -698,7 +694,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldCadastroCPFClienteKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCadastroCPFCliente.setDocument(new JTextFieldLimit(11, true, true));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -724,28 +720,25 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane2" min="-2" pref="1073" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jScrollPane2" min="-2" pref="1027" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="lblNome2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="FieldConsultaNomeCliente" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jSeparator7" alignment="0" min="-2" pref="498" max="-2" attributes="0"/>
+                                          <Component id="FieldConsultaNomeCliente" alignment="0" pref="617" max="32767" attributes="0"/>
+                                          <Component id="jSeparator7" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSeparator11" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblCPF2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lblCPF2" min="-2" max="-2" attributes="0"/>
                                           <Component id="FieldConsultaCPFCliente" max="32767" attributes="0"/>
+                                          <Component id="jSeparator11" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="BotaoBuscarConsultaCliente" min="-2" pref="157" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="BotaoBuscarConsultaCliente" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="305" max="-2" attributes="0"/>
+                              <EmptySpace pref="54" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -753,7 +746,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="58" pref="58" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lblNome2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -774,9 +767,9 @@
                                       <Component id="jSeparator11" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="299" max="-2" attributes="0"/>
-                              <EmptySpace pref="75" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="330" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -959,97 +952,73 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="DadosAlteraClientes" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblNome10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jScrollPane5" min="-2" pref="1039" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jSeparator18" min="-2" pref="1" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="FieldGerenciarNomeCliente" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jSeparator10" alignment="0" min="-2" pref="634" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="FieldNomeConsultarGerenciarClientes" alignment="0" min="-2" pref="690" max="-2" attributes="0"/>
+                                          <Component id="lblNome10" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jSeparator8" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="FieldCPFConsultarGerenciarClientes" alignment="0" min="-2" pref="279" max="-2" attributes="0"/>
-                                          <Component id="lblCPF3" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="lblCPF6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jSeparator32" alignment="0" pref="200" max="32767" attributes="0"/>
+                                          <Component id="FieldGerenciarCPFCliente" alignment="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="BotaoBuscarConsultaCliente1" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="DadosAlteraClientes" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="52" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblNome10" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="lblCPF3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="FieldCPFConsultarGerenciarClientes" min="-2" max="-2" attributes="0"/>
-                                  <Component id="FieldNomeConsultarGerenciarClientes" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSeparator8" alignment="0" min="-2" pref="13" max="-2" attributes="0"/>
-                                          <Component id="jSeparator18" alignment="0" min="-2" pref="10" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane5" min="-2" pref="121" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="lblNome10" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="lblCPF6" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="FieldGerenciarNomeCliente" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                          <Component id="FieldGerenciarCPFCliente" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                      <Component id="jSeparator10" min="-2" pref="12" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="BotaoBuscarConsultaCliente1" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="jSeparator32" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane5" min="-2" pref="102" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="DadosAlteraClientes" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JSeparator" name="jSeparator18">
-                      <Properties>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="0" red="0" type="rgb"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JTextField" name="FieldNomeConsultarGerenciarClientes">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f0" green="f0" red="f0" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="16" style="0"/>
-                        </Property>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="null"/>
-                        </Property>
-                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[25, 25]"/>
-                        </Property>
-                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[25, 25]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FieldNomeConsultarGerenciarClientesMouseClicked"/>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldNomeConsultarGerenciarClientesKeyPressed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeCadastrarConsertos.setDocument(new JTextFieldLimit(40, true));"/>
-                      </AuxValues>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="lblNome10">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1121,43 +1090,6 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JFormattedTextField" name="FieldCPFConsultarGerenciarClientes">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f0" green="f0" red="f0" type="rgb"/>
-                        </Property>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="null"/>
-                        </Property>
-                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                          <Format format="###.###.###-##" subtype="-1" type="5"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="16" style="0"/>
-                        </Property>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[112, 25]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldCPFConsultarGerenciarClientesActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="lblCPF3">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="18" style="0"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="CPF"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JSeparator" name="jSeparator8">
-                      <Properties>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="0" red="0" type="rgb"/>
-                        </Property>
-                      </Properties>
-                    </Component>
                     <Container class="javax.swing.JPanel" name="DadosAlteraClientes">
                       <Properties>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -1174,11 +1106,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblNome21" min="-2" max="-2" attributes="0"/>
-                                              <Component id="FieldIDGerenciarClientes" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace pref="32" max="32767" attributes="0"/>
+                                          <Component id="FieldIDGerenciarClientes" min="-2" pref="23" max="-2" attributes="0"/>
+                                          <EmptySpace pref="22" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblNome22" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
@@ -1219,13 +1148,15 @@
                                                   <Component id="FieldNomeGerenciarClientes" alignment="0" min="-2" pref="560" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="lblCPF5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jSeparator19" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="FieldCPFGerenciarClientes" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jSeparator19" max="32767" attributes="0"/>
+                                                  <Component id="FieldCPFGerenciarClientes" pref="200" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="lblCPF5" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblNome11" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -1247,10 +1178,9 @@
                                           <Component id="lblNome19" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="lblNome11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="lblCPF5" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="lblNome11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCPF5" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -1261,15 +1191,14 @@
                                       </Group>
                                       <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="FieldTelefoneGerenciarClientes" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="FieldTelefoneGerenciarClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="FieldCPFGerenciarClientes" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                               <Component id="jSeparator28" min="-2" pref="12" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="FieldCPFGerenciarClientes" min="-2" pref="25" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                              <Component id="jSeparator19" min="-2" pref="12" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="jSeparator19" alignment="1" min="-2" pref="12" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
@@ -1294,19 +1223,21 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblNome24" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblNome21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                  <Component id="FieldEmailGerenciarClientes" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  <Component id="lblNome24" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jSeparator31" min="-2" pref="10" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="BotaoCancelarGerenciarServicos2" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <Component id="BotaoExcluirGerenciarGarantia1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <Component id="BotaoAlterarGerenciarGarantia1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                          <Component id="FieldEmailGerenciarClientes" min="-2" pref="25" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                          <Component id="jSeparator31" min="-2" pref="10" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="BotaoCancelarGerenciarServicos2" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                              <Component id="BotaoExcluirGerenciarGarantia1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                              <Component id="BotaoAlterarGerenciarGarantia1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -1321,7 +1252,7 @@
                               <Color blue="e6" green="e6" red="e6" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="18" style="0"/>
+                              <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Cancelar"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -1339,7 +1270,7 @@
                               <Color blue="e6" green="e6" red="e6" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="18" style="0"/>
+                              <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Excluir"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -1357,7 +1288,7 @@
                               <Color blue="e6" green="e6" red="e6" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="18" style="0"/>
+                              <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Alterar"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -1374,7 +1305,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Nome do cliente:"/>
+                            <Property name="text" type="java.lang.String" value="Nome do cliente*:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldNomeGerenciarClientes">
@@ -1400,7 +1331,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldNomeGerenciarClientesKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeGerenciarClientes.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator27">
@@ -1408,14 +1339,6 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="0" green="0" red="0" type="rgb"/>
                             </Property>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="lblNome21">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="18" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="ID:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldIDGerenciarClientes">
@@ -1446,7 +1369,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="CPF"/>
+                            <Property name="text" type="java.lang.String" value="CPF*"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldCPFGerenciarClientes">
@@ -1473,7 +1396,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldCPFGerenciarClientesKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCPFGerenciarClientes.setDocument(new JTextFieldLimit(11, true, true));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator19">
@@ -1514,7 +1437,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Celular"/>
+                            <Property name="text" type="java.lang.String" value="Celular*"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblNome22">
@@ -1549,7 +1472,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldCidadeGerenciarClientesKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldCidadeGerenciarClientes.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator29">
@@ -1591,7 +1514,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldEnderecoGerenciarClientesKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldEnderecoGerenciarClientes.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator30">
@@ -1606,7 +1529,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Email"/>
+                            <Property name="text" type="java.lang.String" value="Email*"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldEmailGerenciarClientes">
@@ -1633,7 +1556,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldEmailGerenciarClientesKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldEmailGerenciarClientes.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator31">
@@ -1645,11 +1568,104 @@
                         </Component>
                       </SubComponents>
                     </Container>
+                    <Component class="javax.swing.JTextField" name="FieldGerenciarNomeCliente">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="16" style="0"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[25, 25]"/>
+                        </Property>
+                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[25, 25]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FieldGerenciarNomeClienteMouseClicked"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldGerenciarNomeClienteActionPerformed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldGerenciarNomeClienteKeyPressed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldGerenciarNomeCliente.setDocument(new JTextFieldLimit(255, true, false));"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JSeparator" name="jSeparator10">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="0" type="rgb"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSeparator" name="jSeparator32">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="0" green="0" red="0" type="rgb"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="FieldGerenciarCPFCliente">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="16" style="0"/>
+                        </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="null"/>
+                        </Property>
+                        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[25, 25]"/>
+                        </Property>
+                        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[25, 25]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FieldGerenciarCPFClienteMouseClicked"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldGerenciarCPFClienteActionPerformed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldGerenciarCPFClienteKeyPressed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldGerenciarNomeCliente.setDocument(new JTextFieldLimit(11, true, true));"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblCPF6">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Century Gothic" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="CPF"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="BotaoBuscarConsultaCliente1">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="e6" green="e6" red="e6" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Buscar"/>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Default Cursor"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoBuscarConsultaCliente1ActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel17">
+            <Container class="javax.swing.JPanel" name="jPanel8">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[1144, 199]"/>
@@ -1660,24 +1676,24 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="421" max="-2" attributes="0"/>
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="436" max="-2" attributes="0"/>
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="471" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="89" max="32767" attributes="0"/>
-                          <Component id="jLabel10" min="-2" pref="52" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="68" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel10">
+                <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="48" style="1"/>
@@ -1717,7 +1733,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="7" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1728,16 +1744,16 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTabbedPane2" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane2" max="-2" attributes="0"/>
                       <Component id="jPanel11" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="jTabbedPane2" pref="544" max="32767" attributes="0"/>
+                          <Component id="jPanel11" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTabbedPane2" min="-2" pref="557" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1783,7 +1799,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel1" alignment="0" pref="516" max="32767" attributes="0"/>
+                              <Component id="jPanel1" alignment="0" pref="529" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -1802,7 +1818,7 @@
                                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="BotaoNovoCadastroCliente1" min="-2" pref="151" max="-2" attributes="0"/>
+                                              <Component id="BotaoNovoGarantia" min="-2" pref="151" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="557" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
@@ -1811,22 +1827,24 @@
                                                   <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="CampoNome" alignment="0" min="-2" pref="499" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                   <Component id="CampoDataFormatada" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="lblData" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="jSeparator4" min="-2" pref="137" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblConserto" min="-2" max="-2" attributes="0"/>
-                                          <Component id="ComboEscolhaConserto" min="-2" pref="303" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="BotaoSalvarNovaRevista" min="-2" pref="151" max="-2" attributes="0"/>
+                                              <Component id="BotaoSalvarGarantia" min="-2" pref="151" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="BotaoCancelarCadastroCliente1" min="-2" pref="151" max="-2" attributes="0"/>
+                                              <Component id="BotaoCancelarGarantia" min="-2" pref="151" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblConserto" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ComboEscolhaConserto" min="-2" pref="303" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <EmptySpace min="0" pref="53" max="32767" attributes="0"/>
@@ -1852,7 +1870,7 @@
                                                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                                       <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
                                                       <Component id="lblData" min="-2" max="-2" attributes="0"/>
                                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                                       <Component id="CampoDataFormatada" min="-2" pref="27" max="-2" attributes="0"/>
@@ -1862,9 +1880,9 @@
                                               </Group>
                                               <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="BotaoSalvarNovaRevista" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="BotaoCancelarCadastroCliente1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                                  <Component id="BotaoNovoCadastroCliente1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                                  <Component id="BotaoSalvarGarantia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="BotaoCancelarGarantia" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                                  <Component id="BotaoNovoGarantia" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1902,10 +1920,11 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CampoNomeMouseClicked"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CampoNomeActionPerformed"/>
                                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CampoNomeKeyPressed"/>
                               </Events>
                               <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(255, true, false));"/>
                               </AuxValues>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator2">
@@ -1941,6 +1960,9 @@
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CampoDataFormatadaActionPerformed"/>
                               </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoDataFormatada.setDocument(new JTextFieldLimit(11, true, true));"/>
+                              </AuxValues>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator4">
                               <Properties>
@@ -1957,7 +1979,7 @@
                                 <Property name="text" type="java.lang.String" value="Conserto"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JButton" name="BotaoSalvarNovaRevista">
+                            <Component class="javax.swing.JButton" name="BotaoSalvarGarantia">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
@@ -1974,7 +1996,7 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoSalvarNovaRevistaActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoSalvarGarantiaActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JComboBox" name="ComboEscolhaConserto">
@@ -1993,7 +2015,7 @@
                                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                               </AuxValues>
                             </Component>
-                            <Component class="javax.swing.JButton" name="BotaoCancelarCadastroCliente1">
+                            <Component class="javax.swing.JButton" name="BotaoCancelarGarantia">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
@@ -2007,10 +2029,10 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoCancelarCadastroCliente1ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoCancelarGarantiaActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="javax.swing.JButton" name="BotaoNovoCadastroCliente1">
+                            <Component class="javax.swing.JButton" name="BotaoNovoGarantia">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
@@ -2024,7 +2046,7 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoNovoCadastroCliente1ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoNovoGarantiaActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -2048,25 +2070,24 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jSeparator3" min="-2" pref="494" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblNome1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="TxtNome1" min="-2" pref="414" max="-2" attributes="0"/>
-                                              <Component id="jSeparator3" min="-2" pref="414" max="-2" attributes="0"/>
+                                              <Component id="lblNome1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="FieldConsultaNomeGarantia" min="-2" pref="494" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblCPF1" min="-2" max="-2" attributes="0"/>
-                                              <Component id="FieldCPFConsultarGarantias" pref="270" max="32767" attributes="0"/>
-                                              <Component id="jSeparator6" max="32767" attributes="0"/>
+                                              <Component id="ComboOrdenaGarantia" min="-2" pref="303" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="BotaoBuscarConsultarGarantias" min="-2" pref="151" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                          <Component id="BotaoBuscarConsultarGarantias" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jScrollPane1" min="-2" pref="1026" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="1026" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="55" max="32767" attributes="0"/>
                               </Group>
@@ -2075,32 +2096,26 @@
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="lblNome1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblCPF1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="lblNome1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblCPF1" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="TxtNome1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="FieldCPFConsultarGarantias" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jSeparator3" alignment="1" min="-2" pref="16" max="-2" attributes="0"/>
-                                              <Component id="jSeparator6" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="FieldConsultaNomeGarantia" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ComboOrdenaGarantia" min="-2" pref="30" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                          <Component id="BotaoBuscarConsultarGarantias" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="BotaoBuscarConsultarGarantias" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" min="-2" pref="242" max="-2" attributes="0"/>
-                                  <EmptySpace pref="82" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                  <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" min="-2" pref="328" max="-2" attributes="0"/>
+                                  <EmptySpace pref="62" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2114,7 +2129,7 @@
                             <Property name="text" type="java.lang.String" value="Nome do cliente"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="TxtNome1">
+                        <Component class="javax.swing.JTextField" name="FieldConsultaNomeGarantia">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="f0" green="f0" red="f0" type="rgb"/>
@@ -2136,12 +2151,12 @@
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TxtNome1MouseClicked"/>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtNome1ActionPerformed"/>
-                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtNome1KeyPressed"/>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FieldConsultaNomeGarantiaMouseClicked"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldConsultaNomeGarantiaActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldConsultaNomeGarantiaKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldConsultaNomeGarantia.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator3">
@@ -2156,14 +2171,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="CPF"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JSeparator" name="jSeparator6">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="0" green="0" red="0" type="rgb"/>
-                            </Property>
+                            <Property name="text" type="java.lang.String" value="Ordenar data da garantia:"/>
                           </Properties>
                         </Component>
                         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -2244,28 +2252,6 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JFormattedTextField" name="FieldCPFConsultarGarantias">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="f0" green="f0" red="f0" type="rgb"/>
-                            </Property>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="null"/>
-                            </Property>
-                            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                              <Format format="###.###.###-##" subtype="-1" type="5"/>
-                            </Property>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="16" style="0"/>
-                            </Property>
-                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[112, 25]"/>
-                            </Property>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FieldCPFConsultarGarantiasActionPerformed"/>
-                          </Events>
-                        </Component>
                         <Component class="javax.swing.JButton" name="BotaoBuscarConsultarGarantias">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -2285,6 +2271,31 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoBuscarConsultarGarantiasActionPerformed"/>
                           </Events>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="ComboOrdenaGarantia">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="5">
+                                <StringItem index="0" value="TODAS"/>
+                                <StringItem index="1" value="VIGENTES"/>
+                                <StringItem index="2" value="VENCIDAS"/>
+                                <StringItem index="3" value=" "/>
+                                <StringItem index="4" value=" "/>
+                              </StringArray>
+                            </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="null"/>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -2307,25 +2318,25 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="lblNome17" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jSeparator25" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="FieldNomeGerenciarServicos1" alignment="0" pref="844" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="BotaoBuscarGerenciarServicos1" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPane8" alignment="0" min="-2" pref="1034" max="-2" attributes="0"/>
-                                              <Component id="DadosAlteraGarantia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblNome17" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="FieldNomeGerenciarServicos1" min="-2" pref="497" max="-2" attributes="0"/>
+                                              <Component id="jSeparator25" alignment="1" min="-2" pref="497" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblCPF3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="ComboOrdenaGarantia1" alignment="0" min="-2" pref="303" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="BotaoBuscarGerenciarServicos1" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="jScrollPane8" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="DadosAlteraGarantia" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                                  <EmptySpace pref="51" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2334,20 +2345,25 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="lblNome17" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="FieldNomeGerenciarServicos1" min="-2" pref="25" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                          <Component id="jSeparator25" min="-2" pref="6" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="BotaoBuscarGerenciarServicos1" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="lblCPF3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="ComboOrdenaGarantia1" min="-2" pref="30" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="BotaoBuscarGerenciarServicos1" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                  <Component id="jSeparator25" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane8" min="-2" pref="123" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane8" min="-2" pref="102" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="DadosAlteraGarantia" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="31" max="32767" attributes="0"/>
+                                  <EmptySpace pref="62" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2383,7 +2399,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldNomeGerenciarServicos1KeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeCadastrarConsertos.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeGerenciarServicos1.setDocument(new JTextFieldLimit(255, true, false));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblNome17">
@@ -2400,7 +2416,7 @@
                               <Color blue="e6" green="e6" red="e6" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="18" style="0"/>
+                              <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Buscar"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -2482,46 +2498,40 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="lblNome18" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="FieldNomeGerenciarGarantia" alignment="0" pref="736" max="32767" attributes="0"/>
-                                                          <Component id="jSeparator26" alignment="0" max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="CampoGerenciaDataFormatada" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="lblData1" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jSeparator5" alignment="1" min="-2" pref="137" max="-2" attributes="0"/>
-                                                      </Group>
+                                                  <Component id="lblConserto1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="ComboGerenciaEscolhaConserto" alignment="0" min="-2" pref="303" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                              <Component id="FieldIDGerenciarGarantia" min="-2" pref="119" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="BotaoAlterarGerenciarGarantia" min="-2" pref="151" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="BotaoExcluirGerenciarGarantia" min="-2" pref="151" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="BotaoCancelarGerenciarServicos1" min="-2" pref="151" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="lblNome18" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="FieldNomeGerenciarGarantia" alignment="0" pref="736" max="32767" attributes="0"/>
+                                                      <Component id="jSeparator26" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblConserto1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="ComboGerenciaEscolhaConserto" alignment="0" min="-2" pref="303" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                          <Component id="FieldIDGerenciarGarantia" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                                                          <Component id="lblNome20" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
+                                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="CampoGerenciaDataFormatada" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="lblData1" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jSeparator5" alignment="1" min="-2" pref="137" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <Component id="BotaoAlterarGerenciarGarantia" min="-2" pref="151" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="BotaoExcluirGerenciarGarantia" min="-2" pref="151" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="BotaoCancelarGerenciarServicos1" min="-2" pref="151" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -2544,18 +2554,14 @@
                                               <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Component id="lblConserto1" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="ComboGerenciaEscolhaConserto" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblNome20" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="FieldIDGerenciarGarantia" min="-2" pref="25" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="FieldIDGerenciarGarantia" min="-2" pref="25" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -2575,7 +2581,7 @@
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
+                                  <Font name="Segoe UI" size="18" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -2593,7 +2599,7 @@
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
+                                  <Font name="Segoe UI" size="18" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Excluir"/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -2611,7 +2617,7 @@
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
+                                  <Font name="Segoe UI" size="18" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Alterar"/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -2654,7 +2660,7 @@
                                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldNomeGerenciarGarantiaKeyPressed"/>
                               </Events>
                               <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeGerenciarGarantia.setDocument(new JTextFieldLimit(255, true, false));"/>
                               </AuxValues>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator26">
@@ -2662,14 +2668,6 @@
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="0" type="rgb"/>
                                 </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lblNome20">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="ID:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="FieldIDGerenciarGarantia">
@@ -2721,6 +2719,9 @@
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CampoGerenciaDataFormatadaActionPerformed"/>
                               </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoGerenciaDataFormatada.setDocument(new JTextFieldLimit(11, true, true));"/>
+                              </AuxValues>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator5">
                               <Properties>
@@ -2755,6 +2756,39 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JLabel" name="lblCPF3">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Century Gothic" size="18" style="0"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Ordenar data da garantia:"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JComboBox" name="ComboOrdenaGarantia1">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="f0" green="f0" red="f0" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="18" style="0"/>
+                            </Property>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="5">
+                                <StringItem index="0" value="TODAS"/>
+                                <StringItem index="1" value="VIGENTES"/>
+                                <StringItem index="2" value="VENCIDAS"/>
+                                <StringItem index="3" value=" "/>
+                                <StringItem index="4" value=" "/>
+                              </StringArray>
+                            </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="null"/>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                          </AuxValues>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -2827,8 +2861,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="jPanel7" pref="551" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jPanel7" min="-2" pref="546" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2849,7 +2884,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane1" min="-2" pref="546" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -2890,13 +2925,13 @@
                                               <Component id="jSeparator13" alignment="0" max="32767" attributes="0"/>
                                               <Component id="FieldNomeCadastrarConsertos" alignment="1" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="lblNome13" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jSeparator22" alignment="0" max="32767" attributes="0"/>
                                               <Component id="FieldDuracaoCadastrarConsertos" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="269" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="BotaoNovoCadastroConserto" min="-2" pref="151" max="-2" attributes="0"/>
@@ -2913,16 +2948,16 @@
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="lblNome5" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="FieldNomeCadastrarConsertos" min="-2" pref="25" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                           <Component id="jSeparator13" min="-2" pref="10" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="lblNome13" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="FieldDuracaoCadastrarConsertos" min="-2" pref="25" max="-2" attributes="0"/>
@@ -2930,7 +2965,7 @@
                                           <Component id="jSeparator22" min="-2" pref="10" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="BotaoSalvarCadastroConserto" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                                       <Component id="BotaoCancelarCadastroConserto" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
@@ -2947,7 +2982,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Conserto"/>
+                            <Property name="text" type="java.lang.String" value="Nome do servi&#xe7;o"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldNomeCadastrarConsertos">
@@ -2967,13 +3002,14 @@
                             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[25, 25]"/>
                             </Property>
+                            <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FieldNomeCadastrarConsertosMouseClicked"/>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldNomeCadastrarConsertosKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeCadastrarConsertos.setDocument(new JTextFieldLimit(255, true));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator13">
@@ -3030,6 +3066,9 @@
                               <Color id="Default Cursor"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoCancelarCadastroConsertoActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="FieldDuracaoCadastrarConsertos">
                           <Properties>
@@ -3048,13 +3087,14 @@
                             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[25, 25]"/>
                             </Property>
+                            <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FieldDuracaoCadastrarConsertosMouseClicked"/>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldDuracaoCadastrarConsertosKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldDuracaoCadastrarConsertos.setDocument(new JTextFieldLimit(2, false, true));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JSeparator" name="jSeparator22">
@@ -3086,37 +3126,41 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lblNome7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="FieldConsultaDescricaoGarantias" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jSeparator15" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane3" alignment="0" min="-2" pref="480" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jScrollPane3" pref="1026" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lblNome7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="FieldConsultaDescricaoGarantias" alignment="0" pref="614" max="32767" attributes="0"/>
+                                              <Component id="jSeparator15" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="BotaoBuscarGarantias" min="-2" pref="160" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="BotaoBuscarGarantias" min="-2" pref="151" max="-2" attributes="0"/>
-                                  <EmptySpace pref="432" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="BotaoBuscarGarantias" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="lblNome7" min="-2" pref="23" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="FieldConsultaDescricaoGarantias" min="-2" pref="25" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="BotaoBuscarGarantias" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   <Component id="jSeparator15" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane3" min="-2" pref="179" max="-2" attributes="0"/>
-                                  <EmptySpace pref="131" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" pref="328" max="-2" attributes="0"/>
+                                  <EmptySpace pref="50" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3145,7 +3189,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldConsultaDescricaoGarantiasKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeCadastrarConsertos.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldConsultaDescricaoGarantias.setDocument(new JTextFieldLimit(255, true));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblNome7">
@@ -3223,7 +3267,7 @@
                               <Color blue="e6" green="e6" red="e6" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="18" style="0"/>
+                              <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Buscar"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -3255,25 +3299,20 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="lblNome12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jSeparator20" max="32767" attributes="0"/>
-                                              <Component id="FieldNomeGerenciarServicos" alignment="0" pref="844" max="32767" attributes="0"/>
+                                              <Component id="FieldNomeGerenciarServicos" alignment="0" min="-2" pref="825" max="-2" attributes="0"/>
+                                              <Component id="jSeparator20" alignment="0" min="-2" pref="825" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="BotaoBuscarGerenciarServicos" max="32767" attributes="0"/>
+                                          <EmptySpace pref="45" max="32767" attributes="0"/>
+                                          <Component id="BotaoBuscarGerenciarServicos" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPane7" min="-2" pref="1034" max="-2" attributes="0"/>
-                                              <Component id="DadosAlteraServicos" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="jScrollPane7" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="DadosAlteraServicos" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                                  <EmptySpace pref="51" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3282,20 +3321,20 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="lblNome12" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="FieldNomeGerenciarServicos" min="-2" pref="25" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="BotaoBuscarGerenciarServicos" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   <Component id="jSeparator20" min="-2" pref="10" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane7" min="-2" pref="102" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane7" min="-2" pref="123" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="DadosAlteraServicos" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="DadosAlteraServicos" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="51" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3331,7 +3370,7 @@
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldNomeGerenciarServicosKeyPressed"/>
                           </Events>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeCadastrarConsertos.setDocument(new JTextFieldLimit(40, true));"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeGerenciarServicos.setDocument(new JTextFieldLimit(255, true));"/>
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblNome12">
@@ -3339,7 +3378,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Century Gothic" size="18" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Conserto"/>
+                            <Property name="text" type="java.lang.String" value="Encontre um servi&#xe7;o:"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="BotaoBuscarGerenciarServicos">
@@ -3348,7 +3387,7 @@
                               <Color blue="e6" green="e6" red="e6" type="rgb"/>
                             </Property>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Century Gothic" size="18" style="0"/>
+                              <Font name="Segoe UI" size="18" style="0"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Buscar"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -3430,7 +3469,7 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -3440,7 +3479,6 @@
                                                   </Group>
                                                   <Component id="lblNome14" min="-2" max="-2" attributes="0"/>
                                                   <Component id="FieldIDGerenciarConsertos" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                                                  <Component id="lblNome16" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -3480,16 +3518,15 @@
                                               <Component id="jSeparator24" min="-2" pref="10" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblNome16" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                       <Component id="FieldIDGerenciarConsertos" min="-2" pref="25" max="-2" attributes="0"/>
-                                      <EmptySpace pref="86" max="32767" attributes="0"/>
+                                      <EmptySpace pref="48" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="BotaoCancelarGerenciarServicos" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <Component id="BotaoExcluirGerenciarServicos" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                                           <Component id="BotaoAlterarGerenciarServicos" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="BotaoExcluirGerenciarServicos" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="BotaoCancelarGerenciarServicos" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -3501,7 +3538,7 @@
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
+                                  <Font name="Segoe UI" size="18" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Cancelar"/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -3519,7 +3556,7 @@
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
+                                  <Font name="Segoe UI" size="18" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Excluir"/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -3537,7 +3574,7 @@
                                   <Color blue="e6" green="e6" red="e6" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
+                                  <Font name="Segoe UI" size="18" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Alterar"/>
                                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -3580,7 +3617,7 @@
                                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldNomeGerenciarConsertosKeyPressed"/>
                               </Events>
                               <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldNomeGerenciarConsertos.setDocument(new JTextFieldLimit(255, true));"/>
                               </AuxValues>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator23">
@@ -3621,7 +3658,7 @@
                                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FieldDuracaoGerenciarConsertosKeyPressed"/>
                               </Events>
                               <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CampoNome.setDocument(new JTextFieldLimit(40, true));"/>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="FieldDuracaoGerenciarConsertos.setDocument(new JTextFieldLimit(2, false, true));"/>
                               </AuxValues>
                             </Component>
                             <Component class="javax.swing.JSeparator" name="jSeparator24">
@@ -3629,14 +3666,6 @@
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="0" type="rgb"/>
                                 </Property>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lblNome16">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Century Gothic" size="18" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="ID:"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="FieldIDGerenciarConsertos">
@@ -3681,7 +3710,7 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="436" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -3706,7 +3735,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="70" green="19" red="19" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="CONSERTOS"/>
+                    <Property name="text" type="java.lang.String" value="Servi&#xe7;os"/>
                   </Properties>
                 </Component>
               </SubComponents>
