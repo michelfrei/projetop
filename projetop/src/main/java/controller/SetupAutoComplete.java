@@ -15,10 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-/**
- *
- * @author Uemerson
- */
+
 public class SetupAutoComplete {
     private static boolean isAdjusting(JComboBox cbInput) {
         if (cbInput.getClientProperty("is_adjusting") instanceof Boolean) {
@@ -62,11 +59,11 @@ public class SetupAutoComplete {
             @Override
             public void keyPressed(KeyEvent e) {
                 setAdjusting(cbInput, true);
-                //if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    //if (cbInput.isPopupVisible()) {
-                        //e.setKeyCode(KeyEvent.VK_ENTER);
-                    //}
-                //}
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) { // daqui
+                    if (cbInput.isPopupVisible()) {
+                        e.setKeyCode(KeyEvent.VK_ENTER);
+                    }
+                } // até aqui estava comentado
                 if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN) {
                     
                     e.setSource(cbInput);
