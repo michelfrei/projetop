@@ -1172,7 +1172,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Projetop garantias");
+        setTitle("PROJETOP Garantias");
         setBackground(new java.awt.Color(230, 230, 230));
         setIconImages(null);
         setPreferredSize(new java.awt.Dimension(1364, 750));
@@ -1320,7 +1320,7 @@ public class Principal extends javax.swing.JFrame {
         jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
 
         BotaoSalvarCadastroCliente.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoSalvarCadastroCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarCadastroCliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoSalvarCadastroCliente.setText("Salvar");
         BotaoSalvarCadastroCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoSalvarCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -1335,7 +1335,7 @@ public class Principal extends javax.swing.JFrame {
         lblNome4.setText("Celular*");
 
         BotaoNovoCadastroCliente.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoNovoCadastroCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoNovoCadastroCliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoNovoCadastroCliente.setText("Novo");
         BotaoNovoCadastroCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoNovoCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -1360,7 +1360,7 @@ public class Principal extends javax.swing.JFrame {
         FieldCadastroTelefoneCliente.setPreferredSize(new java.awt.Dimension(49, 25));
 
         BotaoCancelarCadastroCliente.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCancelarCadastroCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarCadastroCliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoCancelarCadastroCliente.setText("Cancelar");
         BotaoCancelarCadastroCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoCancelarCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -1622,7 +1622,7 @@ public class Principal extends javax.swing.JFrame {
 
         TableConsultaCliente.setAutoCreateRowSorter(true);
         TableConsultaCliente.setBackground(new java.awt.Color(240, 240, 240));
-        TableConsultaCliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        TableConsultaCliente.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         TableConsultaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null}
@@ -1648,7 +1648,7 @@ public class Principal extends javax.swing.JFrame {
         jSeparator11.setForeground(new java.awt.Color(0, 0, 0));
 
         BotaoBuscarConsultaCliente.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarConsultaCliente.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoBuscarConsultaCliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoBuscarConsultaCliente.setText("Buscar");
         BotaoBuscarConsultaCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoBuscarConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -1764,7 +1764,7 @@ public class Principal extends javax.swing.JFrame {
         DadosAlteraClientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do cliente"));
 
         BotaoCancelarGerenciarServicos2.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCancelarGerenciarServicos2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarGerenciarServicos2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoCancelarGerenciarServicos2.setText("Cancelar");
         BotaoCancelarGerenciarServicos2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoCancelarGerenciarServicos2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1779,7 +1779,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoExcluirGerenciarGarantia1.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoExcluirGerenciarGarantia1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoExcluirGerenciarGarantia1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoExcluirGerenciarGarantia1.setText("Excluir");
         BotaoExcluirGerenciarGarantia1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoExcluirGerenciarGarantia1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1794,7 +1794,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoAlterarGerenciarGarantia1.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoAlterarGerenciarGarantia1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoAlterarGerenciarGarantia1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoAlterarGerenciarGarantia1.setText("Alterar");
         BotaoAlterarGerenciarGarantia1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoAlterarGerenciarGarantia1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2125,7 +2125,7 @@ public class Principal extends javax.swing.JFrame {
         lblCPF6.setText("CPF");
 
         BotaoBuscarConsultaCliente1.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarConsultaCliente1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoBuscarConsultaCliente1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoBuscarConsultaCliente1.setText("Buscar");
         BotaoBuscarConsultaCliente1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoBuscarConsultaCliente1.addActionListener(new java.awt.event.ActionListener() {
@@ -2299,7 +2299,7 @@ public class Principal extends javax.swing.JFrame {
         lblConserto.setText("Conserto");
 
         BotaoSalvarGarantia.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoSalvarGarantia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarGarantia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoSalvarGarantia.setText("Salvar");
         BotaoSalvarGarantia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoSalvarGarantia.setPreferredSize(new java.awt.Dimension(151, 50));
@@ -2310,10 +2310,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         ComboEscolhaConserto.setBackground(new java.awt.Color(240, 240, 240));
+        ComboEscolhaConserto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         ComboEscolhaConserto.setBorder(null);
 
         BotaoCancelarGarantia.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCancelarGarantia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarGarantia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoCancelarGarantia.setText("Cancelar");
         BotaoCancelarGarantia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoCancelarGarantia.addActionListener(new java.awt.event.ActionListener() {
@@ -2323,7 +2324,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoNovoGarantia.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoNovoGarantia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoNovoGarantia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoNovoGarantia.setText("Novo");
         BotaoNovoGarantia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoNovoGarantia.addActionListener(new java.awt.event.ActionListener() {
@@ -2397,7 +2398,7 @@ public class Principal extends javax.swing.JFrame {
         CadastrarGarantias.setLayout(CadastrarGarantiasLayout);
         CadastrarGarantiasLayout.setHorizontalGroup(
             CadastrarGarantiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1139, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1139, Short.MAX_VALUE)
         );
         CadastrarGarantiasLayout.setVerticalGroup(
             CadastrarGarantiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2441,7 +2442,7 @@ public class Principal extends javax.swing.JFrame {
 
         TableConsultaGarantia.setAutoCreateRowSorter(true);
         TableConsultaGarantia.setBackground(new java.awt.Color(240, 240, 240));
-        TableConsultaGarantia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        TableConsultaGarantia.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         TableConsultaGarantia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
@@ -2465,7 +2466,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TableConsultaGarantia);
 
         BotaoBuscarConsultarGarantias.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarConsultarGarantias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoBuscarConsultarGarantias.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoBuscarConsultarGarantias.setText("Buscar");
         BotaoBuscarConsultarGarantias.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoBuscarConsultarGarantias.setPreferredSize(new java.awt.Dimension(151, 50));
@@ -2476,7 +2477,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         ComboOrdenaGarantia.setBackground(new java.awt.Color(240, 240, 240));
-        ComboOrdenaGarantia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ComboOrdenaGarantia.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         ComboOrdenaGarantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODAS", "VIGENTES", "VENCIDAS" }));
         ComboOrdenaGarantia.setBorder(null);
 
@@ -2512,15 +2513,18 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(ConsultarGarantiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome1)
                             .addComponent(lblCPF1))
-                        .addGap(9, 9, 9)
-                        .addGroup(ConsultarGarantiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ComboOrdenaGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FieldConsultaNomeGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(ConsultarGarantiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ConsultarGarantiasLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(ComboOrdenaGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConsultarGarantiasLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FieldConsultaNomeGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Consultar", ConsultarGarantias);
@@ -2547,10 +2551,10 @@ public class Principal extends javax.swing.JFrame {
         });
 
         lblNome17.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNome17.setText("Nome do conserto");
+        lblNome17.setText("Nome do cliente");
 
         BotaoBuscarGerenciarServicos1.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarGerenciarServicos1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoBuscarGerenciarServicos1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoBuscarGerenciarServicos1.setText("Buscar");
         BotaoBuscarGerenciarServicos1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoBuscarGerenciarServicos1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2597,7 +2601,7 @@ public class Principal extends javax.swing.JFrame {
         DadosAlteraGarantia.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do conserto"));
 
         BotaoCancelarGerenciarGarantia.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCancelarGerenciarGarantia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarGerenciarGarantia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoCancelarGerenciarGarantia.setText("Cancelar");
         BotaoCancelarGerenciarGarantia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoCancelarGerenciarGarantia.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2612,7 +2616,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoExcluirGerenciarGarantia.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoExcluirGerenciarGarantia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoExcluirGerenciarGarantia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoExcluirGerenciarGarantia.setText("Excluir");
         BotaoExcluirGerenciarGarantia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoExcluirGerenciarGarantia.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2627,7 +2631,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoAlterarGerenciarGarantia.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoAlterarGerenciarGarantia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoAlterarGerenciarGarantia.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoAlterarGerenciarGarantia.setText("Alterar");
         BotaoAlterarGerenciarGarantia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoAlterarGerenciarGarantia.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2703,6 +2707,7 @@ public class Principal extends javax.swing.JFrame {
         lblConserto1.setText("Conserto");
 
         ComboGerenciaEscolhaConserto.setBackground(new java.awt.Color(240, 240, 240));
+        ComboGerenciaEscolhaConserto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         ComboGerenciaEscolhaConserto.setBorder(null);
 
         javax.swing.GroupLayout DadosAlteraGarantiaLayout = new javax.swing.GroupLayout(DadosAlteraGarantia);
@@ -2768,7 +2773,7 @@ public class Principal extends javax.swing.JFrame {
         lblCPF3.setText("Filtrar por:");
 
         ComboOrdenaGarantia1.setBackground(new java.awt.Color(240, 240, 240));
-        ComboOrdenaGarantia1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ComboOrdenaGarantia1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         ComboOrdenaGarantia1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODAS", "VIGENTES", "VENCIDAS" }));
         ComboOrdenaGarantia1.setBorder(null);
 
@@ -2804,11 +2809,15 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(GerenciarServicos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome17)
                             .addComponent(lblCPF3))
-                        .addGap(9, 9, 9)
-                        .addGroup(GerenciarServicos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(FieldNomeGerenciarServicos1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboOrdenaGarantia1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
+                        .addGroup(GerenciarServicos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(GerenciarServicos1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(ComboOrdenaGarantia1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GerenciarServicos1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FieldNomeGerenciarServicos1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)))
                         .addComponent(jSeparator25, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BotaoBuscarGerenciarServicos1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -2908,7 +2917,7 @@ public class Principal extends javax.swing.JFrame {
         jSeparator13.setForeground(new java.awt.Color(0, 0, 0));
 
         BotaoNovoCadastroConserto.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoNovoCadastroConserto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoNovoCadastroConserto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoNovoCadastroConserto.setText("Novo");
         BotaoNovoCadastroConserto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoNovoCadastroConserto.addActionListener(new java.awt.event.ActionListener() {
@@ -2918,7 +2927,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoSalvarCadastroConserto.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoSalvarCadastroConserto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoSalvarCadastroConserto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoSalvarCadastroConserto.setText("Salvar");
         BotaoSalvarCadastroConserto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoSalvarCadastroConserto.addActionListener(new java.awt.event.ActionListener() {
@@ -2928,7 +2937,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoCancelarCadastroConserto.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCancelarCadastroConserto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarCadastroConserto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoCancelarCadastroConserto.setText("Cancelar");
         BotaoCancelarCadastroConserto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoCancelarCadastroConserto.addActionListener(new java.awt.event.ActionListener() {
@@ -3033,7 +3042,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         lblNome7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNome7.setText("Conserto");
+        lblNome7.setText("Nome do conserto");
 
         jSeparator15.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -3063,7 +3072,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3.setViewportView(TabelaConsultaManutencao);
 
         BotaoBuscarGarantias.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarGarantias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoBuscarGarantias.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoBuscarGarantias.setText("Buscar");
         BotaoBuscarGarantias.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoBuscarGarantias.addActionListener(new java.awt.event.ActionListener() {
@@ -3133,7 +3142,7 @@ public class Principal extends javax.swing.JFrame {
         lblNome12.setText("Nome do conserto");
 
         BotaoBuscarGerenciarServicos.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoBuscarGerenciarServicos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoBuscarGerenciarServicos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoBuscarGerenciarServicos.setText("Buscar");
         BotaoBuscarGerenciarServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoBuscarGerenciarServicos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3180,7 +3189,7 @@ public class Principal extends javax.swing.JFrame {
         DadosAlteraServicos.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados da categoria"));
 
         BotaoCancelarGerenciarServicos.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoCancelarGerenciarServicos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoCancelarGerenciarServicos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoCancelarGerenciarServicos.setText("Cancelar");
         BotaoCancelarGerenciarServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoCancelarGerenciarServicos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3195,7 +3204,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoExcluirGerenciarServicos.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoExcluirGerenciarServicos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoExcluirGerenciarServicos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoExcluirGerenciarServicos.setText("Excluir");
         BotaoExcluirGerenciarServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoExcluirGerenciarServicos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3210,7 +3219,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         BotaoAlterarGerenciarServicos.setBackground(new java.awt.Color(230, 230, 230));
-        BotaoAlterarGerenciarServicos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BotaoAlterarGerenciarServicos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         BotaoAlterarGerenciarServicos.setText("Alterar");
         BotaoAlterarGerenciarServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BotaoAlterarGerenciarServicos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3524,7 +3533,7 @@ public class Principal extends javax.swing.JFrame {
 
                 try {
 
-                    JOptionPane.showMessageDialog(null, "Garantia cadastrada com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Garantia cadastrada com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     SalvarCamposCadastroGarantia();
                     atualizarTabelaConsultaGarantia();
                     atualizarTabelaGerenciaCGarantia();
@@ -3533,7 +3542,7 @@ public class Principal extends javax.swing.JFrame {
                     System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Contate o suporte tecnico! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "O nome do cliente inserido não está cadastrado. Cadastre-o para prosseguir!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
         }
@@ -3585,14 +3594,14 @@ public class Principal extends javax.swing.JFrame {
                     ResetaCombos();
                     atualizarTabelaGerenciaCManutencao();
                     atualizarTabelaConsultaManutencao();
-                    JOptionPane.showMessageDialog(null, "Categoria cadastrada com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Categoria cadastrada com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     SalvarCamposCadastroServicos();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Talvez essa categoria já exista! "/*Erro:" + ex.getMessage()*/, "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Talvez essa categoria já exista! "/*Erro:" + ex.getMessage()*/, "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
         }
@@ -3632,8 +3641,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void BotaoExcluirGerenciarServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirGerenciarServicosActionPerformed
         if (FieldIDGerenciarConsertos.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Selecione um serviço para remoção, caso não queira remover um serviço, cancele a ação!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
-        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir essa categoria?", "pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Selecione uma categoria para remoção, caso não queira remover, cancele a ação!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir essa categoria?", "Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             try {
                 Manutencao man = new Manutencao();
                 ManutencaoDAO manDAO = new ManutencaoDAO();
@@ -3647,13 +3656,13 @@ public class Principal extends javax.swing.JFrame {
                     atualizarTabelaConsultaManutencao();
                     SalvarCamposGerenciarServicos();
 
-                    JOptionPane.showMessageDialog(null, "Categoria removida com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Categoria excluída com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + e.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     System.out.println(e.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Não foi possível alterar essa categoria, talvez ela já esteja vinculada à alguma garantia!" /*+
+                JOptionPane.showMessageDialog(null, "Não foi possível excluir essa categoria, talvez ela já esteja vinculada à alguma garantia!" /*+
                        "\n" + "Erro:" + ex.getMessage()*/, "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
@@ -3711,7 +3720,7 @@ public class Principal extends javax.swing.JFrame {
                     System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Não foi possível alterar esse serviço, talves ele já esteja vinculado à alguma garantia! " /*+
+                JOptionPane.showMessageDialog(null, "Não foi possível alterar essa categoria, talvez ela já esteja vinculada à alguma garantia! " /*+
                        "\n" + "Erro:" + ex.getMessage()*/, "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
@@ -3806,7 +3815,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldCadastroEnderecoClienteMouseClicked
 
     private void BotaoCancelarCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCancelarCadastroClienteActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Todos os dados informados serão perdidos. Deseja continuar?", "Cadastro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Todos os dados inseridos serão perdidos. Deseja continuar?", "Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             SalvarCamposCadastroClientes();
         }
     }//GEN-LAST:event_BotaoCancelarCadastroClienteActionPerformed
@@ -3837,7 +3846,7 @@ public class Principal extends javax.swing.JFrame {
                     AutoComplete1();
                     AutoComplete2();
                     atualizarTabelaConsultaCliente();
-                    JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     SalvarCamposCadastroClientes();
 
                 } catch (Exception ex) {
@@ -3845,7 +3854,7 @@ public class Principal extends javax.swing.JFrame {
                     System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Esse cliente já existe! Erro:" + ex.getMessage(), "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Esse cliente já existe! Erro:" + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
         }
@@ -3996,8 +4005,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void BotaoExcluirGerenciarGarantiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoExcluirGerenciarGarantiaActionPerformed
         if (FieldIDGerenciarGarantia.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Selecione uma garantia para remoção, caso não queira remover uma garantia, cancele a ação!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
-        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir essa garantia?", "pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Selecione uma garantia para remoção, caso não queira remover, cancele a ação!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir essa garantia?", "Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             try {
                 Garantia gar = new Garantia();
                 GarantiaDAO gardao = new GarantiaDAO();
@@ -4008,7 +4017,7 @@ public class Principal extends javax.swing.JFrame {
                     atualizarTabelaGerenciaCGarantia();
                     atualizarTabelaConsultaGarantia();
                     SalvarCamposGarenciarGarantia();
-                    JOptionPane.showMessageDialog(null, "Garantia removida com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Garantia excluída com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + e.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     System.out.println(e.getMessage());
@@ -4047,11 +4056,11 @@ public class Principal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Garantia alterada com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Contete o suporte tecnico. Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Contate o suporte técnico. Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Não foi possivel alterar essa garantia, contate o suporte tecnico!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Não foi possível alterar essa garantia, contate o suporte técnico!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
         }
@@ -4093,8 +4102,8 @@ public class Principal extends javax.swing.JFrame {
         if (FieldIDGerenciarClientes.getText().isEmpty()
                 || FieldNomeGerenciarClientes.getText().isEmpty()
                 || FieldCPFGerenciarClientes.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Selecione um cliente para remoção, caso não queira remover um cliente, cancele a ação!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
-        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo alterar esse cliente?", "pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente para remoção, caso não queira remover, cancele a ação!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo excluir esse cliente?", "Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             try {
                 Cliente cli = new Cliente();
                 clienteDAO clidao = new clienteDAO();
@@ -4113,13 +4122,13 @@ public class Principal extends javax.swing.JFrame {
 
                     SalvarCamposGerenciarClientes();
 
-                    JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Algo de errado ocorreu! Erro: " + ex.getMessage(), "Sistema", JOptionPane.INFORMATION_MESSAGE);
                     System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Não foi possível alterar esse serviço, talves ele já esteja vinculado à alguma garantia!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Não foi possível excluir esse cliente, talvez ele já esteja vinculado à alguma garantia!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
         }
@@ -4132,7 +4141,7 @@ public class Principal extends javax.swing.JFrame {
     private void BotaoAlterarGerenciarGarantia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoAlterarGerenciarGarantia1ActionPerformed
         if (FieldIDGerenciarClientes.getText().isEmpty() || FieldNomeGerenciarClientes.getText().isEmpty() || FieldCPFGerenciarClientes.getText().isEmpty() || FieldTelefoneGerenciarClientes.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Há campos vazios, preencha os campos obrigatórios (*) para proceder com a alteração!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
-        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo alterar esse cliente?", "pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+        } else if (JOptionPane.showConfirmDialog(null, "Deseja mesmo alterar esse cliente?", "Sistema", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
             try {
                 Cliente cli = new Cliente();
                 clienteDAO clidao = new clienteDAO();
@@ -4163,7 +4172,7 @@ public class Principal extends javax.swing.JFrame {
                     System.out.println(ex.getMessage());
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Não foi possível alterar esse cliente, talves ele já esteja vinculado à alguma garantia!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Não foi possível alterar esse cliente, talvez ele já esteja vinculado à alguma garantia!", "Sistema", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(ex.getMessage());
             }
         }
